@@ -110,7 +110,7 @@ export default function ContactPage() {
                     <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">Telefone</h3>
-                      <p className="text-gray-600 dark:text-gray-400">+55 (11) 99999-9999</p>
+                      <p className="text-gray-600 dark:text-gray-400">+55 (81) 99194-2628</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">E-mail</h3>
-                      <p className="text-gray-600 dark:text-gray-400">contato@aleguimas.com.br</p>
+                      <p className="text-gray-600 dark:text-gray-400">aleguimas@gmail.com.br</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -131,7 +131,7 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-semibold mb-1">Localização</h3>
                       <p className="text-gray-600 dark:text-gray-400">
-                        São Paulo - SP, Brasil
+                        Recife - PE, Brasil
                         <br />
                         Disponível para palestras e consultorias em todo o Brasil
                       </p>
