@@ -170,15 +170,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-blue-400 mr-3" />
-                <span className="text-gray-400">(11) 99999-9999</span>
+                <span className="text-gray-400">(81) 99194-2628</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-blue-400 mr-3" />
-                <span className="text-gray-400">contato@aleguimas.com.br</span>
+                <span className="text-gray-400">aleguimas@gmail.com</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-blue-400 mr-3 mt-0.5" />
-                <span className="text-gray-400">São Paulo - SP, Brasil</span>
+                <span className="text-gray-400">Recife - PE, Brasil</span>
               </li>
             </ul>
           </div>

@@ -27,22 +27,22 @@ export default function VideosPage() {
             <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
               Palestras
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Trechos de Palestras</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Conteúdos</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="O Impacto da IA Generativa nos Negócios"
+              videoId="_nZTxmazs8Y" // Substitua pelo ID real do vídeo do YouTube
+              title="IA o Novo Básico - Araripina PE"
               description="Como ferramentas de IA generativa estão revolucionando diferentes setores e como as empresas podem se beneficiar."
               category="Inteligência Artificial"
               duration="3:45"
             />
             <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="Transformação Digital na Prática"
-              description="Casos reais de empresas que implementaram com sucesso estratégias de transformação digital."
-              category="Transformação Digital"
+              videoId="xAHt88kr_cU" // Substitua pelo ID real do vídeo do YouTube
+              title="A Nova Revolução da IA"
+              description="Workshop 2025 realizado junto a Fecomércio trazendo novidades e os Agentes de IA"
+              category="Inteligência Artificial"
               duration="4:20"
             />
             <FeaturedVideo
