@@ -67,7 +67,7 @@ export default function VideosPage() {
               clientName="IA na Gestão Pública"
               clientPosition="Workshop"
               clientCompany="Prefeitura do Jaboatão dos Guararapes"
-              //thumbnailUrl="/images/testimonials/kleber-carvalho-thumb.webp"
+              thumbnailUrl={`https://img.youtube.com/vi/-xtOHXgwijwJ0/hqdefault.jpg`}
             />
             <VideoTestimonial
               videoId="Rx0j5CvY3us"
