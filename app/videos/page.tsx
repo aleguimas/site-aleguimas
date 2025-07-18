@@ -67,28 +67,28 @@ export default function VideosPage() {
               clientName="IA na Gestão Pública"
               clientPosition="Workshop"
               clientCompany="Prefeitura do Jaboatão dos Guararapes"
-              thumbnailUrl={`https://img.youtube.com/vi/-xtOHXgwijwJ0/hqdefault.jpg`}
+              thumbnailUrl="/images/shorts/workshop-ia-na-pratica-para-gestao-publica-alexandre-guimarães.webp"
             />
             <VideoTestimonial
-              videoId="Rx0j5CvY3us"
-              clientName="Ygor Valença"
-              clientPosition="Presidente"
-              clientCompany="FENEAUTO BR e SINDCFC-PE"
-              thumbnailUrl="/images/testimonials/ygor-valenca-thumb.webp"
+              videoId="Fgp0wXLuPO8"
+              clientName="Marketing Digital o Básico Bem Feito"
+              clientPosition="Oficina"
+              clientCompany="SEBRAE PE"
+              thumbnailUrl="/images/shorts/oficina-marketing-digital-o-básico-bem-feito-alexandre-guimarães.webp"
             />
             <VideoTestimonial
-              videoId="1TRqJSdCy5w"
-              clientName="Henrique Vila Nova"
-              clientPosition="Coordenador do curso de CCO"
-              clientCompany="FICR"
-              thumbnailUrl="/images/testimonials/henrique-vila-nova-thumb.webp"
+              videoId="dW67Ldv3oWM"
+              clientName="A Nova Revolução da IA"
+              clientPosition="Workshop"
+              clientCompany="Fecomércio PE"
+              thumbnailUrl="/images/shorts/workshop-ia-a-nova-revolucao-alexandre-guimarães.webp"
             />
             <VideoTestimonial
-              videoId="oDHZ29wHhes"
-              clientName="Rafaela Santos"
-              clientPosition="Radialista"
-              clientCompany="Jornalista"
-              thumbnailUrl="/images/testimonials/rafaela-santos-thumb.webp"
+              videoId="yVjrAxDBx4Y"
+              clientName="Agentes de IA e Automação"
+              clientPosition="Imersão"
+              clientCompany="MagnoTech SP"
+              thumbnailUrl="/images/shorts/imersão-agentes-ia-automacao-alexandre-guimarães.webp"
             />
           </div>
 
