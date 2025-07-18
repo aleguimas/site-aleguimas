@@ -14,8 +14,8 @@ export default function VideosPage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-6">Vídeos e Conteúdos</h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Confira trechos de palestras, workshops e conteúdos sobre Inteligência Artificial, Transformação Digital e
-            Inovação.
+            Confira trechos de palestras, workshops e conteúdos sobre Inteligência Artificial, Transformação Digital,
+            Inovação e Marketing Digital.
           </p>
         </div>
       </section>
@@ -43,45 +43,52 @@ export default function VideosPage() {
               title="A Nova Revolução da IA"
               description="Workshop 2025 realizado junto a Fecomércio trazendo novidades e os Agentes de IA"
               category="Inteligência Artificial"
-              duration="4:20"
+              duration="1:31:00"
             />
             <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="Inovação e Disrupção"
-              description="Como criar uma cultura de inovação na sua empresa e se antecipar às mudanças do mercado."
-              category="Inovação"
-              duration="2:55"
+              videoId="zSKgpf1X15k" // Substitua pelo ID real do vídeo do YouTube
+              title="Tráfego Pago não VENDE!"
+              description="O tráfego pago não é o único fator determinante para as vendas no seu e-commerce."
+              category="Maketing Digital"
+              duration="31:10"
             />
           </div>
 
           <div className="mb-12">
             <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Workshops
+              Depoimentos
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Workshops e Treinamentos</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Workshops e Palestras</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="Workshop: Implementando IA na sua Empresa"
-              description="Passo a passo para implementar soluções de IA que geram resultados reais para o seu negócio."
-              category="Workshop"
-              duration="5:10"
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <VideoTestimonial
+              videoId="-xtOHXqwjwJ0"
+              clientName="IA na Gestão Pública"
+              clientPosition="Workshop"
+              clientCompany="Prefeitura do Jaboatão dos Guararapes"
+              //thumbnailUrl="/images/testimonials/kleber-carvalho-thumb.webp"
             />
-            <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="Treinamento: Liderança na Era Digital"
-              description="Desenvolvimento de habilidades de liderança necessárias para conduzir equipes em ambientes digitais."
-              category="Treinamento"
-              duration="4:35"
+            <VideoTestimonial
+              videoId="Rx0j5CvY3us"
+              clientName="Ygor Valença"
+              clientPosition="Presidente"
+              clientCompany="FENEAUTO BR e SINDCFC-PE"
+              thumbnailUrl="/images/testimonials/ygor-valenca-thumb.webp"
             />
-            <FeaturedVideo
-              videoId="dQw4w9WgXcQ" // Substitua pelo ID real do vídeo do YouTube
-              title="Conteúdo Exclusivo: Futuro do Trabalho"
-              description="Como preparar sua empresa e equipe para as mudanças no mercado de trabalho impulsionadas pela automação."
-              category="Conteúdo Exclusivo"
-              duration="3:20"
+            <VideoTestimonial
+              videoId="1TRqJSdCy5w"
+              clientName="Henrique Vila Nova"
+              clientPosition="Coordenador do curso de CCO"
+              clientCompany="FICR"
+              thumbnailUrl="/images/testimonials/henrique-vila-nova-thumb.webp"
+            />
+            <VideoTestimonial
+              videoId="oDHZ29wHhes"
+              clientName="Rafaela Santos"
+              clientPosition="Radialista"
+              clientCompany="Jornalista"
+              thumbnailUrl="/images/testimonials/rafaela-santos-thumb.webp"
             />
           </div>
 
