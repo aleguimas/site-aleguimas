@@ -117,6 +117,7 @@ export default function RootLayout({
           }}
         />
         {/* Google Analytics - Substitua GA_MEASUREMENT_ID pelo seu ID real */}
+        {/* 
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID`}
@@ -131,6 +132,7 @@ export default function RootLayout({
             `,
           }}
         />
+        */}
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -159,6 +161,7 @@ export default function RootLayout({
               <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-900"></div>
             </div>
           </a>
+
         </ThemeProvider>
       </body>
     </html>
