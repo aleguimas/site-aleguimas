@@ -24,8 +24,12 @@ export default function FeaturedVideo({
 }: FeaturedVideoProps) {
   const [playing, setPlaying] = useState(false)
 
-  // Se não for fornecida uma thumbnail personalizada, usa a do YouTube
-  const thumbnail = thumbnailUrl || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+  // Usa a thumbnail do YouTube automaticamente com fallback para diferentes qualidades
+  const getYouTubeThumbnail = (videoId: string) => {
+    if (thumbnailUrl) return thumbnailUrl
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+  }
+  const thumbnail = getYouTubeThumbnail(videoId)
 
   return (
     <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
@@ -41,7 +45,11 @@ export default function FeaturedVideo({
                     </div>
                   </div>
                 </div>
-                <img src={thumbnail || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+                <img 
+                  src={thumbnail || "/placeholder.svg"} 
+                  alt={title} 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                 {duration}

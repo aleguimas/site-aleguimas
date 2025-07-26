@@ -2,6 +2,36 @@ import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Trajetória e Experiência - Alexandre Guimarães",
+  description: "Conheça a trajetória profissional de Alexandre Guimarães, especialista em Inteligência Artificial com mais de 20 anos de experiência em tecnologia e transformação digital.",
+  keywords: [
+    "trajetória Alexandre Guimarães",
+    "experiência IA",
+    "carreira tecnologia",
+    "especialista transformação digital",
+    "consultor IA experiência",
+    "palestrante tecnologia carreira"
+  ],
+  openGraph: {
+    title: "Trajetória e Experiência - Alexandre Guimarães",
+    description: "Conheça a trajetória profissional de Alexandre Guimarães, especialista em Inteligência Artificial com mais de 20 anos de experiência em tecnologia e transformação digital.",
+    url: "https://www.aleguimas.com.br/trajetoria",
+    images: [
+      {
+        url: "/images/alexandre-guimaraes-palestrante-consultor-ia-3.webp",
+        width: 1200,
+        height: 630,
+        alt: "Alexandre Guimarães - Trajetória profissional",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/trajetoria",
+  },
+}
 
 export default function TrajetoriaPage() {
   return (

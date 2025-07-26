@@ -7,6 +7,36 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Download, FileText, Newspaper, Play } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Kit de Imprensa - Alexandre Guimarães",
+  description: "Kit de imprensa com fotos, biografia, currículo e informações sobre Alexandre Guimarães. Material para jornalistas e veículos de comunicação.",
+  keywords: [
+    "kit imprensa Alexandre Guimarães",
+    "fotos palestrante",
+    "biografia Alexandre Guimarães",
+    "currículo palestrante",
+    "material imprensa",
+    "press kit"
+  ],
+  openGraph: {
+    title: "Kit de Imprensa - Alexandre Guimarães",
+    description: "Kit de imprensa com fotos, biografia, currículo e informações sobre Alexandre Guimarães. Material para jornalistas e veículos de comunicação.",
+    url: "https://www.aleguimas.com.br/kit-imprensa",
+    images: [
+      {
+        url: "/images/alexandre_guimas_palestrante_principal.webp",
+        width: 1200,
+        height: 630,
+        alt: "Kit de Imprensa - Alexandre Guimarães",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/kit-imprensa",
+  },
+}
 
 export default function KitImprensaPage() {
   return (
@@ -107,7 +137,7 @@ export default function KitImprensaPage() {
 
                       <p>
                         Além de sua atuação como palestrante e consultor, Alexandre é autor de artigos e conteúdos sobre
-                        IA e transformação digital, compartilhando regularmente seus conhecimentos em seu blog e canais
+                        IA e transformação digital, compartilhando regularmente seus conhecimentos em canais
                         de mídia social.
                       </p>
                     </div>
@@ -358,7 +388,7 @@ export default function KitImprensaPage() {
                     },
                     {
                       title: "Como preparar sua equipe para a revolução da IA",
-                      outlet: "Blog Gestão Moderna",
+                      outlet: "Portal de Tecnologia",
                       date: "3 de fevereiro de 2024",
                       type: "Artigo",
                       icon: <FileText className="h-5 w-5" />,
@@ -448,7 +478,13 @@ export default function KitImprensaPage() {
                       </div>
 
                       <div className="pt-4">
-                        <Button className="w-full">Solicitar Entrevista</Button>
+                        <a
+                          href="https://wa.me/5581991942628"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button className="w-full bg-green-600 hover:bg-green-700 text-white">Solicitar Entrevista</Button>
+                        </a>
                       </div>
                     </div>
                   </CardContent>
@@ -470,7 +506,13 @@ export default function KitImprensaPage() {
                       </div>
 
                       <div className="pt-4">
-                        <Button className="w-full">Verificar Disponibilidade</Button>
+                        <a
+                          href="https://wa.me/5581991942628"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button className="w-full bg-green-600 hover:bg-green-700 text-white">Verificar Disponibilidade</Button>
+                        </a>
                       </div>
                     </div>
                   </CardContent>
@@ -630,12 +672,24 @@ export default function KitImprensaPage() {
             Alexandre Guimarães.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-              Solicitar Entrevista
-            </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-              Contato para Imprensa
-            </Button>
+            <a
+              href="https://wa.me/5581991942628"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+                Solicitar Entrevista
+              </Button>
+            </a>
+            <a
+              href="https://wa.me/5581991942628"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                Contato para Imprensa
+              </Button>
+            </a>
           </div>
         </div>
       </section>

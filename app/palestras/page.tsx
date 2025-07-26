@@ -10,6 +10,38 @@ import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Palestras e Workshops - Inteligência Artificial e Transformação Digital",
+  description: "Contrate palestras e workshops sobre Inteligência Artificial, Transformação Digital e Inovação. Alexandre Guimarães é especialista em IA aplicada para empresas.",
+  keywords: [
+    "palestras inteligência artificial",
+    "workshop IA",
+    "palestrante transformação digital",
+    "palestras inovação",
+    "workshop tecnologia",
+    "palestras empresas",
+    "consultoria IA",
+    "palestras motivacionais tecnologia"
+  ],
+  openGraph: {
+    title: "Palestras e Workshops - Inteligência Artificial e Transformação Digital",
+    description: "Contrate palestras e workshops sobre Inteligência Artificial, Transformação Digital e Inovação. Alexandre Guimarães é especialista em IA aplicada para empresas.",
+    url: "https://www.aleguimas.com.br/palestras",
+    images: [
+      {
+        url: "/images/alexandre-guimaraes-palestrante-consultor-ia-2.webp",
+        width: 1200,
+        height: 630,
+        alt: "Alexandre Guimarães palestrando sobre IA",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/palestras",
+  },
+}
 
 export default function PalestrasPage() {
   return (
@@ -837,9 +869,15 @@ export default function PalestrasPage() {
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
               <a href="#solicitar-cotacao">Solicitar Cotação</a>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-              <Link href="/contato">Fale Diretamente Conosco</Link>
-            </Button>
+            <a
+              href="https://wa.me/5581991942628"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                Fale Diretamente Conosco
+              </Button>
+            </a>
           </div>
         </div>
       </section>

@@ -21,7 +21,7 @@ export default function VideoTestimonial({
 }: VideoTestimonialProps) {
   const [playing, setPlaying] = useState(false)
 
-  // Se não for fornecida uma thumbnail personalizada, usa a do YouTube
+  // Usa a thumbnail do YouTube automaticamente se não for fornecida uma personalizada
   const thumbnail = thumbnailUrl || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
   return (

@@ -14,7 +14,6 @@ const navigation = [
   { name: "Palestras", href: "/palestras" },
   { name: "Consultoria", href: "/consultoria" },
   { name: "Vídeos", href: "/videos" },
-  { name: "Blog", href: "/blog" },
   { name: "Contato", href: "/contato" },
 ]
 
@@ -99,62 +98,82 @@ export default function Navbar() {
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
           )}
-          <Link href="/contato">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Fale Comigo</Button>
-          </Link>
+          <a
+            href="https://wa.me/5581991942628"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-green-600 hover:bg-green-700 text-white">Fale Comigo</Button>
+          </a>
         </div>
       </nav>
 
+      {/* Mobile menu overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 z-40 bg-black/20"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+      
       {/* Mobile menu */}
       <div
         className={cn(
-          "lg:hidden fixed inset-y-0 right-0 z-50 w-full bg-white dark:bg-slate-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 transform transition-transform duration-300 ease-in-out",
+          "lg:hidden fixed inset-y-0 right-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col",
           mobileMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
-        <div className="flex items-center justify-between">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center" onClick={() => setMobileMenuOpen(false)}>
+        <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
+          <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
             <span className="sr-only">Alexandre Guimarães</span>
-            <div className="h-10 w-10 rounded-full overflow-hidden mr-3">
+            <div className="h-7 w-7 rounded-full overflow-hidden mr-2">
               <Image
                 src="/images/alexandre-guimaraes-palestrante-consultor-ia-3.webp"
                 alt="Alexandre Guimarães"
-                width={40}
-                height={40}
+                width={28}
+                height={28}
                 className="object-cover object-center"
               />
             </div>
-            <span className="text-lg font-semibold text-gray-900 dark:text-white">Alexandre Guimarães</span>
+            <span className="text-xs font-semibold text-gray-900 dark:text-white truncate">Alexandre Guimarães</span>
           </Link>
           <button
             type="button"
-            className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+            className="rounded-md p-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
             onClick={() => setMobileMenuOpen(false)}
           >
             <span className="sr-only">Fechar menu</span>
-            <X className="h-6 w-6" aria-hidden="true" />
+            <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
-        <div className="mt-6 flow-root">
-          <div className="-my-6 divide-y divide-gray-500/10">
-            <div className="space-y-2 py-6">
+        <div className="flex-1 overflow-y-auto">
+          <div className="px-3 py-2">
+            <div className="space-y-0.5">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
             </div>
-            <div className="py-6">
-              <Link href="/contato">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Fale Comigo</Button>
-              </Link>
-            </div>
           </div>
+        </div>
+        
+        <div className="border-t border-gray-200 dark:border-gray-700 p-3">
+          <a
+            href="https://wa.me/5581991942628"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2">
+              Fale Comigo
+            </Button>
+          </a>
         </div>
       </div>
     </header>

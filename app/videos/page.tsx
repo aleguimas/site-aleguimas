@@ -3,6 +3,37 @@ import Footer from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import FeaturedVideo from "@/components/featured-video"
 import VideoTestimonial from "@/components/video-testimonial"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Vídeos e Conteúdos - Palestras e Workshops",
+  description: "Assista palestras, workshops e depoimentos sobre Inteligência Artificial, Transformação Digital e Inovação. Conteúdo exclusivo de Alexandre Guimarães.",
+  keywords: [
+    "vídeos inteligência artificial",
+    "palestras IA online",
+    "workshop transformação digital",
+    "vídeos inovação",
+    "palestras tecnologia",
+    "depoimentos IA",
+    "conteúdo digital"
+  ],
+  openGraph: {
+    title: "Vídeos e Conteúdos - Palestras e Workshops",
+    description: "Assista palestras, workshops e depoimentos sobre Inteligência Artificial, Transformação Digital e Inovação. Conteúdo exclusivo de Alexandre Guimarães.",
+    url: "https://www.aleguimas.com.br/videos",
+    images: [
+      {
+        url: "/images/alexandre_guimas_palestrante_principal.webp",
+        width: 1200,
+        height: 630,
+        alt: "Vídeos e Conteúdos - Alexandre Guimarães",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/videos",
+  },
+}
 
 export default function VideosPage() {
   return (
@@ -32,21 +63,21 @@ export default function VideosPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <FeaturedVideo
-              videoId="_nZTxmazs8Y" // Substitua pelo ID real do vídeo do YouTube
+              videoId="_nZTxmazs8Y"
               title="IA o Novo Básico - Araripina PE"
               description="Como ferramentas de IA generativa estão revolucionando diferentes setores e como as empresas podem se beneficiar."
               category="Inteligência Artificial"
               duration="3:45"
             />
             <FeaturedVideo
-              videoId="xAHt88kr_cU" // Substitua pelo ID real do vídeo do YouTube
+              videoId="xAHt88kr_cU"
               title="A Nova Revolução da IA"
               description="Workshop 2025 realizado junto a Fecomércio trazendo novidades e os Agentes de IA"
               category="Inteligência Artificial"
               duration="1:31:00"
             />
             <FeaturedVideo
-              videoId="zSKgpf1X15k" // Substitua pelo ID real do vídeo do YouTube
+              videoId="zSKgpf1X15k"
               title="Tráfego Pago não VENDE!"
               description="O tráfego pago não é o único fator determinante para as vendas no seu e-commerce."
               category="Maketing Digital"
@@ -56,7 +87,7 @@ export default function VideosPage() {
 
           <div className="mb-12">
             <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Depoimentos
+              Shorts
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Workshops e Palestras</h2>
           </div>

@@ -1,0 +1,27 @@
+{
+  "name": "Alexandre Guimarães - Palestrante e Consultor em IA",
+  "short_name": "Alexandre Guimarães",
+  "description": "Especialista em Inteligência Artificial, Transformação Digital e Inovação",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/alexandre_guimas_palestrante_principal.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/alexandre_guimas_palestrante_principal.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "education", "productivity"],
+  "lang": "pt-BR",
+  "dir": "ltr"
+} 

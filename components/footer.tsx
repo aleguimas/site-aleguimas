@@ -112,11 +112,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/kit-imprensa" className="text-gray-400 hover:text-white transition-colors">
                   Kit de Imprensa
                 </Link>
@@ -161,6 +156,11 @@ export default function Footer() {
                   Futuro do Trabalho
                 </Link>
               </li>
+              <li>
+                <Link href="/temas/agentes-ia" className="text-gray-400 hover:text-white transition-colors">
+                  Agentes de IA
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -187,7 +187,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} Alexandre Guimarães. Todos os direitos reservados.
+              &copy; 2025 Alexandre Guimarães. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6">
               <Link
@@ -195,9 +195,6 @@ export default function Footer() {
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Política de Privacidade
-              </Link>
-              <Link href="/termos-de-uso" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Termos de Uso
               </Link>
             </div>
           </div>

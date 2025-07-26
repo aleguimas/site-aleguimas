@@ -11,11 +11,18 @@ interface AnimatedCounterProps {
 
 export default function AnimatedCounter({ end, duration = 2000, suffix = "", className = "" }: AnimatedCounterProps) {
   const [count, setCount] = useState(0)
-  const countRef = useRef<HTMLDivElement>(null)
+  const countRef = useRef<HTMLSpanElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -34,7 +41,7 @@ export default function AnimatedCounter({ end, duration = 2000, suffix = "", cla
         observer.unobserve(countRef.current)
       }
     }
-  }, [])
+  }, [isMounted])
 
   useEffect(() => {
     if (!isVisible || hasAnimated.current) return
@@ -68,9 +75,9 @@ export default function AnimatedCounter({ end, duration = 2000, suffix = "", cla
   }, [isVisible, end, duration])
 
   return (
-    <div ref={countRef} className={className}>
-      {count}
+    <span ref={countRef} className={className}>
+      {isMounted ? count : 0}
       {suffix}
-    </div>
+    </span>
   )
 }

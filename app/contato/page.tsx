@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube, MessageCircle } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import type { Metadata } from "next"
 
 // Criando um componente TikTok já que não existe no Lucide
 const TikTok = () => (
@@ -24,6 +23,35 @@ const TikTok = () => (
   </svg>
 )
 
+export const metadata: Metadata = {
+  title: "Contato - Alexandre Guimarães",
+  description: "Entre em contato com Alexandre Guimarães para palestras, workshops e consultoria em Inteligência Artificial e Transformação Digital. Solicite orçamento e informações.",
+  keywords: [
+    "contato Alexandre Guimarães",
+    "solicitar palestra",
+    "contratar palestrante",
+    "consultoria IA",
+    "orçamento palestra",
+    "contato palestrante tecnologia"
+  ],
+  openGraph: {
+    title: "Contato - Alexandre Guimarães",
+    description: "Entre em contato com Alexandre Guimarães para palestras, workshops e consultoria em Inteligência Artificial e Transformação Digital. Solicite orçamento e informações.",
+    url: "https://www.aleguimas.com.br/contato",
+    images: [
+      {
+        url: "/images/alexandre_guimas_palestrante_principal.webp",
+        width: 1200,
+        height: 630,
+        alt: "Contato - Alexandre Guimarães",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/contato",
+  },
+}
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -40,68 +68,62 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Contact Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Envie uma mensagem</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Preencha o formulário abaixo e entrarei em contato com você o mais breve possível.
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl font-bold mb-6">Fale Comigo</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg">
+                A maneira mais rápida de entrar em contato é através do WhatsApp. 
+                Clique no botão abaixo e vamos conversar sobre como posso ajudar sua empresa!
               </p>
 
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Nome completo
-                    </label>
-                    <Input id="name" placeholder="Seu nome" required />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      E-mail
-                    </label>
-                    <Input id="email" type="email" placeholder="seu@email.com" required />
-                  </div>
-                </div>
+              <div className="space-y-6">
+                <a
+                  href="https://wa.me/5581991942628"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                >
+                  <MessageCircle className="h-6 w-6 mr-3" />
+                  Fale Comigo no WhatsApp
+                </a>
 
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Telefone
-                  </label>
-                  <Input id="phone" placeholder="(00) 00000-0000" />
+                <div className="text-center lg:text-left">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Resposta em até 2 horas • Atendimento de segunda a sexta, 8h às 18h
+                  </p>
                 </div>
+              </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Assunto
-                  </label>
-                  <Input id="subject" placeholder="Assunto da mensagem" required />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Mensagem
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Descreva seu interesse ou dúvida..."
-                    className="min-h-[150px]"
-                    required
-                  />
-                </div>
-
-                <Button type="submit" className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white">
-                  Enviar Mensagem
-                </Button>
-              </form>
+              <div className="mt-12">
+                <h3 className="text-xl font-semibold mb-4">Por que escolher o WhatsApp?</h3>
+                <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+                  <li className="flex items-start">
+                    <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
+                    Resposta rápida e direta
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
+                    Pode enviar arquivos e imagens
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
+                    Conversa mais informal e descontraída
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
+                    Ideal para tirar dúvidas rápidas
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div>
               <h2 className="text-3xl font-bold mb-6">Informações de Contato</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Você também pode entrar em contato diretamente através dos canais abaixo.
+                Você também pode entrar em contato através dos canais abaixo.
               </p>
 
               <div className="space-y-6">
@@ -120,7 +142,7 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">E-mail</h3>
-                      <p className="text-gray-600 dark:text-gray-400">aleguimas@gmail.com.br</p>
+                      <p className="text-gray-600 dark:text-gray-400">aleguimas@gmail.com</p>
                     </div>
                   </CardContent>
                 </Card>
