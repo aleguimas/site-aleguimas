@@ -64,6 +64,7 @@ export default function TrajetoriaPage() {
                       fill
                       className="object-contain object-bottom"
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      unoptimized
                     />
                   </div>
                 </div>

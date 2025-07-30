@@ -75,6 +75,11 @@ export const metadata: Metadata = {
     google: 'seu-google-verification-code', // Substitua pelo código real do Google Search Console
   },
   manifest: '/manifest.json',
+  icons: {
+    icon: '/images/favicon-aleguimas.png',
+    shortcut: '/images/favicon-aleguimas.png',
+    apple: '/images/favicon-aleguimas.png',
+  },
 }
 
 export default function RootLayout({
@@ -85,6 +90,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/images/favicon-aleguimas.png" />
+        <link rel="shortcut icon" href="/images/favicon-aleguimas.png" type="image/png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

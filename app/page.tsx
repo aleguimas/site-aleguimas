@@ -130,15 +130,8 @@ export default function Home() {
                   reais.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                    Agendar Consultoria
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="bg-blue-600/20 text-white border-white hover:bg-blue-600/30"
-                  >
-                    Contratar Palestra
+                  <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Link href="/contato">Contratar palestra</Link>
                   </Button>
                 </div>
               </div>
@@ -151,6 +144,7 @@ export default function Home() {
                     className="object-cover object-[center_top]"
                     priority // Mantém priority apenas para a imagem principal acima da dobra
                     sizes="(max-width: 768px) 288px, 384px"
+                    unoptimized
                   />
                 </div>
               </div>
@@ -205,6 +199,7 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 50vw"
                     priority
                     quality={85}
+                    unoptimized
                   />
                 </div>
               </div>
@@ -393,6 +388,7 @@ export default function Home() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   loading="lazy"
+                  unoptimized
                 />
               </div>
               <div className="lg:w-1/2 space-y-6">

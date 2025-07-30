@@ -35,6 +35,7 @@ export default function Footer() {
                   width={40}
                   height={40}
                   className="object-cover object-top"
+                  unoptimized
                 />
               </div>
               <span className="text-lg font-semibold text-white">Alexandre Guimarães</span>

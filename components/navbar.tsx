@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Menu, Moon, Sun, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -48,8 +47,8 @@ export default function Navbar() {
           <Link href="/" className="-m-1.5 p-1.5 flex items-center">
             <span className="sr-only">Alexandre Guimarães</span>
             <div className="h-10 w-10 rounded-full overflow-hidden mr-3">
-              <Image
-                src="/images/alexandre-guimaraes-palestrante-consultor-ia-3.webp"
+              <img
+                src="/images/guimas-palestrante-header.png"
                 alt="Alexandre Guimarães"
                 width={40}
                 height={40}
@@ -127,8 +126,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
             <span className="sr-only">Alexandre Guimarães</span>
             <div className="h-7 w-7 rounded-full overflow-hidden mr-2">
-              <Image
-                src="/images/alexandre-guimaraes-palestrante-consultor-ia-3.webp"
+              <img
+                src="/images/guimas-palestrante-header.png"
                 alt="Alexandre Guimarães"
                 width={28}
                 height={28}

@@ -8,8 +8,7 @@ import { CheckCircle, Star, Users } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import ContactForm from "@/components/contact-form"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -712,93 +711,7 @@ export default function PalestrasPage() {
               </p>
             </div>
 
-            <Card className="border-none shadow-xl">
-              <CardContent className="p-8">
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Nome completo
-                      </label>
-                      <Input id="name" placeholder="Seu nome" required />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >
-                        E-mail corporativo
-                      </label>
-                      <Input id="email" type="email" placeholder="seu@empresa.com" required />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        htmlFor="phone"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >
-                        Telefone
-                      </label>
-                      <Input id="phone" placeholder="(00) 00000-0000" />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="company"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >
-                        Empresa
-                      </label>
-                      <Input id="company" placeholder="Nome da empresa" required />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="topic" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Tema de interesse
-                    </label>
-                    <select
-                      id="topic"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
-                      required
-                    >
-                      <option value="">Selecione um tema</option>
-                      <option value="ia-novo-basico">IA o Novo Básico</option>
-                      <option value="transformacao-digital">Transformação Digital na Prática</option>
-                      <option value="lideranca-ia">Liderança na Era da IA</option>
-                      <option value="ia-generativa">O Impacto da IA Generativa nos Negócios</option>
-                      <option value="workshop-ia">Workshop: Implementando IA na sua Empresa</option>
-                      <option value="workshop-lideranca">Treinamento: Liderança na Era Digital</option>
-                      <option value="personalizado">Tema personalizado</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
-                      Detalhes adicionais
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Conte-nos mais sobre o evento, público esperado, data preferencial, etc."
-                      className="min-h-[120px]"
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Solicitar Cotação
-                  </Button>
-
-                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                    Ao enviar este formulário, você concorda em receber comunicações relacionadas à sua solicitação.
-                    Seus dados estão seguros e não serão compartilhados com terceiros.
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
+            <ContactForm />
           </div>
         </div>
       </section>

@@ -31,6 +31,7 @@ export default function ClientLogos() {
               className="object-contain"
               sizes="(max-width: 768px) 144px, 176px"
               loading={index < 6 ? "eager" : "lazy"} // Carrega apenas as primeiras 6 logos imediatamente
+              unoptimized
             />
           </div>
         </div>
