@@ -41,6 +41,9 @@ export default function ContactForm() {
       })
 
       if (response.ok) {
+        // Rastreamento temporariamente desabilitado
+        console.log('Form submitted successfully')
+        
         setShowSuccessModal(true)
         setFormData({
           name: '',

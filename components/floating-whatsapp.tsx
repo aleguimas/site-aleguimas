@@ -1,18 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
 export default function FloatingWhatsApp() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
   return (
     <a
       href="https://wa.me/5581991942628"

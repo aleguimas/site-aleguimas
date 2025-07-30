@@ -678,17 +678,17 @@ export default function KitImprensaPage() {
               rel="noopener noreferrer"
             >
               <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
-                Solicitar Entrevista
-              </Button>
+              Solicitar Entrevista
+            </Button>
             </a>
             <a
               href="https://wa.me/5581991942628"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                Contato para Imprensa
-              </Button>
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+              Contato para Imprensa
+            </Button>
             </a>
           </div>
         </div>

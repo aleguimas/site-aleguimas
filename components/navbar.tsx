@@ -20,7 +20,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(true)
 
   useEffect(() => {
     setMounted(true)

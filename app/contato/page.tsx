@@ -95,7 +95,7 @@ export default function ContactPage() {
                     Resposta em até 2 horas • Atendimento de segunda a sexta, 8h às 18h
                   </p>
                 </div>
-              </div>
+                </div>
 
               <div className="mt-12">
                 <h3 className="text-xl font-semibold mb-4">Por que escolher o WhatsApp?</h3>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                     Ideal para tirar dúvidas rápidas
                   </li>
                 </ul>
-              </div>
+                </div>
             </div>
 
             <div>
