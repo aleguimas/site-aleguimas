@@ -5,12 +5,24 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Redirects - excluindo /admin para permitir acesso direto
+# Redirects para o admin - IMPORTANTE: ordem específica
 [[redirects]]
-  from = "/admin/*"
+  from = "/admin"
   to = "/admin/index.html"
   status = 200
 
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200
+
+# Redirects para outros recursos do admin
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+# Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"
   to = "/index.html"
