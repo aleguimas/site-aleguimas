@@ -9,8 +9,8 @@ public_folder: "/uploads"
 
 publish_mode: editorial_workflow
 
-site_url: https://aleguimas.com.br
-display_url: https://aleguimas.com.br
+site_url: https://www.aleguimas.com.br
+display_url: https://www.aleguimas.com.br
 
 collections:
   - name: "posts"

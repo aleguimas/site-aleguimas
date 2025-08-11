@@ -87,6 +87,23 @@
             font-size: 0.8rem;
             z-index: 1000;
         }
+        
+        .alternative-link {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background-color: #2196f3;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            z-index: 1000;
+        }
+        
+        .alternative-link:hover {
+            background-color: #1976d2;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +117,9 @@
     
     <!-- Link para debug -->
     <a href="index.html" class="debug-link">Debug</a>
+    
+    <!-- Link para versão alternativa -->
+    <a href="netlify-cms.html" class="alternative-link">Netlify CMS</a>
     
     <div id="nc-root">
         <div class="loading">

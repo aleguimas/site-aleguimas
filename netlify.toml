@@ -16,6 +16,17 @@
   to = "/admin/clean.html"
   status = 200
 
+# Redirect para www (importante!)
+[[redirects]]
+  from = "https://aleguimas.com.br/admin"
+  to = "https://www.aleguimas.com.br/admin"
+  status = 301
+
+[[redirects]]
+  from = "https://aleguimas.com.br/admin/"
+  to = "https://www.aleguimas.com.br/admin/"
+  status = 301
+
 # Redirect para debug (opcional)
 [[redirects]]
   from = "/admin/debug"
