@@ -63,20 +63,20 @@ collections:
         name: "seo"
         widget: "object"
         fields:
-          - { label: "Título SEO", name: "title", widget: "string" }
-          - { label: "Descrição SEO", name: "description", widget: "text" }
-          - { label: "URL Canônica", name: "canonical", widget: "string" }
-          - { label: "Não indexar", name: "noindex", widget: "boolean", default: false }
-          - { label: "Não seguir links", name: "nofollow", widget: "boolean", default: false }
-          - { label: "Título Open Graph", name: "og_title", widget: "string" }
-          - { label: "Descrição Open Graph", name: "og_description", widget: "text" }
-          - { label: "Imagem Open Graph", name: "og_image", widget: "image" }
+          - { label: "Título SEO", name: "title", widget: "string", required: false }
+          - { label: "Descrição SEO", name: "description", widget: "text", required: false }
+          - { label: "URL Canônica", name: "canonical", widget: "string", required: false }
+          - { label: "Não indexar", name: "noindex", widget: "boolean", default: false, required: false }
+          - { label: "Não seguir links", name: "nofollow", widget: "boolean", default: false, required: false }
+          - { label: "Título Open Graph", name: "og_title", widget: "string", required: false }
+          - { label: "Descrição Open Graph", name: "og_description", widget: "text", required: false }
+          - { label: "Imagem Open Graph", name: "og_image", widget: "image", required: false }
           - label: "FAQ"
             name: "faq"
             widget: "list"
             fields:
-              - { label: "Pergunta", name: "pergunta", widget: "string" }
-              - { label: "Resposta", name: "resposta", widget: "text" }
+              - { label: "Pergunta", name: "pergunta", widget: "string", required: true }
+              - { label: "Resposta", name: "resposta", widget: "text", required: true }
 
 # Configurações de workflow simplificadas
 workflow:
