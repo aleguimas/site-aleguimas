@@ -22,6 +22,12 @@
   to = "/admin/index.html"
   status = 200
 
+# Redirect para teste simples
+[[redirects]]
+  from = "/admin/test"
+  to = "/admin/simple.html"
+  status = 200
+
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"

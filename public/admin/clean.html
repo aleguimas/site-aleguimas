@@ -76,6 +76,32 @@
         .debug-link:hover {
             background-color: #1976d2;
         }
+        
+        .status {
+            text-align: center;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .status-loading {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+        
+        .status-success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
     </style>
 </head>
 <body>
@@ -87,6 +113,11 @@
     <!-- Link para debug -->
     <a href="index.html" class="debug-link">Debug</a>
     
+    <!-- Status do carregamento -->
+    <div id="status" class="status status-loading">
+        <p>🔄 Inicializando CMS...</p>
+    </div>
+    
     <div id="nc-root">
         <div class="loading">
             <p>Carregando o CMS...</p>
@@ -94,57 +125,170 @@
     </div>
     
     <script>
-        // Configuração simples do CMS
-        if (typeof CMS !== 'undefined') {
-            // Registrar estilos de preview
-            CMS.registerPreviewStyle('./cms.css');
-            
-            // Template de preview para posts
-            CMS.registerPreviewTemplate('posts', ({ entry, widgetFor, getAsset }) => {
-                const title = entry.getIn(['data', 'title']) || 'Título não definido';
-                const excerpt = entry.getIn(['data', 'excerpt']) || 'Resumo não definido';
-                const author = entry.getIn(['data', 'author']) || 'Autor não definido';
-                const date = entry.getIn(['data', 'date']);
-                const cover = getAsset(entry.getIn(['data', 'cover']));
-                const body = widgetFor('body');
+        // Variáveis de controle
+        let cmsLoaded = false;
+        let identityReady = false;
+        let configLoaded = false;
+        
+        // Função para atualizar status
+        function updateStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('status');
+            statusEl.className = `status status-${type}`;
+            statusEl.innerHTML = `<p>${message}</p>`;
+        }
+        
+        // Função para verificar se o CMS está carregado
+        function checkCMS() {
+            if (typeof CMS !== 'undefined') {
+                cmsLoaded = true;
+                updateStatus('✅ CMS carregado com sucesso!', 'success');
+                initializeCMS();
+            } else {
+                updateStatus('⏳ Aguardando carregamento do CMS...', 'loading');
+            }
+        }
+        
+        // Função para verificar se o Netlify Identity está carregado
+        function checkIdentity() {
+            if (typeof netlifyIdentity !== 'undefined') {
+                identityReady = true;
+                updateStatus('✅ Netlify Identity carregado', 'success');
                 
-                return `
-                    <div style="max-width: 800px; margin: 0 auto; padding: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-                        <h1 style="color: #333; margin-bottom: 1rem;">${title}</h1>
-                        <div style="color: #666; margin-bottom: 2rem;">
-                            <p><strong>Autor:</strong> ${author}</p>
-                            <p><strong>Data:</strong> ${date ? new Date(date).toLocaleDateString('pt-BR') : 'Não definida'}</p>
-                        </div>
-                        ${cover ? `<img src="${cover.toString()}" alt="${title}" style="width: 100%; max-width: 600px; height: auto; margin-bottom: 2rem; border-radius: 8px;" />` : ''}
-                        <div style="color: #333; line-height: 1.6;">
-                            <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;"><em>${excerpt}</em></p>
-                            <div>${body}</div>
-                        </div>
-                    </div>
-                `;
-            });
+                // Configurar eventos do Identity
+                netlifyIdentity.on('init', user => {
+                    if (user) {
+                        updateStatus('✅ Usuário logado: ' + user.email, 'success');
+                    } else {
+                        updateStatus('ℹ️ Usuário não logado', 'loading');
+                    }
+                });
+                
+                netlifyIdentity.on('login', user => {
+                    updateStatus('✅ Login realizado: ' + user.email, 'success');
+                });
+                
+                netlifyIdentity.on('logout', () => {
+                    updateStatus('ℹ️ Usuário deslogado', 'loading');
+                });
+                
+                // Inicializar Identity
+                netlifyIdentity.init();
+                
+            } else {
+                updateStatus('⏳ Aguardando Netlify Identity...', 'loading');
+            }
+        }
+        
+        // Função para verificar configuração
+        function checkConfig() {
+            fetch('./config.yml')
+                .then(response => {
+                    if (response.ok) {
+                        configLoaded = true;
+                        updateStatus('✅ Configuração carregada', 'success');
+                    } else {
+                        updateStatus('❌ Erro ao carregar configuração', 'error');
+                    }
+                })
+                .catch(error => {
+                    updateStatus('❌ Erro: ' + error.message, 'error');
+                });
+        }
+        
+        // Função para inicializar o CMS
+        function initializeCMS() {
+            if (!cmsLoaded) {
+                updateStatus('❌ CMS não está carregado', 'error');
+                return;
+            }
             
-            // Limpar área de loading
-            document.getElementById('nc-root').innerHTML = '';
-            
-        } else {
-            // Se o CMS não carregou, mostrar erro
-            setTimeout(() => {
-                if (typeof CMS === 'undefined') {
-                    document.getElementById('nc-root').innerHTML = `
-                        <div class="error">
-                            <h2>Erro ao carregar o CMS</h2>
-                            <p>O CMS não conseguiu carregar. Tente:</p>
-                            <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
-                                <li>Recarregar a página</li>
-                                <li>Verificar sua conexão com a internet</li>
-                                <li>Acessar a <a href="index.html">página de debug</a> para mais informações</li>
-                            </ul>
+            try {
+                // Registrar estilos de preview
+                CMS.registerPreviewStyle('./cms.css');
+                
+                // Template de preview para posts
+                CMS.registerPreviewTemplate('posts', ({ entry, widgetFor, getAsset }) => {
+                    const title = entry.getIn(['data', 'title']) || 'Título não definido';
+                    const excerpt = entry.getIn(['data', 'excerpt']) || 'Resumo não definido';
+                    const author = entry.getIn(['data', 'author']) || 'Autor não definido';
+                    const date = entry.getIn(['data', 'date']);
+                    const cover = getAsset(entry.getIn(['data', 'cover']));
+                    const body = widgetFor('body');
+                    
+                    return `
+                        <div style="max-width: 800px; margin: 0 auto; padding: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                            <h1 style="color: #333; margin-bottom: 1rem;">${title}</h1>
+                            <div style="color: #666; margin-bottom: 2rem;">
+                                <p><strong>Autor:</strong> ${author}</p>
+                                <p><strong>Data:</strong> ${date ? new Date(date).toLocaleDateString('pt-BR') : 'Não definida'}</p>
+                            </div>
+                            ${cover ? `<img src="${cover.toString()}" alt="${title}" style="width: 100%; max-width: 600px; height: auto; margin-bottom: 2rem; border-radius: 8px;" />` : ''}
+                            <div style="color: #333; line-height: 1.6;">
+                                <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;"><em>${excerpt}</em></p>
+                                <div>${body}</div>
+                            </div>
                         </div>
                     `;
-                }
-            }, 5000);
+                });
+                
+                // Limpar área de loading e status
+                document.getElementById('nc-root').innerHTML = '';
+                document.getElementById('status').style.display = 'none';
+                
+                updateStatus('🎉 CMS inicializado com sucesso!', 'success');
+                
+            } catch (error) {
+                updateStatus('❌ Erro ao inicializar CMS: ' + error.message, 'error');
+                console.error('Erro ao inicializar CMS:', error);
+            }
         }
+        
+        // Verificações iniciais
+        updateStatus('🔄 Iniciando verificações...', 'loading');
+        
+        // Verificar configuração
+        checkConfig();
+        
+        // Verificar Identity
+        checkIdentity();
+        
+        // Verificar CMS com intervalos
+        checkCMS();
+        
+        // Verificações periódicas
+        const checkInterval = setInterval(() => {
+            if (!cmsLoaded) {
+                checkCMS();
+            }
+            if (!identityReady) {
+                checkIdentity();
+            }
+            
+            // Se tudo estiver carregado, parar verificações
+            if (cmsLoaded && identityReady && configLoaded) {
+                clearInterval(checkInterval);
+            }
+        }, 1000);
+        
+        // Timeout de segurança
+        setTimeout(() => {
+            if (!cmsLoaded) {
+                updateStatus('❌ Timeout: CMS não carregou em 30 segundos', 'error');
+                clearInterval(checkInterval);
+                
+                document.getElementById('nc-root').innerHTML = `
+                    <div class="error">
+                        <h2>Erro ao carregar o CMS</h2>
+                        <p>O CMS não conseguiu carregar. Tente:</p>
+                        <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                            <li>Recarregar a página</li>
+                            <li>Verificar sua conexão com a internet</li>
+                            <li>Acessar a <a href="index.html">página de debug</a> para mais informações</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        }, 30000);
     </script>
 </body>
 </html>

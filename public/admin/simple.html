@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decap CMS - Teste Simples</title>
+    
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .status-loading {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .status-error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .debug-link {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-decoration: none;
+            z-index: 1000;
+        }
+        
+        #nc-root {
+            min-height: calc(100vh - 100px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Blog - Alexandre Guimarães</h1>
+        <p>Teste Simples do CMS</p>
+    </div>
+    
+    <!-- Link para debug -->
+    <a href="index.html" class="debug-link">Debug</a>
+    
+    <!-- Status do carregamento -->
+    <div id="status" class="status status-loading">
+        <p>🔄 Testando carregamento...</p>
+    </div>
+    
+    <div id="nc-root">
+        <div style="text-align: center; padding: 2rem; color: #666;">
+            <p>Aguardando carregamento do CMS...</p>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Script iniciado');
+        
+        // Verificar se os scripts carregaram
+        function checkScripts() {
+            console.log('Verificando scripts...');
+            
+            if (typeof netlifyIdentity !== 'undefined') {
+                console.log('✅ Netlify Identity carregado');
+                updateStatus('✅ Netlify Identity carregado', 'success');
+            } else {
+                console.log('❌ Netlify Identity não carregado');
+                updateStatus('❌ Netlify Identity não carregado', 'error');
+            }
+            
+            if (typeof CMS !== 'undefined') {
+                console.log('✅ CMS carregado');
+                updateStatus('✅ CMS carregado', 'success');
+                
+                // Tentar inicializar o CMS
+                try {
+                    console.log('Tentando inicializar CMS...');
+                    
+                    // Configuração mínima
+                    CMS.registerPreviewStyle('./cms.css');
+                    
+                    // Limpar área de loading
+                    document.getElementById('nc-root').innerHTML = '';
+                    document.getElementById('status').style.display = 'none';
+                    
+                    console.log('✅ CMS inicializado com sucesso!');
+                    
+                } catch (error) {
+                    console.error('❌ Erro ao inicializar CMS:', error);
+                    updateStatus('❌ Erro ao inicializar: ' + error.message, 'error');
+                }
+                
+            } else {
+                console.log('❌ CMS não carregado');
+                updateStatus('❌ CMS não carregado', 'error');
+            }
+        }
+        
+        function updateStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('status');
+            statusEl.className = `status status-${type}`;
+            statusEl.innerHTML = `<p>${message}</p>`;
+        }
+        
+        // Verificar após carregamento da página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM carregado');
+            updateStatus('🔄 DOM carregado, verificando scripts...', 'loading');
+            
+            // Verificar imediatamente
+            checkScripts();
+            
+            // Verificar novamente após 2 segundos
+            setTimeout(checkScripts, 2000);
+            
+            // Verificar novamente após 5 segundos
+            setTimeout(checkScripts, 5000);
+        });
+        
+        // Verificar quando a janela carregar
+        window.addEventListener('load', function() {
+            console.log('Janela carregada');
+            updateStatus('🔄 Janela carregada, verificando scripts...', 'loading');
+            checkScripts();
+        });
+        
+        // Verificação periódica
+        setInterval(checkScripts, 3000);
+    </script>
+</body>
+</html>
