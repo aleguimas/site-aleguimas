@@ -5,10 +5,25 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Build do Sanity Studio
+[context.production]
+  command = "npm run build && cd studio && npm run build"
+
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"
   to = "/index.html"
+  status = 200
+
+# Redirect para o Sanity Studio
+[[redirects]]
+  from = "/studio"
+  to = "/studio/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/studio/*"
+  to = "/studio/:splat"
   status = 200
 
 # Configurações de headers
