@@ -1,37 +1,17 @@
-# Decap CMS Configuration
-# Configuração otimizada para Netlify Identity + Git Gateway
-
-# Configuração do backend
+# Decap CMS - Configuração Ultra-Simples
 backend:
   name: git-gateway
   branch: main
-  # IMPORTANTE: Usar o nome completo do repositório
   repo: aleguimas/site-aleguimas
-  # Configurações adicionais para estabilidade
-  squash_merges: true
-  commit_messages:
-    create: 'content: create {{collection}} "{{slug}}"'
-    update: 'content: update {{collection}} "{{slug}}"'
-    delete: 'content: delete {{collection}} "{{slug}}"'
-    uploadMedia: 'media: upload {{path}}'
-    deleteMedia: 'media: delete {{path}}'
 
-# Configuração de autenticação
-auth_endpoint: https://aleguimas.com.br/.netlify/identity
-
-# Configuração de mídia
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-# Modo de publicação
 publish_mode: editorial_workflow
 
-# URLs do site
 site_url: https://aleguimas.com.br
 display_url: https://aleguimas.com.br
-base_url: https://aleguimas.com.br
 
-# Configuração de coleções
 collections:
   - name: "posts"
     label: "Posts do Blog"
@@ -39,46 +19,44 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Título", name: "title", widget: "string", required: true }
-      - { label: "Resumo", name: "excerpt", widget: "text", required: true }
-      - { label: "Data", name: "date", widget: "datetime", required: true }
-      - { label: "Autor", name: "author", widget: "string", required: true }
-      - { label: "Imagem de Capa", name: "cover", widget: "image", required: true }
-      - { 
-          label: "Categoria", 
-          name: "category", 
-          widget: "select", 
-          options: 
-            - "Inteligência Artificial"
-            - "Transformação Digital"
-            - "Inovação"
-            - "Tecnologia"
-            - "Liderança"
-            - "Estratégia"
-          required: true 
-        }
-      - { label: "Tags", name: "tags", widget: "list", required: true }
-      - { label: "Conteúdo", name: "body", widget: "markdown", required: true }
-      - label: "SEO"
-        name: "seo"
-        widget: "object"
-        fields:
-          - { label: "Título SEO", name: "title", widget: "string", required: false }
-          - { label: "Descrição SEO", name: "description", widget: "text", required: false }
-          - { label: "URL Canônica", name: "canonical", widget: "string", required: false }
-          - { label: "Não indexar", name: "noindex", widget: "boolean", default: false, required: false }
-          - { label: "Não seguir links", name: "nofollow", widget: "boolean", default: false, required: false }
-          - { label: "Título Open Graph", name: "og_title", widget: "string", required: false }
-          - { label: "Descrição Open Graph", name: "og_description", widget: "text", required: false }
-          - { label: "Imagem Open Graph", name: "og_image", widget: "image", required: false }
-          - label: "FAQ"
-            name: "faq"
-            widget: "list"
-            fields:
-              - { label: "Pergunta", name: "pergunta", widget: "string", required: true }
-              - { label: "Resposta", name: "resposta", widget: "text", required: true }
+      - label: "Título"
+        name: "title"
+        widget: "string"
+        required: true
+      - label: "Resumo"
+        name: "excerpt"
+        widget: "text"
+        required: true
+      - label: "Data"
+        name: "date"
+        widget: "datetime"
+        required: true
+      - label: "Autor"
+        name: "author"
+        widget: "string"
+        required: true
+      - label: "Imagem de Capa"
+        name: "cover"
+        widget: "image"
+        required: false
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        options:
+          - "Tecnologia"
+          - "Inovação"
+          - "Liderança"
+          - "Estratégia"
+        required: true
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+      - label: "Conteúdo"
+        name: "body"
+        widget: "markdown"
+        required: true
 
-# Configurações de workflow simplificadas
 workflow:
   - label: "Rascunho"
     name: "draft"
@@ -90,19 +68,7 @@ workflow:
     name: "published"
     color: "#2196f3"
 
-# Configurações de preview
 preview_path: "blog/{{slug}}"
 preview_path_date_field: "date"
 
-# Configurações de slug
-slug:
-  encoding: "ascii"
-  clean_accents: true
-  sanitize_replacement: "-"
-
-# Configurações de editor
-editor:
-  preview: true
-
-# Configurações de localização
 locale: "pt"
