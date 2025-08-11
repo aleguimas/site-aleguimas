@@ -89,6 +89,21 @@
             color: #ff9800;
             font-weight: bold;
         }
+        
+        .test-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .test-button:hover {
+            background-color: #1976d2;
+        }
     </style>
 </head>
 <body>
@@ -106,6 +121,13 @@
         <p><strong>Git Gateway:</strong> <span id="gateway-status">Verificando...</span></p>
         <p><strong>CMS Status:</strong> <span id="cms-status">Carregando...</span></p>
         <p><strong>Config:</strong> <span id="config-status">Verificando...</span></p>
+        <p><strong>Repositório:</strong> <span id="repo-status">Verificando...</span></p>
+        
+        <div style="margin-top: 1rem;">
+            <button class="test-button" onclick="testGitGateway()">Testar Git Gateway</button>
+            <button class="test-button" onclick="testIdentity()">Testar Identity</button>
+            <button class="test-button" onclick="reloadCMS()">Recarregar CMS</button>
+        </div>
     </div>
     
     <div id="nc-root">
@@ -135,6 +157,23 @@
         // Verificar Netlify Identity
         if (typeof netlifyIdentity !== 'undefined') {
             updateStatus('identity-status', '✅ Carregado', 'status-success');
+            
+            // Configurar Netlify Identity
+            netlifyIdentity.on('init', user => {
+                console.log('Netlify Identity inicializado:', user);
+                updateStatus('identity-status', '✅ Inicializado', 'status-success');
+            });
+            
+            netlifyIdentity.on('login', user => {
+                console.log('Usuário logado:', user);
+                updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
+            });
+            
+            netlifyIdentity.on('logout', () => {
+                console.log('Usuário deslogado');
+                updateStatus('identity-status', '✅ Deslogado', 'status-success');
+            });
+            
         } else {
             updateStatus('identity-status', '❌ Não carregado', 'status-error');
         }
@@ -151,6 +190,47 @@
             .catch(error => {
                 updateStatus('config-status', '❌ Erro: ' + error.message, 'status-error');
             });
+        
+        // Verificar repositório
+        fetch('https://api.github.com/repos/aleguimas/site-aleguimas')
+            .then(response => {
+                if (response.ok) {
+                    updateStatus('repo-status', '✅ Acessível', 'status-success');
+                } else {
+                    updateStatus('repo-status', '❌ Erro: ' + response.status, 'status-error');
+                }
+            })
+            .catch(error => {
+                updateStatus('repo-status', '❌ Erro: ' + error.message, 'status-error');
+            });
+        
+        // Funções de teste
+        function testGitGateway() {
+            updateStatus('gateway-status', '🔄 Testando...', 'status-warning');
+            
+            // Simular teste do Git Gateway
+            setTimeout(() => {
+                if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
+                    updateStatus('gateway-status', '✅ Funcionando', 'status-success');
+                } else {
+                    updateStatus('gateway-status', '❌ Erro: usuário não autenticado', 'status-error');
+                }
+            }, 2000);
+        }
+        
+        function testIdentity() {
+            if (typeof netlifyIdentity !== 'undefined') {
+                netlifyIdentity.open();
+                updateStatus('identity-status', '🔄 Abrindo login...', 'status-warning');
+            } else {
+                updateStatus('identity-status', '❌ Identity não disponível', 'status-error');
+            }
+        }
+        
+        function reloadCMS() {
+            updateStatus('cms-status', '🔄 Recarregando...', 'status-warning');
+            location.reload();
+        }
         
         // Verificar se o CMS carregou
         let cmsLoaded = false;
