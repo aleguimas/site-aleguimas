@@ -200,7 +200,7 @@ export default function Footer() {
               <span className="text-gray-400 text-sm">
                 Desenvolvido por{" "}
                 <Link
-                  href="https://simplidigital.dev"
+                  href="https://www.simplidigital.dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
