@@ -5,7 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Redirects para o admin - IMPORTANTE: ordem específica
+# Redirects específicos para o admin
 [[redirects]]
   from = "/admin"
   to = "/admin/index.html"
@@ -14,12 +14,6 @@
 [[redirects]]
   from = "/admin/"
   to = "/admin/index.html"
-  status = 200
-
-# Redirects para outros recursos do admin
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin/:splat"
   status = 200
 
 # Redirect global para SPA (deve vir por último)
@@ -34,13 +28,6 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
     X-Frame-Options = "SAMEORIGIN"
-
-# Configuração opcional para Basic Auth em produção
-# Descomente e configure as variáveis de ambiente se necessário
-# [[headers]]
-#   for = "/admin"
-#   [headers.values]
-#     Basic-Auth = "admin:$BASIC_AUTH_PASS"
 
 [[headers]]
   for = "/images/*"
