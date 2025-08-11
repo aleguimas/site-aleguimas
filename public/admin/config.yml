@@ -2,12 +2,17 @@ backend:
   name: git-gateway
   branch: main
 
+# Remover local_backend em produção
 # local_backend: true
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
 publish_mode: editorial_workflow
+
+# Configuração do site
+site_url: https://aleguimas.com.br
+display_url: https://aleguimas.com.br
 
 collections:
   - name: "posts"

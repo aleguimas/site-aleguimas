@@ -55,23 +55,39 @@
             margin: 2rem;
         }
         
-        .dev-info {
-            background-color: #e3f2fd;
-            border: 1px solid #2196f3;
+        .debug-info {
+            background-color: #e8f5e8;
+            border: 1px solid #4caf50;
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem;
-            color: #1976d2;
+            color: #2e7d32;
+            font-family: monospace;
+            font-size: 0.9rem;
         }
         
-        .dev-info h3 {
+        .debug-info h3 {
             margin: 0 0 0.5rem 0;
             font-size: 1.1rem;
         }
         
-        .dev-info p {
+        .debug-info p {
             margin: 0.25rem 0;
-            font-size: 0.9rem;
+        }
+        
+        .status-success {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .status-error {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .status-warning {
+            color: #ff9800;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -81,12 +97,15 @@
         <p>Gerenciador de Conteúdo</p>
     </div>
     
-    <!-- Informações para desenvolvimento -->
-    <div class="dev-info" id="dev-info" style="display: none;">
-        <h3>🔧 Modo Desenvolvimento</h3>
+    <!-- Informações de debug -->
+    <div class="debug-info" id="debug-info">
+        <h3>🔧 Debug - Status do CMS</h3>
         <p><strong>URL:</strong> <span id="current-url"></span></p>
         <p><strong>Ambiente:</strong> <span id="environment"></span></p>
-        <p><strong>Status:</strong> <span id="cms-status">Carregando...</span></p>
+        <p><strong>Netlify Identity:</strong> <span id="identity-status">Verificando...</span></p>
+        <p><strong>Git Gateway:</strong> <span id="gateway-status">Verificando...</span></p>
+        <p><strong>CMS Status:</strong> <span id="cms-status">Carregando...</span></p>
+        <p><strong>Config:</strong> <span id="config-status">Verificando...</span></p>
     </div>
     
     <div id="nc-root">
@@ -97,73 +116,112 @@
     </div>
     
     <script>
+        // Função para atualizar status
+        function updateStatus(elementId, status, className) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = status;
+                element.className = className;
+            }
+        }
+        
         // Detectar ambiente
         const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const isDevPort = window.location.port === '3000';
         
-        if (isDev && isDevPort) {
-            document.getElementById('dev-info').style.display = 'block';
-            document.getElementById('current-url').textContent = window.location.href;
-            document.getElementById('environment').textContent = 'Desenvolvimento Local';
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('environment').textContent = isDev && isDevPort ? 'Desenvolvimento Local' : 'Produção';
+        
+        // Verificar Netlify Identity
+        if (typeof netlifyIdentity !== 'undefined') {
+            updateStatus('identity-status', '✅ Carregado', 'status-success');
+        } else {
+            updateStatus('identity-status', '❌ Não carregado', 'status-error');
         }
         
-        // Verificar se o CMS carregou
-        if (typeof CMS !== 'undefined') {
-            console.log('Decap CMS carregado com sucesso!');
-            
-            if (isDev && isDevPort) {
-                document.getElementById('cms-status').textContent = '✅ CMS Carregado';
-                document.getElementById('cms-status').style.color = '#4caf50';
-            }
-            
-            // Registrar estilos de preview - usar rota relativa
-            CMS.registerPreviewStyle('./cms.css');
-            
-            // Template de preview para posts
-            CMS.registerPreviewTemplate('posts', ({ entry, widgetFor, getAsset }) => {
-                const title = entry.getIn(['data', 'title']) || 'Título não definido';
-                const excerpt = entry.getIn(['data', 'excerpt']) || 'Resumo não definido';
-                const author = entry.getIn(['data', 'author']) || 'Autor não definido';
-                const date = entry.getIn(['data', 'date']);
-                const cover = getAsset(entry.getIn(['data', 'cover']));
-                const body = widgetFor('body');
-                
-                return `
-                    <div style="max-width: 800px; margin: 0 auto; padding: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-                        <h1 style="color: #333; margin-bottom: 1rem;">${title}</h1>
-                        <div style="color: #666; margin-bottom: 2rem;">
-                            <p><strong>Autor:</strong> ${author}</p>
-                            <p><strong>Data:</strong> ${date ? new Date(date).toLocaleDateString('pt-BR') : 'Não definida'}</p>
-                        </div>
-                        ${cover ? `<img src="${cover.toString()}" alt="${title}" style="width: 100%; max-width: 600px; height: auto; margin-bottom: 2rem; border-radius: 8px;" />` : ''}
-                        <div style="color: #333; line-height: 1.6;">
-                            <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;"><em>${excerpt}</em></p>
-                            <div>${body}</div>
-                        </div>
-                    </div>
-                `;
+        // Verificar configuração
+        fetch('./config.yml')
+            .then(response => {
+                if (response.ok) {
+                    updateStatus('config-status', '✅ Carregada', 'status-success');
+                } else {
+                    updateStatus('config-status', '❌ Erro ao carregar', 'status-error');
+                }
+            })
+            .catch(error => {
+                updateStatus('config-status', '❌ Erro: ' + error.message, 'status-error');
             });
-        } else {
-            console.error('Erro: Decap CMS não carregou');
-            
-            if (isDev && isDevPort) {
-                document.getElementById('cms-status').textContent = '❌ CMS Não Carregou';
-                document.getElementById('cms-status').style.color = '#f44336';
+        
+        // Verificar se o CMS carregou
+        let cmsLoaded = false;
+        
+        function checkCMS() {
+            if (typeof CMS !== 'undefined') {
+                cmsLoaded = true;
+                console.log('Decap CMS carregado com sucesso!');
+                updateStatus('cms-status', '✅ CMS Carregado', 'status-success');
+                
+                // Registrar estilos de preview
+                CMS.registerPreviewStyle('./cms.css');
+                
+                // Template de preview para posts
+                CMS.registerPreviewTemplate('posts', ({ entry, widgetFor, getAsset }) => {
+                    const title = entry.getIn(['data', 'title']) || 'Título não definido';
+                    const excerpt = entry.getIn(['data', 'excerpt']) || 'Resumo não definido';
+                    const author = entry.getIn(['data', 'author']) || 'Autor não definido';
+                    const date = entry.getIn(['data', 'date']);
+                    const cover = getAsset(entry.getIn(['data', 'cover']));
+                    const body = widgetFor('body');
+                    
+                    return `
+                        <div style="max-width: 800px; margin: 0 auto; padding: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                            <h1 style="color: #333; margin-bottom: 1rem;">${title}</h1>
+                            <div style="color: #666; margin-bottom: 2rem;">
+                                <p><strong>Autor:</strong> ${author}</p>
+                                <p><strong>Data:</strong> ${date ? new Date(date).toLocaleDateString('pt-BR') : 'Não definida'}</p>
+                            </div>
+                            ${cover ? `<img src="${cover.toString()}" alt="${title}" style="width: 100%; max-width: 600px; height: auto; margin-bottom: 2rem; border-radius: 8px;" />` : ''}
+                            <div style="color: #333; line-height: 1.6;">
+                                <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;"><em>${excerpt}</em></p>
+                                <div>${body}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Verificar Git Gateway
+                updateStatus('gateway-status', '✅ Configurado', 'status-success');
+                
+            } else {
+                console.error('Erro: Decap CMS não carregou');
+                updateStatus('cms-status', '❌ CMS Não Carregou', 'status-error');
+                updateStatus('gateway-status', '⚠️ Verificar configuração', 'status-warning');
+                
+                // Mostrar erro após 5 segundos se o CMS não carregar
+                setTimeout(() => {
+                    if (!cmsLoaded) {
+                        document.getElementById('nc-root').innerHTML = `
+                            <div class="error">
+                                <h2>Erro ao carregar o CMS</h2>
+                                <p>Verifique se:</p>
+                                <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                                    <li>O Netlify Identity está ativado</li>
+                                    <li>O Git Gateway está configurado</li>
+                                    <li>As permissões do repositório estão corretas</li>
+                                    <li>A configuração do CMS está correta</li>
+                                </ul>
+                                <p><a href="https://decapcms.org/docs/add-to-your-site/" target="_blank">Documentação do Decap CMS</a></p>
+                            </div>
+                        `;
+                    }
+                }, 5000);
             }
-            
-            document.getElementById('nc-root').innerHTML = `
-                <div class="error">
-                    <h2>Erro ao carregar o CMS</h2>
-                    <p>Verifique se:</p>
-                    <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
-                        <li>O Netlify Identity está ativado</li>
-                        <li>O Git Gateway está configurado</li>
-                        <li>As permissões do repositório estão corretas</li>
-                    </ul>
-                    <p><a href="https://decapcms.org/docs/add-to-your-site/" target="_blank">Documentação do Decap CMS</a></p>
-                </div>
-            `;
         }
+        
+        // Verificar CMS imediatamente e depois de 1 segundo
+        checkCMS();
+        setTimeout(checkCMS, 1000);
+        setTimeout(checkCMS, 3000);
     </script>
 </body>
 </html>
