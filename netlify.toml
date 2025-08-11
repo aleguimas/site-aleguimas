@@ -5,71 +5,13 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Redirects específicos para o admin
-[[redirects]]
-  from = "/admin"
-  to = "/admin/clean.html"
-  status = 200
-
-[[redirects]]
-  from = "/admin/"
-  to = "/admin/clean.html"
-  status = 200
-
-# Redirect para www (importante!)
-[[redirects]]
-  from = "https://aleguimas.com.br/admin"
-  to = "https://www.aleguimas.com.br/admin"
-  status = 301
-
-[[redirects]]
-  from = "https://aleguimas.com.br/admin/"
-  to = "https://www.aleguimas.com.br/admin/"
-  status = 301
-
-# Redirect para debug (opcional)
-[[redirects]]
-  from = "/admin/debug"
-  to = "/admin/index.html"
-  status = 200
-
-# Redirect para teste simples
-[[redirects]]
-  from = "/admin/test"
-  to = "/admin/simple.html"
-  status = 200
-
-# Redirect para versão alternativa (Netlify CMS)
-[[redirects]]
-  from = "/admin/netlify"
-  to = "/admin/netlify-cms.html"
-  status = 200
-
-# Redirect para versão funcional (CMS que deve funcionar)
-[[redirects]]
-  from = "/admin/working"
-  to = "/admin/working.html"
-  status = 200
-
-# Redirect para config simples
-[[redirects]]
-  from = "/admin/config-simple"
-  to = "/admin/config-simple.yml"
-  status = 200
-
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Configurações específicas para o admin
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    Cache-Control = "public, max-age=3600"
-    X-Frame-Options = "SAMEORIGIN"
-
+# Configurações de headers
 [[headers]]
   for = "/images/*"
   [headers.values]
