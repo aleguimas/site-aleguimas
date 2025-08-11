@@ -8,11 +8,17 @@
 # Redirects específicos para o admin
 [[redirects]]
   from = "/admin"
-  to = "/admin/index.html"
+  to = "/admin/clean.html"
   status = 200
 
 [[redirects]]
   from = "/admin/"
+  to = "/admin/clean.html"
+  status = 200
+
+# Redirect para debug (opcional)
+[[redirects]]
+  from = "/admin/debug"
   to = "/admin/index.html"
   status = 200
 
