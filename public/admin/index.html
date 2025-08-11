@@ -180,6 +180,7 @@
             <button class="test-button" id="reload-cms-btn" onclick="reloadCMS()">Recarregar CMS</button>
             <button class="test-button" id="force-cms-btn" onclick="forceLoadCMS()">Forçar CMS</button>
             <button class="test-button" id="clear-log-btn" onclick="clearLog()">Limpar Log</button>
+            <button class="test-button" id="refresh-token-btn" onclick="refreshToken()">Renovar Token</button>
         </div>
     </div>
     
@@ -372,10 +373,28 @@
                 const currentUser = netlifyIdentity.currentUser();
                 addLog('Usuário atual verificado', 'info', { 
                     user: currentUser ? currentUser.email : 'não logado',
-                    token: currentUser ? 'presente' : 'ausente'
+                    token: currentUser ? 'presente' : 'ausente',
+                    tokenExpiry: currentUser && currentUser.token ? 
+                        (currentUser.token.expires_at ? new Date(currentUser.token.expires_at).toLocaleString('pt-BR') : 'não definido') : 
+                        'não aplicável'
                 });
                 
-                if (currentUser) {
+                if (currentUser && currentUser.token) {
+                    // Verificar se o token não expirou
+                    const now = new Date();
+                    const tokenExpiry = currentUser.token.expires_at ? new Date(currentUser.token.expires_at) : null;
+                    
+                    if (tokenExpiry && now > tokenExpiry) {
+                        addLog('Token expirado!', 'error', { 
+                            now: now.toLocaleString('pt-BR'),
+                            expiresAt: tokenExpiry.toLocaleString('pt-BR')
+                        });
+                        updateStatus('gateway-status', '❌ Token Expirado', 'status-error');
+                        return;
+                    }
+                    
+                    addLog('Token válido, testando com API do Netlify...', 'info');
+                    
                     // Testar token de acesso
                     fetch('https://api.netlify.com/api/v1/user', {
                         headers: {
@@ -383,6 +402,12 @@
                         }
                     })
                     .then(response => {
+                        addLog('Resposta da API do Netlify', 'info', { 
+                            status: response.status, 
+                            statusText: response.statusText,
+                            ok: response.ok
+                        });
+                        
                         if (response.ok) {
                             return response.json();
                         } else {
@@ -400,11 +425,14 @@
                         testGitGatewayConnection(currentUser.token.access_token);
                     })
                     .catch(error => {
-                        addLog('Erro ao validar token do usuário', 'error', { error: error.message });
+                        addLog('Erro ao validar token do usuário', 'error', { 
+                            error: error.message,
+                            suggestion: 'Tente usar "Renovar Token" para obter um novo token'
+                        });
                         updateStatus('gateway-status', '❌ Token inválido', 'status-error');
                     });
                 } else {
-                    addLog('Usuário não está logado', 'warning');
+                    addLog('Usuário não está logado ou token ausente', 'warning');
                     updateStatus('gateway-status', '❌ Usuário não logado', 'status-error');
                 }
             } else {
@@ -493,6 +521,44 @@
                     addLog('Erro ao recarregar script do CMS', 'error');
                 };
                 document.head.appendChild(script);
+            }
+        }
+
+        function refreshToken() {
+            addLog('Iniciando renovação do token...', 'info');
+            updateStatus('gateway-status', '🔄 Renovando Token...', 'status-warning');
+            updateTimestamp();
+
+            if (typeof netlifyIdentity !== 'undefined') {
+                const currentUser = netlifyIdentity.currentUser();
+                if (currentUser && currentUser.token) {
+                    addLog('Usuário logado, tentando renovar token...', 'info', { 
+                        email: currentUser.email,
+                        tokenExpiry: currentUser.token.expires_at ? new Date(currentUser.token.expires_at).toLocaleString('pt-BR') : 'não definido'
+                    });
+                    
+                    // Fazer logout primeiro para limpar o token antigo
+                    addLog('Fazendo logout para limpar token antigo...', 'info');
+                    netlifyIdentity.logout();
+                    
+                    // Aguardar um pouco e abrir login
+                    setTimeout(() => {
+                        addLog('Abrindo modal de login para renovar token...', 'info');
+                        netlifyIdentity.open();
+                        updateStatus('gateway-status', '🔄 Abrindo login para renovar...', 'status-warning');
+                    }, 1000);
+                    
+                } else {
+                    addLog('Usuário não logado ou token ausente', 'warning');
+                    updateStatus('gateway-status', '⚠️ Usuário não logado', 'status-warning');
+                    
+                    // Se não está logado, abrir login diretamente
+                    addLog('Abrindo modal de login...', 'info');
+                    netlifyIdentity.open();
+                }
+            } else {
+                addLog('Netlify Identity não disponível', 'error');
+                updateStatus('gateway-status', '❌ Identity não disponível', 'status-error');
             }
         }
         
