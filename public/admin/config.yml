@@ -1,0 +1,81 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "posts"
+    label: "Posts do Blog"
+    folder: "content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string", required: true }
+      - { label: "Resumo", name: "excerpt", widget: "text", required: true }
+      - { label: "Data", name: "date", widget: "datetime", required: true }
+      - { label: "Autor", name: "author", widget: "string", required: true }
+      - { label: "Imagem de Capa", name: "cover", widget: "image", required: true }
+      - { 
+          label: "Categoria", 
+          name: "category", 
+          widget: "select", 
+          options: 
+            - "Inteligência Artificial"
+            - "Transformação Digital"
+            - "Inovação"
+            - "Tecnologia"
+            - "Liderança"
+            - "Estratégia"
+          required: true 
+        }
+      - { label: "Tags", name: "tags", widget: "list", required: true }
+      - { label: "Conteúdo", name: "body", widget: "markdown", required: true }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        fields:
+          - { label: "Título SEO", name: "title", widget: "string" }
+          - { label: "Descrição SEO", name: "description", widget: "text" }
+          - { label: "URL Canônica", name: "canonical", widget: "string" }
+          - { label: "Não indexar", name: "noindex", widget: "boolean", default: false }
+          - { label: "Não seguir links", name: "nofollow", widget: "boolean", default: false }
+          - { label: "Título Open Graph", name: "og_title", widget: "string" }
+          - { label: "Descrição Open Graph", name: "og_description", widget: "text" }
+          - { label: "Imagem Open Graph", name: "og_image", widget: "image" }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            fields:
+              - { label: "Pergunta", name: "pergunta", widget: "string" }
+              - { label: "Resposta", name: "resposta", widget: "text" }
+
+# Configurações de workflow
+workflow:
+  - label: "Rascunho"
+    name: "draft"
+    color: "#ffeb3b"
+  - label: "Em Revisão"
+    name: "review"
+    color: "#ff9800"
+  - label: "Pronto"
+    name: "ready"
+    color: "#4caf50"
+  - label: "Publicado"
+    name: "published"
+    color: "#2196f3"
+
+# Configurações de preview
+preview_path: "blog/{{slug}}"
+preview_path_date_field: "date"
+
+# Configurações de slug
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"

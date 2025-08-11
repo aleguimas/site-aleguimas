@@ -4,8 +4,14 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
-
-const inter = Inter({ subsets: ["latin"] })
+// Otimização de fontes para melhor LCP
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap', // Evita bloqueio de render
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -88,12 +94,29 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
       <head>
+        {/* Preload de recursos críticos */}
+        <link rel="preload" href="/images/alexandre_guimas_palestrante_principal.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/favicon-aleguimas.png" as="image" type="image/png" />
+        
+        {/* Preconnect para domínios externos */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        
+        {/* DNS prefetch para melhor performance */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        
+        {/* Icons */}
         <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/images/favicon-aleguimas.png" />
         <link rel="shortcut icon" href="/images/favicon-aleguimas.png" type="image/png" />
+        
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -125,30 +148,32 @@ export default function RootLayout({
             })
           }}
         />
-        {/* Google Analytics */}
+        
+        {/* Google Analytics - Carregamento otimizado */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-4FJCDGTPXG"
         />
         <script
+          id="google-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-4FJCDGTPXG');
+              gtag('config', 'G-4FJCDGTPXG', {
+                page_title: document.title,
+                page_location: window.location.href,
+              });
             `,
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main id="main-content">
             {children}
           </main>
-          
-          {/* Floating WhatsApp Button - Removido */}
-
         </ThemeProvider>
       </body>
     </html>

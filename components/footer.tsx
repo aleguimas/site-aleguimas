@@ -197,6 +197,17 @@ export default function Footer() {
               >
                 Política de Privacidade
               </Link>
+              <span className="text-gray-400 text-sm">
+                Desenvolvido por{" "}
+                <Link
+                  href="https://simplidigital.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                >
+                  Simplí
+                </Link>
+              </span>
             </div>
           </div>
         </div>

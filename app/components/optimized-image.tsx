@@ -13,6 +13,7 @@ interface OptimizedImageProps {
   quality?: number
   placeholder?: 'blur' | 'empty'
   blurDataURL?: string
+  loading?: 'lazy' | 'eager'
 }
 
 export default function OptimizedImage({
@@ -24,12 +25,23 @@ export default function OptimizedImage({
   className = '',
   priority = false,
   sizes,
-  quality = 75,
+  quality = 85, // Aumentado para melhor qualidade
   placeholder = 'empty',
   blurDataURL,
+  loading = 'lazy',
   ...props
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
+
+  // Determinar sizes baseado no contexto
+  const defaultSizes = sizes || (fill 
+    ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    : undefined
+  )
+
+  // Determinar loading baseado na prioridade
+  const imageLoading = priority ? 'eager' : loading
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -40,17 +52,36 @@ export default function OptimizedImage({
         height={height}
         fill={fill}
         className={`
-          duration-700 ease-in-out
-          ${isLoading ? 'scale-110 blur-2xl grayscale' : 'scale-100 blur-0 grayscale-0'}
+          transition-all duration-300 ease-in-out
+          ${isLoading ? 'scale-105 blur-sm' : 'scale-100 blur-0'}
+          ${hasError ? 'opacity-50' : 'opacity-100'}
         `}
         onLoadingComplete={() => setIsLoading(false)}
+        onError={() => setHasError(true)}
         priority={priority}
-        sizes={sizes}
+        sizes={defaultSizes}
         quality={quality}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
+        loading={imageLoading}
+        // Otimizações para Core Web Vitals
+        unoptimized={false} // Usar otimização do Next.js quando possível
         {...props}
       />
+      
+      {/* Placeholder durante carregamento */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 animate-pulse" />
+      )}
+      
+      {/* Fallback para erro */}
+      {hasError && (
+        <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+          <div className="text-gray-500 dark:text-gray-400 text-sm">
+            Erro ao carregar imagem
+          </div>
+        </div>
+      )}
     </div>
   )
 } 
