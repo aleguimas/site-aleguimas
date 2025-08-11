@@ -104,6 +104,11 @@
         .test-button:hover {
             background-color: #1976d2;
         }
+        
+        .test-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -116,17 +121,19 @@
     <div class="debug-info" id="debug-info">
         <h3>🔧 Debug - Status do CMS</h3>
         <p><strong>URL:</strong> <span id="current-url"></span></p>
-        <p><strong>Ambiente:</strong> <span id="environment"></span></p>
+        <p><strong>Ambiente:</strong> <span id="current-environment"></span></p>
         <p><strong>Netlify Identity:</strong> <span id="identity-status">Verificando...</span></p>
         <p><strong>Git Gateway:</strong> <span id="gateway-status">Verificando...</span></p>
         <p><strong>CMS Status:</strong> <span id="cms-status">Carregando...</span></p>
         <p><strong>Config:</strong> <span id="config-status">Verificando...</span></p>
         <p><strong>Repositório:</strong> <span id="repo-status">Verificando...</span></p>
+        <p><strong>Última Verificação:</strong> <span id="last-check">-</span></p>
         
         <div style="margin-top: 1rem;">
-            <button class="test-button" onclick="testGitGateway()">Testar Git Gateway</button>
-            <button class="test-button" onclick="testIdentity()">Testar Identity</button>
-            <button class="test-button" onclick="reloadCMS()">Recarregar CMS</button>
+            <button class="test-button" id="test-gateway-btn" onclick="testGitGateway()">Testar Git Gateway</button>
+            <button class="test-button" id="test-identity-btn" onclick="testIdentity()">Testar Identity</button>
+            <button class="test-button" id="reload-cms-btn" onclick="reloadCMS()">Recarregar CMS</button>
+            <button class="test-button" id="force-cms-btn" onclick="forceLoadCMS()">Forçar CMS</button>
         </div>
     </div>
     
@@ -138,6 +145,12 @@
     </div>
     
     <script>
+        // Variáveis globais
+        let cmsLoaded = false;
+        let identityReady = false;
+        let gatewayReady = false;
+        let configReady = false;
+        
         // Função para atualizar status
         function updateStatus(elementId, status, className) {
             const element = document.getElementById(elementId);
@@ -147,72 +160,99 @@
             }
         }
         
+        // Função para atualizar timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('last-check').textContent = now.toLocaleTimeString('pt-BR');
+        }
+        
         // Detectar ambiente
         const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const isDevPort = window.location.port === '3000';
         
         document.getElementById('current-url').textContent = window.location.href;
-        document.getElementById('environment').textContent = isDev && isDevPort ? 'Desenvolvimento Local' : 'Produção';
+        document.getElementById('current-environment').textContent = isDev && isDevPort ? 'Desenvolvimento Local' : 'Produção';
         
         // Verificar Netlify Identity
-        if (typeof netlifyIdentity !== 'undefined') {
-            updateStatus('identity-status', '✅ Carregado', 'status-success');
-            
-            // Configurar Netlify Identity
-            netlifyIdentity.on('init', user => {
-                console.log('Netlify Identity inicializado:', user);
-                updateStatus('identity-status', '✅ Inicializado', 'status-success');
-            });
-            
-            netlifyIdentity.on('login', user => {
-                console.log('Usuário logado:', user);
-                updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
-            });
-            
-            netlifyIdentity.on('logout', () => {
-                console.log('Usuário deslogado');
-                updateStatus('identity-status', '✅ Deslogado', 'status-success');
-            });
-            
-        } else {
-            updateStatus('identity-status', '❌ Não carregado', 'status-error');
+        function checkIdentity() {
+            if (typeof netlifyIdentity !== 'undefined') {
+                identityReady = true;
+                updateStatus('identity-status', '✅ Carregado', 'status-success');
+                
+                // Configurar Netlify Identity
+                netlifyIdentity.on('init', user => {
+                    console.log('Netlify Identity inicializado:', user);
+                    if (user) {
+                        updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
+                    } else {
+                        updateStatus('identity-status', '✅ Inicializado (não logado)', 'status-success');
+                    }
+                });
+                
+                netlifyIdentity.on('login', user => {
+                    console.log('Usuário logado:', user);
+                    updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
+                });
+                
+                netlifyIdentity.on('logout', () => {
+                    console.log('Usuário deslogado');
+                    updateStatus('identity-status', '✅ Deslogado', 'status-success');
+                });
+                
+                // Inicializar Identity
+                netlifyIdentity.init();
+                
+            } else {
+                identityReady = false;
+                updateStatus('identity-status', '❌ Não carregado', 'status-error');
+            }
         }
         
         // Verificar configuração
-        fetch('./config.yml')
-            .then(response => {
-                if (response.ok) {
-                    updateStatus('config-status', '✅ Carregada', 'status-success');
-                } else {
-                    updateStatus('config-status', '❌ Erro ao carregar', 'status-error');
-                }
-            })
-            .catch(error => {
-                updateStatus('config-status', '❌ Erro: ' + error.message, 'status-error');
-            });
+        function checkConfig() {
+            fetch('./config.yml')
+                .then(response => {
+                    if (response.ok) {
+                        configReady = true;
+                        updateStatus('config-status', '✅ Carregada', 'status-success');
+                    } else {
+                        configReady = false;
+                        updateStatus('config-status', '❌ Erro ao carregar', 'status-error');
+                    }
+                })
+                .catch(error => {
+                    configReady = false;
+                    updateStatus('config-status', '❌ Erro: ' + error.message, 'status-error');
+                });
+        }
         
         // Verificar repositório
-        fetch('https://api.github.com/repos/aleguimas/site-aleguimas')
-            .then(response => {
-                if (response.ok) {
-                    updateStatus('repo-status', '✅ Acessível', 'status-success');
-                } else {
-                    updateStatus('repo-status', '❌ Erro: ' + response.status, 'status-error');
-                }
-            })
-            .catch(error => {
-                updateStatus('repo-status', '❌ Erro: ' + error.message, 'status-error');
-            });
+        function checkRepository() {
+            fetch('https://api.github.com/repos/aleguimas/site-aleguimas')
+                .then(response => {
+                    if (response.ok) {
+                        updateStatus('repo-status', '✅ Acessível', 'status-success');
+                    } else {
+                        updateStatus('repo-status', '❌ Erro: ' + response.status, 'status-error');
+                    }
+                })
+                .catch(error => {
+                    updateStatus('repo-status', '❌ Erro: ' + error.message, 'status-error');
+                });
+        }
         
         // Funções de teste
         function testGitGateway() {
             updateStatus('gateway-status', '🔄 Testando...', 'status-warning');
+            updateTimestamp();
             
             // Simular teste do Git Gateway
             setTimeout(() => {
                 if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
+                    gatewayReady = true;
                     updateStatus('gateway-status', '✅ Funcionando', 'status-success');
                 } else {
+                    gatewayReady = false;
                     updateStatus('gateway-status', '❌ Erro: usuário não autenticado', 'status-error');
                 }
             }, 2000);
@@ -222,6 +262,7 @@
             if (typeof netlifyIdentity !== 'undefined') {
                 netlifyIdentity.open();
                 updateStatus('identity-status', '🔄 Abrindo login...', 'status-warning');
+                updateTimestamp();
             } else {
                 updateStatus('identity-status', '❌ Identity não disponível', 'status-error');
             }
@@ -229,13 +270,39 @@
         
         function reloadCMS() {
             updateStatus('cms-status', '🔄 Recarregando...', 'status-warning');
-            location.reload();
+            updateTimestamp();
+            
+            // Desabilitar botões durante recarregamento
+            document.getElementById('reload-cms-btn').disabled = true;
+            document.getElementById('force-cms-btn').disabled = true;
+            
+            // Recarregar após 2 segundos
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
         
-        // Verificar se o CMS carregou
-        let cmsLoaded = false;
+        function forceLoadCMS() {
+            updateStatus('cms-status', '🔄 Forçando CMS...', 'status-warning');
+            updateTimestamp();
+            
+            // Tentar forçar o carregamento do CMS
+            if (typeof CMS !== 'undefined') {
+                initializeCMS();
+            } else {
+                // Tentar carregar o script novamente
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+                script.onload = function() {
+                    console.log('CMS script recarregado');
+                    setTimeout(initializeCMS, 1000);
+                };
+                document.head.appendChild(script);
+            }
+        }
         
-        function checkCMS() {
+        // Inicializar CMS
+        function initializeCMS() {
             if (typeof CMS !== 'undefined') {
                 cmsLoaded = true;
                 console.log('Decap CMS carregado com sucesso!');
@@ -271,11 +338,16 @@
                 
                 // Verificar Git Gateway
                 updateStatus('gateway-status', '✅ Configurado', 'status-success');
+                gatewayReady = true;
+                
+                // Limpar área de erro
+                document.getElementById('nc-root').innerHTML = '';
                 
             } else {
                 console.error('Erro: Decap CMS não carregou');
                 updateStatus('cms-status', '❌ CMS Não Carregou', 'status-error');
                 updateStatus('gateway-status', '⚠️ Verificar configuração', 'status-warning');
+                gatewayReady = false;
                 
                 // Mostrar erro após 5 segundos se o CMS não carregar
                 setTimeout(() => {
@@ -298,10 +370,22 @@
             }
         }
         
-        // Verificar CMS imediatamente e depois de 1 segundo
-        checkCMS();
-        setTimeout(checkCMS, 1000);
-        setTimeout(checkCMS, 3000);
+        // Verificações iniciais
+        checkIdentity();
+        checkConfig();
+        checkRepository();
+        
+        // Verificar CMS com delay para garantir que tudo esteja carregado
+        setTimeout(initializeCMS, 2000);
+        setTimeout(initializeCMS, 5000);
+        setTimeout(initializeCMS, 10000);
+        
+        // Verificar se o usuário está logado
+        setTimeout(() => {
+            if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser()) {
+                updateStatus('identity-status', '✅ Logado: ' + netlifyIdentity.currentUser().email, 'status-success');
+            }
+        }, 3000);
     </script>
 </body>
 </html>
