@@ -6,9 +6,8 @@
     <title>Decap CMS - Alexandre Guimarães</title>
     <meta name="description" content="Gerenciador de conteúdo do blog">
     
-    <!-- Decap CMS -->
+    <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
     <style>
         body {
@@ -154,6 +153,20 @@
         .expanded .collapsible-content {
             display: block;
         }
+        
+        .cms-status {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem;
+            color: #856404;
+        }
+        
+        .cms-status h4 {
+            margin: 0 0 0.5rem 0;
+            color: #856404;
+        }
     </style>
 </head>
 <body>
@@ -181,6 +194,7 @@
             <button class="test-button" id="force-cms-btn" onclick="forceLoadCMS()">Forçar CMS</button>
             <button class="test-button" id="clear-log-btn" onclick="clearLog()">Limpar Log</button>
             <button class="test-button" id="refresh-token-btn" onclick="refreshToken()">Renovar Token</button>
+            <button class="test-button" id="manual-cms-btn" onclick="loadCMSManually()">Carregar CMS Manual</button>
         </div>
     </div>
     
@@ -188,6 +202,12 @@
     <div class="log-container" id="log-container">
         <div class="log-entry log-info">=== LOG DO SISTEMA INICIADO ===</div>
         <div class="log-entry log-info">Aguardando inicialização...</div>
+    </div>
+    
+    <!-- Status do CMS -->
+    <div class="cms-status" id="cms-status-panel" style="display: none;">
+        <h4>📊 Status do CMS</h4>
+        <div id="cms-status-content"></div>
     </div>
     
     <div id="nc-root">
@@ -246,6 +266,7 @@
         let identityReady = false;
         let gatewayReady = false;
         let configReady = false;
+        let cmsScriptLoaded = false;
         
         // Função para atualizar status
         function updateStatus(elementId, status, className) {
@@ -297,6 +318,12 @@
                 netlifyIdentity.on('login', user => {
                     addLog('Usuário logado', 'success', { email: user.email, id: user.id });
                     updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
+                    
+                    // Tentar carregar CMS após login
+                    setTimeout(() => {
+                        addLog('Tentando carregar CMS após login...', 'info');
+                        loadCMSManually();
+                    }, 2000);
                 });
                 
                 netlifyIdentity.on('logout', () => {
@@ -362,13 +389,39 @@
                 });
         }
         
+        // Carregar CMS manualmente
+        function loadCMSManually() {
+            addLog('Carregando CMS manualmente...', 'info');
+            updateStatus('cms-status', '🔄 Carregando Manualmente...', 'status-warning');
+            updateTimestamp();
+            
+            if (!cmsScriptLoaded) {
+                addLog('Carregando script do CMS...', 'info');
+                
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+                script.onload = function() {
+                    addLog('Script do CMS carregado com sucesso', 'success');
+                    cmsScriptLoaded = true;
+                    setTimeout(initializeCMS, 1000);
+                };
+                script.onerror = function() {
+                    addLog('Erro ao carregar script do CMS', 'error');
+                    updateStatus('cms-status', '❌ Erro no Script', 'status-error');
+                };
+                document.head.appendChild(script);
+            } else {
+                addLog('Script já carregado, inicializando CMS...', 'info');
+                initializeCMS();
+            }
+        }
+        
         // Funções de teste
         function testGitGateway() {
             addLog('Iniciando teste do Git Gateway...', 'info');
             updateStatus('gateway-status', '🔄 Testando...', 'status-warning');
             updateTimestamp();
             
-            // Verificar se o usuário está logado
             if (typeof netlifyIdentity !== 'undefined') {
                 const currentUser = netlifyIdentity.currentUser();
                 addLog('Usuário atual verificado', 'info', { 
@@ -380,7 +433,6 @@
                 });
                 
                 if (currentUser && currentUser.token) {
-                    // Verificar se o token não expirou
                     const now = new Date();
                     const tokenExpiry = currentUser.token.expires_at ? new Date(currentUser.token.expires_at) : null;
                     
@@ -395,7 +447,6 @@
                     
                     addLog('Token válido, testando com API do Netlify...', 'info');
                     
-                    // Testar token de acesso
                     fetch('https://api.netlify.com/api/v1/user', {
                         headers: {
                             'Authorization': `Bearer ${currentUser.token.access_token}`
@@ -421,8 +472,15 @@
                             fullName: userData.full_name
                         });
                         
-                        // Testar Git Gateway especificamente
-                        testGitGatewayConnection(currentUser.token.access_token);
+                        updateStatus('gateway-status', '✅ Token Válido', 'status-success');
+                        gatewayReady = true;
+                        
+                        // Tentar carregar CMS após validação
+                        setTimeout(() => {
+                            addLog('Tentando carregar CMS após validação do token...', 'info');
+                            loadCMSManually();
+                        }, 1000);
+                        
                     })
                     .catch(error => {
                         addLog('Erro ao validar token do usuário', 'error', { 
@@ -441,31 +499,6 @@
             }
         }
         
-        function testGitGatewayConnection(token) {
-            addLog('Testando conexão com Git Gateway...', 'info');
-            
-            // Tentar fazer uma operação que requer Git Gateway
-            // Vamos simular uma verificação de permissões
-            setTimeout(() => {
-                try {
-                    // Verificar se o CMS consegue se conectar
-                    if (typeof CMS !== 'undefined') {
-                        addLog('CMS disponível para teste de Git Gateway', 'success');
-                        
-                        // Tentar inicializar o CMS para testar Git Gateway
-                        initializeCMS();
-                        
-                    } else {
-                        addLog('CMS não disponível para teste', 'warning');
-                        updateStatus('gateway-status', '⚠️ CMS não disponível', 'status-warning');
-                    }
-                } catch (error) {
-                    addLog('Erro ao testar Git Gateway', 'error', { error: error.message, stack: error.stack });
-                    updateStatus('gateway-status', '❌ Erro no teste', 'status-error');
-                }
-            }, 2000);
-        }
-        
         function testIdentity() {
             addLog('Testando Netlify Identity...', 'info');
             
@@ -480,50 +513,6 @@
             }
         }
         
-        function reloadCMS() {
-            addLog('Iniciando recarregamento do CMS...', 'info');
-            updateStatus('cms-status', '🔄 Recarregando...', 'status-warning');
-            updateTimestamp();
-            
-            // Desabilitar botões durante recarregamento
-            document.getElementById('reload-cms-btn').disabled = true;
-            document.getElementById('force-cms-btn').disabled = true;
-            
-            addLog('Recarregando página em 2 segundos...', 'warning');
-            
-            // Recarregar após 2 segundos
-            setTimeout(() => {
-                addLog('Recarregando página agora...', 'info');
-                location.reload();
-            }, 2000);
-        }
-        
-        function forceLoadCMS() {
-            addLog('Forçando carregamento do CMS...', 'info');
-            updateStatus('cms-status', '🔄 Forçando CMS...', 'status-warning');
-            updateTimestamp();
-            
-            // Tentar forçar o carregamento do CMS
-            if (typeof CMS !== 'undefined') {
-                addLog('CMS já disponível, inicializando...', 'info');
-                initializeCMS();
-            } else {
-                addLog('CMS não disponível, recarregando script...', 'warning');
-                
-                // Tentar carregar o script novamente
-                const script = document.createElement('script');
-                script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-                script.onload = function() {
-                    addLog('Script do CMS recarregado com sucesso', 'success');
-                    setTimeout(initializeCMS, 1000);
-                };
-                script.onerror = function() {
-                    addLog('Erro ao recarregar script do CMS', 'error');
-                };
-                document.head.appendChild(script);
-            }
-        }
-
         function refreshToken() {
             addLog('Iniciando renovação do token...', 'info');
             updateStatus('gateway-status', '🔄 Renovando Token...', 'status-warning');
@@ -537,11 +526,9 @@
                         tokenExpiry: currentUser.token.expires_at ? new Date(currentUser.token.expires_at).toLocaleString('pt-BR') : 'não definido'
                     });
                     
-                    // Fazer logout primeiro para limpar o token antigo
                     addLog('Fazendo logout para limpar token antigo...', 'info');
                     netlifyIdentity.logout();
                     
-                    // Aguardar um pouco e abrir login
                     setTimeout(() => {
                         addLog('Abrindo modal de login para renovar token...', 'info');
                         netlifyIdentity.open();
@@ -552,13 +539,52 @@
                     addLog('Usuário não logado ou token ausente', 'warning');
                     updateStatus('gateway-status', '⚠️ Usuário não logado', 'status-warning');
                     
-                    // Se não está logado, abrir login diretamente
                     addLog('Abrindo modal de login...', 'info');
                     netlifyIdentity.open();
                 }
             } else {
                 addLog('Netlify Identity não disponível', 'error');
                 updateStatus('gateway-status', '❌ Identity não disponível', 'status-error');
+            }
+        }
+        
+        function reloadCMS() {
+            addLog('Iniciando recarregamento do CMS...', 'info');
+            updateStatus('cms-status', '🔄 Recarregando...', 'status-warning');
+            updateTimestamp();
+            
+            document.getElementById('reload-cms-btn').disabled = true;
+            document.getElementById('force-cms-btn').disabled = true;
+            
+            addLog('Recarregando página em 2 segundos...', 'warning');
+            
+            setTimeout(() => {
+                addLog('Recarregando página agora...', 'info');
+                location.reload();
+            }, 2000);
+        }
+        
+        function forceLoadCMS() {
+            addLog('Forçando carregamento do CMS...', 'info');
+            updateStatus('cms-status', '🔄 Forçando CMS...', 'status-warning');
+            updateTimestamp();
+            
+            if (typeof CMS !== 'undefined') {
+                addLog('CMS já disponível, inicializando...', 'info');
+                initializeCMS();
+            } else {
+                addLog('CMS não disponível, recarregando script...', 'warning');
+                
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+                script.onload = function() {
+                    addLog('Script do CMS recarregado com sucesso', 'success');
+                    setTimeout(initializeCMS, 1000);
+                };
+                script.onerror = function() {
+                    addLog('Erro ao recarregar script do CMS', 'error');
+                };
+                document.head.appendChild(script);
             }
         }
         
@@ -611,6 +637,15 @@
                     document.getElementById('nc-root').innerHTML = '';
                     addLog('Interface do CMS carregada', 'success');
                     
+                    // Mostrar painel de status
+                    document.getElementById('cms-status-panel').style.display = 'block';
+                    document.getElementById('cms-status-content').innerHTML = `
+                        <p><strong>✅ CMS:</strong> Carregado com sucesso</p>
+                        <p><strong>✅ Identity:</strong> ${identityReady ? 'Funcionando' : 'Não funcionando'}</p>
+                        <p><strong>✅ Git Gateway:</strong> ${gatewayReady ? 'Funcionando' : 'Não funcionando'}</p>
+                        <p><strong>✅ Configuração:</strong> ${configReady ? 'Carregada' : 'Não carregada'}</p>
+                    `;
+                    
                 } catch (error) {
                     addLog('Erro ao configurar CMS', 'error', { error: error.message, stack: error.stack });
                 }
@@ -622,7 +657,6 @@
                 updateStatus('gateway-status', '⚠️ Verificar configuração', 'status-warning');
                 gatewayReady = false;
                 
-                // Mostrar erro após 5 segundos se o CMS não carregar
                 setTimeout(() => {
                     if (!cmsLoaded) {
                         addLog('Mostrando erro de CMS não carregado', 'warning');
@@ -654,17 +688,17 @@
         addLog('Agendando verificações do CMS...', 'info');
         setTimeout(() => {
             addLog('Primeira tentativa de inicializar CMS (2s)', 'info');
-            initializeCMS();
+            loadCMSManually();
         }, 2000);
         
         setTimeout(() => {
             addLog('Segunda tentativa de inicializar CMS (5s)', 'info');
-            initializeCMS();
+            loadCMSManually();
         }, 5000);
         
         setTimeout(() => {
             addLog('Terceira tentativa de inicializar CMS (10s)', 'info');
-            initializeCMS();
+            loadCMSManually();
         }, 10000);
         
         // Verificar se o usuário está logado
@@ -677,6 +711,12 @@
                     tokenPresent: !!user.token
                 });
                 updateStatus('identity-status', '✅ Logado: ' + user.email, 'status-success');
+                
+                // Tentar carregar CMS se usuário já estiver logado
+                setTimeout(() => {
+                    addLog('Tentando carregar CMS para usuário já logado...', 'info');
+                    loadCMSManually();
+                }, 2000);
             }
         }, 3000);
         

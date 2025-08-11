@@ -1,21 +1,37 @@
+# Decap CMS Configuration
+# Configuração otimizada para Netlify Identity + Git Gateway
+
+# Configuração do backend
 backend:
   name: git-gateway
   branch: main
-  # Configuração específica para o repositório
+  # IMPORTANTE: Usar o nome completo do repositório
   repo: aleguimas/site-aleguimas
+  # Configurações adicionais para estabilidade
+  squash_merges: true
+  commit_messages:
+    create: 'content: create {{collection}} "{{slug}}"'
+    update: 'content: update {{collection}} "{{slug}}"'
+    delete: 'content: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'media: upload {{path}}'
+    deleteMedia: 'media: delete {{path}}'
 
-# Remover local_backend em produção
-# local_backend: true
+# Configuração de autenticação
+auth_endpoint: https://aleguimas.com.br/.netlify/identity
 
+# Configuração de mídia
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
+# Modo de publicação
 publish_mode: editorial_workflow
 
-# Configuração do site
+# URLs do site
 site_url: https://aleguimas.com.br
 display_url: https://aleguimas.com.br
+base_url: https://aleguimas.com.br
 
+# Configuração de coleções
 collections:
   - name: "posts"
     label: "Posts do Blog"
@@ -62,15 +78,12 @@ collections:
               - { label: "Pergunta", name: "pergunta", widget: "string" }
               - { label: "Resposta", name: "resposta", widget: "text" }
 
-# Configurações de workflow
+# Configurações de workflow simplificadas
 workflow:
   - label: "Rascunho"
     name: "draft"
     color: "#ffeb3b"
-  - label: "Em Revisão"
-    name: "review"
-    color: "#ff9800"
-  - label: "Pronto"
+  - label: "Pronto para Publicar"
     name: "ready"
     color: "#4caf50"
   - label: "Publicado"
@@ -86,3 +99,10 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "-"
+
+# Configurações de editor
+editor:
+  preview: true
+
+# Configurações de localização
+locale: "pt"
