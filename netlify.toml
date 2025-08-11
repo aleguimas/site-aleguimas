@@ -45,6 +45,18 @@
   to = "/admin/netlify-cms.html"
   status = 200
 
+# Redirect para versão funcional (CMS que deve funcionar)
+[[redirects]]
+  from = "/admin/working"
+  to = "/admin/working.html"
+  status = 200
+
+# Redirect para config simples
+[[redirects]]
+  from = "/admin/config-simple"
+  to = "/admin/config-simple.yml"
+  status = 200
+
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"
