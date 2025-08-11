@@ -195,6 +195,7 @@
             <button class="test-button" id="clear-log-btn" onclick="clearLog()">Limpar Log</button>
             <button class="test-button" id="refresh-token-btn" onclick="refreshToken()">Renovar Token</button>
             <button class="test-button" id="manual-cms-btn" onclick="loadCMSManually()">Carregar CMS Manual</button>
+            <button class="test-button" id="access-admin-btn" onclick="accessAdmin()" style="background-color: #4caf50;">Acessar Admin</button>
         </div>
     </div>
     
@@ -588,6 +589,36 @@
             }
         }
         
+        function accessAdmin() {
+            addLog('Acessando interface administrativa...', 'info');
+            
+            if (typeof CMS !== 'undefined') {
+                addLog('CMS disponível, navegando para interface administrativa', 'success');
+                
+                // Limpar área de debug para mostrar apenas o CMS
+                document.getElementById('debug-info').style.display = 'none';
+                document.getElementById('log-container').style.display = 'none';
+                document.getElementById('cms-status-panel').style.display = 'none';
+                
+                // Navegar para a interface administrativa
+                window.location.hash = '#/';
+                
+                addLog('Interface administrativa acessada', 'success');
+            } else {
+                addLog('CMS não disponível, tentando carregar primeiro...', 'warning');
+                loadCMSManually();
+                
+                // Tentar acessar novamente após carregar
+                setTimeout(() => {
+                    if (typeof CMS !== 'undefined') {
+                        accessAdmin();
+                    } else {
+                        addLog('Erro: CMS não conseguiu carregar', 'error');
+                    }
+                }, 3000);
+            }
+        }
+        
         // Inicializar CMS
         function initializeCMS() {
             addLog('Tentando inicializar CMS...', 'info');
@@ -633,7 +664,7 @@
                     gatewayReady = true;
                     addLog('Git Gateway configurado com sucesso', 'success');
                     
-                    // Limpar área de erro
+                    // Limpar área de erro e redirecionar para interface administrativa
                     document.getElementById('nc-root').innerHTML = '';
                     addLog('Interface do CMS carregada', 'success');
                     
@@ -644,7 +675,20 @@
                         <p><strong>✅ Identity:</strong> ${identityReady ? 'Funcionando' : 'Não funcionando'}</p>
                         <p><strong>✅ Git Gateway:</strong> ${gatewayReady ? 'Funcionando' : 'Não funcionando'}</p>
                         <p><strong>✅ Configuração:</strong> ${configReady ? 'Carregada' : 'Não carregada'}</p>
+                        <p><strong>🔄 Redirecionando para interface administrativa...</strong></p>
                     `;
+                    
+                    // Redirecionar para a interface administrativa do CMS
+                    addLog('Redirecionando para interface administrativa...', 'info');
+                    setTimeout(() => {
+                        // Tentar redirecionar para a interface do CMS
+                        if (window.location.hash === '#/') {
+                            addLog('Já na interface administrativa', 'success');
+                        } else {
+                            addLog('Navegando para interface administrativa', 'info');
+                            window.location.hash = '#/';
+                        }
+                    }, 2000);
                     
                 } catch (error) {
                     addLog('Erro ao configurar CMS', 'error', { error: error.message, stack: error.stack });
