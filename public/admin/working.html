@@ -8,9 +8,6 @@
     <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- Decap CMS - Versão mais antiga e estável -->
-    <script src="https://unpkg.com/decap-cms@2.14.0/dist/decap-cms.js"></script>
-    
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -104,12 +101,24 @@
             text-decoration: none;
             z-index: 1000;
         }
+        
+        .script-sources {
+            position: fixed;
+            top: 90px;
+            left: 10px;
+            background-color: #9c27b0;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
     <div class="cms-header">
         <h1>Blog - Alexandre Guimarães</h1>
-        <p>CMS Funcional - Versão Estável</p>
+        <p>CMS Funcional - Múltiplas Fontes</p>
     </div>
     
     <!-- Informação da versão -->
@@ -117,6 +126,9 @@
     
     <!-- Status do carregamento -->
     <div id="status" class="status-info">🔄 Verificando...</div>
+    
+    <!-- Fonte do script -->
+    <div id="script-source" class="script-sources">📡 Tentando CDN...</div>
     
     <!-- Link para debug -->
     <a href="index.html" class="debug-link">Debug</a>
@@ -132,6 +144,7 @@
         let identityLoaded = false;
         let cmsLoaded = false;
         let configLoaded = false;
+        let scriptSource = '';
         
         // Função para atualizar status
         function updateStatus(message, type = 'info') {
@@ -140,6 +153,55 @@
                 statusEl.textContent = message;
                 statusEl.className = `status-info ${type}`;
             }
+        }
+        
+        // Função para atualizar fonte do script
+        function updateScriptSource(source) {
+            scriptSource = source;
+            const sourceEl = document.getElementById('script-source');
+            if (sourceEl) {
+                sourceEl.textContent = `📡 ${source}`;
+            }
+        }
+        
+        // Função para carregar script do CMS
+        function loadCMSScript() {
+            const sources = [
+                'https://unpkg.com/decap-cms@2.14.0/dist/decap-cms.js',
+                'https://cdn.jsdelivr.net/npm/decap-cms@2.14.0/dist/decap-cms.js',
+                'https://unpkg.com/netlify-cms@2.14.0/dist/netlify-cms.js',
+                'https://cdn.jsdelivr.net/npm/netlify-cms@2.14.0/dist/netlify-cms.js'
+            ];
+            
+            let currentSource = 0;
+            
+            function tryNextSource() {
+                if (currentSource >= sources.length) {
+                    updateScriptSource('❌ Todas as fontes falharam');
+                    updateStatus('❌ CMS não conseguiu carregar de nenhuma fonte', 'error');
+                    return;
+                }
+                
+                const source = sources[currentSource];
+                updateScriptSource(`Tentando: ${source.split('/').pop()}`);
+                
+                const script = document.createElement('script');
+                script.src = source;
+                script.onload = function() {
+                    updateScriptSource(`✅ Carregado de: ${source.split('/').pop()}`);
+                    updateStatus('✅ Script do CMS carregado!', 'success');
+                    checkCMS();
+                };
+                script.onerror = function() {
+                    updateScriptSource(`❌ Falhou: ${source.split('/').pop()}`);
+                    currentSource++;
+                    setTimeout(tryNextSource, 1000);
+                };
+                
+                document.head.appendChild(script);
+            }
+            
+            tryNextSource();
         }
         
         // Função para verificar Netlify Identity
@@ -181,7 +243,7 @@
         
         // Função para verificar configuração
         function checkConfig() {
-            fetch('./config.yml')
+            fetch('./config-simple.yml')
                 .then(response => {
                     if (response.ok) {
                         configLoaded = true;
@@ -205,14 +267,14 @@
             // Verificar Identity
             checkIdentity();
             
-            // Verificar CMS
-            checkCMS();
+            // Carregar script do CMS
+            loadCMSScript();
         });
         
         // Verificações periódicas
         setInterval(() => {
             if (!identityLoaded) checkIdentity();
-            if (!cmsLoaded) checkCMS();
+            if (!cmsLoaded && typeof CMS !== 'undefined') checkCMS();
         }, 1000);
         
         // Timeout de segurança
@@ -230,13 +292,14 @@
                                 <li>Identity: ${identityLoaded ? '✅' : '❌'}</li>
                                 <li>CMS: ${cmsLoaded ? '✅' : '❌'}</li>
                                 <li>Config: ${configLoaded ? '✅' : '❌'}</li>
+                                <li>Fonte: ${scriptSource}</li>
                             </ul>
                             <p>Tente recarregar a página ou acessar o debug.</p>
                         </div>
                     `;
                 }
             }
-        }, 10000);
+        }, 15000);
     </script>
 </body>
 </html>
