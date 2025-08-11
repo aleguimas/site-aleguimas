@@ -28,6 +28,12 @@
   to = "/admin/simple.html"
   status = 200
 
+# Redirect para versão alternativa (Netlify CMS)
+[[redirects]]
+  from = "/admin/netlify"
+  to = "/admin/netlify-cms.html"
+  status = 200
+
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"
