@@ -56,7 +56,7 @@ export default async function BlogPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
+            {posts.map((post: any) => (
               <Card key={post._id} className="group hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="p-0">
                   <div className="relative aspect-video overflow-hidden rounded-t-lg">
