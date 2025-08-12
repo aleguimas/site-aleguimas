@@ -10,6 +10,9 @@ import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark } from 'lucide-react
 import { getPost, getAllPostSlugs } from '@/lib/sanity-queries'
 import { portableTextToHtml } from '@/lib/sanity'
 
+// Configuração de revalidação
+export const revalidate = 60 // Revalidar a cada 1 minuto
+
 // Função para formatar data
 function formatDate(dateString: string) {
   const date = new Date(dateString)

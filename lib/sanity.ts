@@ -43,14 +43,14 @@ export const portableTextToHtml = (blocks: any[]): string => {
             text = `<del>${text}</del>`
           }
           
-          // Tratar links - procurar nos markDefs do bloco
+          // Tratar links - versão melhorada
           if (child.marks && child.marks.length > 0) {
             for (const mark of child.marks) {
               if (mark.startsWith('link-')) {
                 const linkDef = block.markDefs?.find((def: any) => def._key === mark)
                 if (linkDef && linkDef._type === 'link' && linkDef.href) {
                   text = `<a href="${linkDef.href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">${text}</a>`
-                  break // Só aplicar o primeiro link encontrado
+                  break
                 }
               }
             }

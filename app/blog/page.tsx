@@ -7,6 +7,9 @@ import { Button } from '@/components/ui/button'
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react'
 import { getAllPosts } from '@/lib/sanity-queries'
 
+// Configuração de revalidação
+export const revalidate = 60 // Revalidar a cada 1 minuto
+
 export const metadata: Metadata = {
   title: 'Blog - Alexandre Guimarães',
   description: 'Artigos sobre Inteligência Artificial, Transformação Digital e Inovação. Insights e análises sobre tecnologia e negócios.',
