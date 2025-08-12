@@ -1,4 +1,5 @@
 import { createClient } from 'next-sanity'
+import imageUrlBuilder from '@sanity/image-url'
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '548uc9hr',
@@ -7,9 +8,11 @@ export const client = createClient({
   useCdn: false, // `false` if you want to ensure fresh data
 })
 
+const builder = imageUrlBuilder(client)
+
 // Helper function to get image URL
 export const urlFor = (source: any) => {
-  return client.image(source).url()
+  return builder.image(source).url()
 }
 
 // Helper function to get portable text

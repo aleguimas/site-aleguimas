@@ -10,7 +10,7 @@
     "studio": "cd studio && npm run dev",
     "studio:build": "cd studio && npm run build",
     "studio:deploy": "cd studio && npm run deploy",
-    "copy-studio": "cp -r studio/dist out/studio 2>/dev/null || echo 'Studio dist not found, skipping copy' # Linux compatible"
+    "copy-studio": "node scripts/copy-studio.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
