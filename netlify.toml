@@ -5,9 +5,9 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Build do Sanity Studio
-[context.production]
-  command = "npm run build && cd studio && npm run build"
+# Build do Sanity Studio (removido - build feito localmente)
+# [context.production]
+#   command = "npm run build && cd studio && npm run build"
 
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
