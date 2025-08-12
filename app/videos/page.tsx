@@ -61,7 +61,7 @@ export default function VideosPage() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Conteúdos</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             <FeaturedVideo
               videoId="_nZTxmazs8Y"
               title="IA o Novo Básico - Araripina PE"
@@ -92,7 +92,7 @@ export default function VideosPage() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Workshops e Palestras</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
             <VideoTestimonial
               videoId="-xtOHXqwjwJ0"
               clientName="IA na Gestão Pública"
@@ -123,11 +123,14 @@ export default function VideosPage() {
             />
           </div>
 
-          <div className="mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
+          {/* Separador visual */}
+          <div className="border-t border-gray-200 dark:border-gray-700 mb-16"></div>
+
+          <div className="mb-16">
+            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-6">
               Depoimentos
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Depoimentos de Clientes</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Depoimentos de Clientes</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
