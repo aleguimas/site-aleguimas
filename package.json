@@ -10,7 +10,7 @@
     "studio": "cd studio && npm run dev",
     "studio:build": "cd studio && npm run build",
     "studio:deploy": "cd studio && npm run deploy",
-    "copy-studio": "if exist studio\\dist (xcopy studio\\dist out\\studio /E /I /Y) else (echo Studio dist not found, skipping copy)"
+    "copy-studio": "cp -r studio/dist out/studio 2>/dev/null || echo 'Studio dist not found, skipping copy'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -45,6 +45,7 @@
     "@radix-ui/react-toggle-group": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
     "@sanity/client": "^7.8.2",
+    "@sanity/image-url": "^1.1.0",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
