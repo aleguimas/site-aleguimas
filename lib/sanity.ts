@@ -25,6 +25,8 @@ export const portableTextToHtml = (blocks: any[]): string => {
       const children = block.children?.map((child: any) => {
         if (child._type === 'span') {
           let text = child.text || ''
+          
+          // Aplicar marcas (marks) na ordem correta
           if (child.marks?.includes('strong')) {
             text = `<strong>${text}</strong>`
           }
@@ -32,33 +34,81 @@ export const portableTextToHtml = (blocks: any[]): string => {
             text = `<em>${text}</em>`
           }
           if (child.marks?.includes('code')) {
-            text = `<code>${text}</code>`
+            text = `<code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">${text}</code>`
           }
+          if (child.marks?.includes('underline')) {
+            text = `<u>${text}</u>`
+          }
+          if (child.marks?.includes('strike-through')) {
+            text = `<del>${text}</del>`
+          }
+          
+          // Tratar links
+          const linkMark = child.marks?.find((mark: string) => mark.startsWith('link-'))
+          if (linkMark) {
+            const linkIndex = parseInt(linkMark.replace('link-', ''))
+            const link = block.markDefs?.find((def: any) => def._key === linkMark)
+            if (link && link.href) {
+              text = `<a href="${link.href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">${text}</a>`
+            }
+          }
+          
           return text
         }
         return ''
       }).join('') || ''
       
+      // Aplicar estilo do bloco
       switch (style) {
         case 'h1':
-          return `<h1>${children}</h1>`
+          return `<h1 class="text-3xl font-bold mb-4 mt-8">${children}</h1>`
         case 'h2':
-          return `<h2>${children}</h2>`
+          return `<h2 class="text-2xl font-bold mb-3 mt-6">${children}</h2>`
         case 'h3':
-          return `<h3>${children}</h3>`
+          return `<h3 class="text-xl font-semibold mb-2 mt-4">${children}</h3>`
         case 'h4':
-          return `<h4>${children}</h4>`
+          return `<h4 class="text-lg font-semibold mb-2 mt-4">${children}</h4>`
         case 'blockquote':
-          return `<blockquote>${children}</blockquote>`
+          return `<blockquote class="border-l-4 border-blue-500 pl-4 italic bg-gray-50 dark:bg-gray-800 py-2 my-4">${children}</blockquote>`
+        case 'normal':
+          return `<p class="mb-4 leading-relaxed">${children}</p>`
         default:
-          return `<p>${children}</p>`
+          return `<p class="mb-4 leading-relaxed">${children}</p>`
       }
     }
     
+    // Tratar imagens
     if (block._type === 'image') {
       const imageUrl = urlFor(block)
       const alt = block.alt || ''
-      return `<img src="${imageUrl}" alt="${alt}" class="rounded-lg" />`
+      const caption = block.caption ? `<figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">${block.caption}</figcaption>` : ''
+      return `<figure class="my-6"><img src="${imageUrl}" alt="${alt}" class="rounded-lg w-full max-w-2xl mx-auto" />${caption}</figure>`
+    }
+    
+    // Tratar listas
+    if (block._type === 'list') {
+      const listType = block.listItem === 'bullet' ? 'ul' : 'ol'
+      const listClass = block.listItem === 'bullet' ? 'list-disc' : 'list-decimal'
+      const children = block.children?.map((child: any) => {
+        if (child._type === 'listItem') {
+          const itemText = child.children?.map((itemChild: any) => {
+            if (itemChild._type === 'span') {
+              let text = itemChild.text || ''
+              if (itemChild.marks?.includes('strong')) {
+                text = `<strong>${text}</strong>`
+              }
+              if (itemChild.marks?.includes('em')) {
+                text = `<em>${text}</em>`
+              }
+              return text
+            }
+            return ''
+          }).join('') || ''
+          return `<li class="mb-1">${itemText}</li>`
+        }
+        return ''
+      }).join('') || ''
+      return `<${listType} class="${listClass} ml-6 mb-4">${children}</${listType}>`
     }
     
     return ''
