@@ -9,16 +9,8 @@
 # [context.production]
 #   command = "npm run build && cd studio && npm run build"
 
-# Redirect para o Sanity Studio (deve vir ANTES do redirect global)
-[[redirects]]
-  from = "/studio"
-  to = "/studio/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/studio/*"
-  to = "/studio/:splat"
-  status = 200
+# Sanity Studio agora é gerenciado pelo Next.js
+# (página de redirecionamento em app/studio/page.tsx)
 
 # Redirect global para SPA (deve vir por último)
 [[redirects]]

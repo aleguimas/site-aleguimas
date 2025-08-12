@@ -17,4 +17,15 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  // Configurações para build estático
+  document: {
+    // Desabilitar preview em produção estática
+    preview: {
+      select: {
+        title: 'title',
+        subtitle: 'subtitle',
+        media: 'mainImage'
+      }
+    }
+  }
 })
