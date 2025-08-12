@@ -58,7 +58,8 @@ export default {
           {title: 'Inovação', value: 'inovacao'},
           {title: 'Liderança', value: 'lideranca'},
           {title: 'Estratégia', value: 'estrategia'},
-          {title: 'Inteligência Artificial', value: 'inteligencia-artificial'}
+          {title: 'Inteligência Artificial', value: 'inteligencia-artificial'},
+          {title: 'Eventos', value: 'eventos'}
         ]
       },
       validation: Rule => Rule.required()
