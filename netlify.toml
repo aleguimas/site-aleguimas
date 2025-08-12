@@ -5,13 +5,6 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Build do Sanity Studio (removido - build feito localmente)
-# [context.production]
-#   command = "npm run build && cd studio && npm run build"
-
-# Sanity Studio agora é gerenciado pelo Next.js
-# (página de redirecionamento em app/studio/page.tsx)
-
 # Redirect global para SPA (deve vir por último)
 [[redirects]]
   from = "/*"

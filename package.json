@@ -4,13 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run copy-studio",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "studio": "cd studio && npm run dev",
-    "studio:build": "cd studio && npm run build",
-    "studio:deploy": "cd studio && npm run deploy",
-    "copy-studio": "node scripts/copy-studio.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
