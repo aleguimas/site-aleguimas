@@ -77,7 +77,7 @@ export default function KitImprensaPage() {
                         className="w-full object-cover"
                       />
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <a href="/documents/biografia-curta.pdf" download>
                         <Button className="w-full flex items-center gap-2">
                           <Download className="h-4 w-4" />
@@ -197,12 +197,12 @@ export default function KitImprensaPage() {
                 ].map((foto) => (
                   <Card key={foto.id} className="overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="relative aspect-[4/3]">
+                      <div className="relative aspect-[3/4]">
                         <Image
                           src={foto.src}
                           alt={foto.alt}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       </div>
                       <div className="p-4">
