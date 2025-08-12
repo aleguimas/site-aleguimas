@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts } from '@/lib/sanity-queries'
 
 export const dynamic = 'force-static'
 export const revalidate = 3600 // Revalidar a cada hora
 
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aleguimas.com.br'
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
 
   // Função para escapar caracteres especiais em XML
   function escapeXml(text: string): string {
@@ -34,15 +34,15 @@ export async function GET() {
     <language>pt-BR</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/rss" rel="self" type="application/rss+xml" />
-    ${posts.map((post) => `
+    ${posts.map((post: any) => `
     <item>
-      <title>${escapeXml(post.frontmatter.title)}</title>
-      <link>${baseUrl}/blog/${post.slug}</link>
-      <guid>${baseUrl}/blog/${post.slug}</guid>
-      <description>${escapeXml(post.frontmatter.excerpt)}</description>
-      <pubDate>${formatRssDate(post.frontmatter.date)}</pubDate>
-      <category>${escapeXml(post.frontmatter.category)}</category>
-      ${post.frontmatter.tags.map(tag => `<category>${escapeXml(tag)}</category>`).join('')}
+      <title>${escapeXml(post.title)}</title>
+      <link>${baseUrl}/blog/${post.slug.current}</link>
+      <guid>${baseUrl}/blog/${post.slug.current}</guid>
+      <description>${escapeXml(post.excerpt)}</description>
+      <pubDate>${formatRssDate(post.publishedAt)}</pubDate>
+      <category>${escapeXml(post.category)}</category>
+      ${post.tags?.map((tag: string) => `<category>${escapeXml(tag)}</category>`).join('') || ''}
     </item>`).join('')}
   </channel>
 </rss>`

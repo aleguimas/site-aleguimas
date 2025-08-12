@@ -10,53 +10,56 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client)
 
-// Helper function to get image URL
 export const urlFor = (source: any) => {
   return builder.image(source).url()
 }
 
-// Helper function to get portable text
-export const portableTextToHtml = (blocks: any) => {
-  if (!blocks) return ''
+// Helper para converter Portable Text para HTML
+export const portableTextToHtml = (blocks: any[]): string => {
+  if (!blocks || !Array.isArray(blocks)) return ''
   
-  return blocks
-    .map((block: any) => {
-      if (block._type === 'block') {
-        const text = block.children
-          .map((child: any) => {
-            if (child._type === 'span') {
-              let text = child.text
-              if (child.marks && child.marks.includes('strong')) {
-                text = `<strong>${text}</strong>`
-              }
-              if (child.marks && child.marks.includes('em')) {
-                text = `<em>${text}</em>`
-              }
-              if (child.marks && child.marks.includes('code')) {
-                text = `<code>${text}</code>`
-              }
-              return text
-            }
-            return ''
-          })
-          .join('')
-        
-        const style = block.style || 'normal'
-        if (style === 'normal') {
-          return `<p>${text}</p>`
+  return blocks.map(block => {
+    if (block._type === 'block') {
+      const style = block.style || 'normal'
+      const children = block.children?.map((child: any) => {
+        if (child._type === 'span') {
+          let text = child.text || ''
+          if (child.marks?.includes('strong')) {
+            text = `<strong>${text}</strong>`
+          }
+          if (child.marks?.includes('em')) {
+            text = `<em>${text}</em>`
+          }
+          if (child.marks?.includes('code')) {
+            text = `<code>${text}</code>`
+          }
+          return text
         }
-        if (style.startsWith('h')) {
-          return `<${style}>${text}</${style}>`
-        }
-        if (style === 'blockquote') {
-          return `<blockquote>${text}</blockquote>`
-        }
-        return `<p>${text}</p>`
+        return ''
+      }).join('') || ''
+      
+      switch (style) {
+        case 'h1':
+          return `<h1>${children}</h1>`
+        case 'h2':
+          return `<h2>${children}</h2>`
+        case 'h3':
+          return `<h3>${children}</h3>`
+        case 'h4':
+          return `<h4>${children}</h4>`
+        case 'blockquote':
+          return `<blockquote>${children}</blockquote>`
+        default:
+          return `<p>${children}</p>`
       }
-      if (block._type === 'image') {
-        return `<img src="${urlFor(block)}" alt="${block.alt || ''}" />`
-      }
-      return ''
-    })
-    .join('')
+    }
+    
+    if (block._type === 'image') {
+      const imageUrl = urlFor(block)
+      const alt = block.alt || ''
+      return `<img src="${imageUrl}" alt="${alt}" class="rounded-lg" />`
+    }
+    
+    return ''
+  }).join('')
 }

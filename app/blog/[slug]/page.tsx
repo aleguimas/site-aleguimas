@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark } from 'lucide-react'
-import { getPost, getAllSlugs, getRelatedPosts } from '@/lib/posts'
+import { getPost, getAllPostSlugs } from '@/lib/sanity-queries'
+import { portableTextToHtml } from '@/lib/sanity'
 
 // Função para formatar data
 function formatDate(dateString: string) {
@@ -21,7 +22,7 @@ function formatDate(dateString: string) {
 
 // Gerar metadados dinâmicos
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPost(params.slug)
+  const post = await getPost(params.slug)
   
   if (!post) {
     return {
@@ -30,8 +31,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
   }
 
-  const { frontmatter } = post
-  const seo = frontmatter.seo || {}
+  const seo = post.seo || {}
 
   // Configurar robots baseado no SEO
   const robots = {
@@ -40,23 +40,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: seo.title || frontmatter.title,
-    description: seo.description || frontmatter.excerpt,
+    title: seo.title || post.title,
+    description: seo.description || post.excerpt,
     robots,
     openGraph: {
       type: 'article',
-      title: seo.og_title || seo.title || frontmatter.title,
-      description: seo.og_description || seo.description || frontmatter.excerpt,
-      images: seo.og_image || frontmatter.cover,
-      publishedTime: frontmatter.date,
-      authors: [frontmatter.author],
-      tags: frontmatter.tags,
+      title: seo.og_title || seo.title || post.title,
+      description: seo.og_description || seo.description || post.excerpt,
+      images: seo.og_image || (post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : ''),
+      publishedTime: post.publishedAt,
+      authors: [post.author],
+      tags: post.tags || [],
     },
     twitter: {
-      card: (seo.og_image || frontmatter.cover) ? 'summary_large_image' : 'summary',
-      title: seo.og_title || seo.title || frontmatter.title,
-      description: seo.og_description || seo.description || frontmatter.excerpt,
-      images: seo.og_image || frontmatter.cover,
+      card: (seo.og_image || post.mainImage) ? 'summary_large_image' : 'summary',
+      title: seo.og_title || seo.title || post.title,
+      description: seo.og_description || seo.description || post.excerpt,
+      images: seo.og_image || (post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : ''),
     },
     alternates: {
       canonical: seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}`,
@@ -66,31 +66,30 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 // Gerar rotas estáticas
 export async function generateStaticParams() {
-  const slugs = getAllSlugs()
-  return slugs.map(slug => ({ slug }))
+  const slugs = await getAllPostSlugs()
+  return slugs.map((slug: string) => ({ slug }))
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug)
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getPost(params.slug)
 
   if (!post) {
     notFound()
   }
 
-  const { frontmatter, content } = post
-  const seo = frontmatter.seo || {}
-  const relatedPosts = getRelatedPosts(params.slug, 3)
+  const seo = post.seo || {}
+  const content = portableTextToHtml(post.body || [])
 
   // Gerar JSON-LD Article
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": seo.title || frontmatter.title,
-    "description": seo.description || frontmatter.excerpt,
-    "image": seo.og_image || frontmatter.cover,
+    "headline": seo.title || post.title,
+    "description": seo.description || post.excerpt,
+    "image": seo.og_image || (post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : ''),
     "author": {
       "@type": "Person",
-      "name": frontmatter.author,
+      "name": post.author,
       "url": "https://www.aleguimas.com.br"
     },
     "publisher": {
@@ -101,14 +100,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         "url": "https://www.aleguimas.com.br/images/alexandre_guimas_palestrante_principal.webp"
       }
     },
-    "datePublished": frontmatter.date,
-    "dateModified": frontmatter.date,
+    "datePublished": post.publishedAt,
+    "dateModified": post.publishedAt,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}`
     },
-    "keywords": frontmatter.tags.join(', '),
-    "articleSection": frontmatter.category,
+    "keywords": post.tags?.join(', ') || '',
+    "articleSection": post.category,
     "inLanguage": "pt-BR"
   }
 
@@ -164,32 +163,32 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             {/* Categoria */}
             <div className="mb-4">
               <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                {frontmatter.category}
+                {post.category}
               </Badge>
             </div>
 
             {/* Título Principal - H1 único */}
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              {frontmatter.title}
+              {post.title}
             </h1>
 
             {/* Meta informações */}
             <div className="flex flex-wrap items-center gap-6 text-gray-300 mb-8">
               <div className="flex items-center gap-2">
                 <User className="w-5 h-5" aria-hidden="true" />
-                <span>{frontmatter.author}</span>
+                <span>{post.author}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" aria-hidden="true" />
-                <time dateTime={frontmatter.date}>
-                  {formatDate(frontmatter.date)}
+                <time dateTime={post.publishedAt}>
+                  {formatDate(post.publishedAt)}
                 </time>
               </div>
             </div>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2" role="list" aria-label="Tags do artigo">
-              {frontmatter.tags.map((tag) => (
+              {post.tags?.map((tag: string) => (
                 <Badge key={tag} variant="outline" className="bg-white/10 text-white border-white/20" role="listitem">
                   {tag}
                 </Badge>
@@ -206,8 +205,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             {/* Imagem destacada */}
             <div className="relative aspect-video rounded-lg overflow-hidden mb-12">
               <Image
-                src={frontmatter.cover}
-                alt={`Imagem de capa: ${frontmatter.title}`}
+                src={post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : '/placeholder.jpg'}
+                alt={`Imagem de capa: ${post.title}`}
                 fill
                 className="object-cover"
                 priority
@@ -233,19 +232,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
               {/* Resumo */}
               <div className="text-xl text-gray-600 dark:text-gray-300 mb-8 italic">
-                {frontmatter.excerpt}
+                {post.excerpt}
               </div>
               
-              {/* Aqui seria renderizado o conteúdo MDX */}
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center">
-                <h2 className="text-lg font-semibold mb-2">Conteúdo MDX</h2>
-                <p className="text-gray-600 dark:text-gray-300">
-                  O conteúdo MDX seria renderizado aqui usando um renderizador MDX.
-                </p>
-                <p className="text-sm text-gray-500 mt-4">
-                  Para implementar a renderização MDX real, será necessário configurar um renderizador MDX.
-                </p>
-              </div>
+              {/* Conteúdo do Post */}
+              <div 
+                className="prose prose-lg dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
 
               {/* FAQ se existir */}
               {seo.faq && seo.faq.length > 0 && (
@@ -275,7 +269,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                     <User className="w-8 h-8 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">{frontmatter.author}</h3>
+                    <h3 className="font-semibold text-lg">{post.author}</h3>
                     <p className="text-gray-600 dark:text-gray-300">
                       Especialista em Inteligência Artificial e Transformação Digital
                     </p>
@@ -284,40 +278,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               </CardContent>
             </Card>
 
-            {/* Posts Relacionados */}
-            {relatedPosts.length > 0 && (
-              <section className="border-t border-gray-200 dark:border-gray-700 pt-12">
-                <h2 className="text-2xl font-bold mb-8">Posts Relacionados</h2>
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {relatedPosts.map((relatedPost) => (
-                    <Card key={relatedPost.slug} className="group hover:shadow-lg transition-shadow">
-                      <div className="relative aspect-video overflow-hidden rounded-t-lg">
-                        <Image
-                          src={relatedPost.frontmatter.cover}
-                          alt={`Imagem de capa: ${relatedPost.frontmatter.title}`}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      </div>
-                      <CardContent className="p-4">
-                        <Badge variant="secondary" className="text-xs mb-2">
-                          {relatedPost.frontmatter.category}
-                        </Badge>
-                        <h3 className="font-semibold mb-2 group-hover:text-blue-600 transition-colors">
-                          <Link href={`/blog/${relatedPost.slug}`} className="hover:underline">
-                            {relatedPost.frontmatter.title}
-                          </Link>
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-                          {relatedPost.frontmatter.excerpt}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-            )}
+            {/* Posts Relacionados - Temporariamente removido */}
+            {/* TODO: Implementar posts relacionados com Sanity */}
 
             {/* CTA */}
             <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 mt-12">

@@ -1,11 +1,11 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPostSlugs } from '@/lib/sanity-queries'
 
 export const dynamic = 'force-static'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aleguimas.com.br'
-  const posts = getAllPosts()
+  const postSlugs = await getAllPostSlugs()
   
   // URLs estáticas do site
   const staticUrls = [
@@ -102,9 +102,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   // URLs dos posts do blog
-  const postUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.frontmatter.date),
+  const postUrls = postSlugs.map((slug: string) => ({
+    url: `${baseUrl}/blog/${slug}`,
+    lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))

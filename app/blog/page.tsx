@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts } from '@/lib/sanity-queries'
 
 export const metadata: Metadata = {
   title: 'Blog - Alexandre Guimarães',
@@ -27,8 +27,8 @@ function formatDate(dateString: string) {
   })
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
+export default async function BlogPage() {
+  const posts = await getAllPosts()
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -57,12 +57,12 @@ export default function BlogPage() {
         <div className="container mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <Card key={post.slug} className="group hover:shadow-lg transition-shadow duration-300">
+              <Card key={post._id} className="group hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="p-0">
                   <div className="relative aspect-video overflow-hidden rounded-t-lg">
                     <Image
-                      src={post.frontmatter.cover}
-                      alt={post.frontmatter.title}
+                      src={post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : '/placeholder.jpg'}
+                      alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -72,46 +72,46 @@ export default function BlogPage() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="secondary" className="text-xs">
-                      {post.frontmatter.category}
+                      {post.category}
                     </Badge>
                   </div>
                   <CardTitle className="text-xl mb-3 group-hover:text-blue-600 transition-colors">
-                    <Link href={`/blog/${post.slug}`} className="hover:underline">
-                      {post.frontmatter.title}
+                    <Link href={`/blog/${post.slug.current}`} className="hover:underline">
+                      {post.title}
                     </Link>
                   </CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {post.frontmatter.excerpt}
+                    {post.excerpt}
                   </CardDescription>
                   
                   {/* Meta informações */}
                   <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <div className="flex items-center gap-1">
                       <User className="w-4 h-4" />
-                      <span>{post.frontmatter.author}</span>
+                      <span>{post.author}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      <span>{formatDate(post.frontmatter.date)}</span>
+                      <span>{formatDate(post.publishedAt)}</span>
                     </div>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                    {post.tags?.slice(0, 3).map((tag: string) => (
                       <Badge key={tag} variant="outline" className="text-xs">
                         {tag}
                       </Badge>
                     ))}
-                    {post.frontmatter.tags.length > 3 && (
+                    {post.tags && post.tags.length > 3 && (
                       <Badge variant="outline" className="text-xs">
-                        +{post.frontmatter.tags.length - 3}
+                        +{post.tags.length - 3}
                       </Badge>
                     )}
                   </div>
 
                   <Button asChild variant="ghost" className="w-full group-hover:bg-blue-50 dark:group-hover:bg-blue-950">
-                    <Link href={`/blog/${post.slug}`} className="flex items-center gap-2">
+                    <Link href={`/blog/${post.slug.current}`} className="flex items-center gap-2">
                       Ler mais
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
