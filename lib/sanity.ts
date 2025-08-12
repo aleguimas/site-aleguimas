@@ -43,15 +43,15 @@ export const portableTextToHtml = (blocks: any[]): string => {
             text = `<del>${text}</del>`
           }
           
-          // Tratar links - versão melhorada
+          // Tratar links - versão corrigida
           if (child.marks && child.marks.length > 0) {
             for (const mark of child.marks) {
-              if (mark.startsWith('link-')) {
-                const linkDef = block.markDefs?.find((def: any) => def._key === mark)
-                if (linkDef && linkDef._type === 'link' && linkDef.href) {
-                  text = `<a href="${linkDef.href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">${text}</a>`
-                  break
-                }
+              // Procurar por qualquer mark que corresponda a um linkDef
+              const linkDef = block.markDefs?.find((def: any) => def._key === mark && def._type === 'link')
+              
+              if (linkDef && linkDef.href) {
+                text = `<a href="${linkDef.href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">${text}</a>`
+                break
               }
             }
           }
