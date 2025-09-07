@@ -198,7 +198,7 @@ export default function Footer() {
                 Política de Privacidade
               </Link>
               <Link
-                href="https://www.simplidigital.dev"
+                href="https://www.simpli.ia.br"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-80"
