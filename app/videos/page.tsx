@@ -3,7 +3,7 @@ import Footer from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import FeaturedVideo from "@/components/featured-video"
 import VideoTestimonial from "@/components/video-testimonial"
-import VideoCarousel from "@/components/video-carousel"
+import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -41,98 +41,62 @@ export default function VideosPage() {
   const workshopVideos = [
     {
       videoId: "QlpxFDwocgE",
-      clientName: "Innovation Meeting BR 2025",
-      clientPosition: "Evento",
-      clientCompany: "Innovation Meeting"
+      title: "Innovation Meeting BR 2025"
     },
     {
       videoId: "oE9N_FrcceA",
-      clientName: "Imersão de IA - In Company",
-      clientPosition: "Imersão",
-      clientCompany: "In Company"
+      title: "Imersão de IA - In Company"
     },
     {
       videoId: "E08kJTSTO0Q",
-      clientName: "Oficina Marketing Digital - Alexandre Guimarães",
-      clientPosition: "Oficina",
-      clientCompany: "Evento"
+      title: "Oficina Marketing Digital - Alexandre Guimarães"
     },
     {
       videoId: "2v7P9rZQEes",
-      clientName: "Workshop IA Time Bluk - Alexandre Guimarães",
-      clientPosition: "Workshop",
-      clientCompany: "Bluk"
+      title: "Workshop IA Time Bluk - Alexandre Guimarães"
     },
     {
       videoId: "X9RXkSHYSsQ",
-      clientName: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães",
-      clientPosition: "Workshop",
-      clientCompany: "Shopping Tacaruna"
+      title: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães"
     },
     {
       videoId: "yVjrAxDBx4Y",
-      clientName: "Agentes de IA e Automação",
-      clientPosition: "Imersão",
-      clientCompany: "MagnoTech SP",
-      thumbnailUrl: "/images/shorts/imersão-agentes-ia-automacao-alexandre-guimarães.webp"
+      title: "Agentes de IA e Automação"
     },
     {
       videoId: "dW67Ldv3oWM",
-      clientName: "A Nova Revolução da IA",
-      clientPosition: "Workshop",
-      clientCompany: "Fecomércio PE",
-      thumbnailUrl: "/images/shorts/workshop-ia-a-nova-revolucao-alexandre-guimarães.webp"
+      title: "A Nova Revolução da IA"
     },
     {
       videoId: "Fgp0wXLuPO8",
-      clientName: "Marketing Digital o Básico Bem Feito",
-      clientPosition: "Oficina",
-      clientCompany: "SEBRAE PE",
-      thumbnailUrl: "/images/shorts/oficina-marketing-digital-o-básico-bem-feito-alexandre-guimarães.webp"
+      title: "Marketing Digital o Básico Bem Feito"
     },
     {
       videoId: "-xtOHXqwjwJ0",
-      clientName: "IA na Gestão Pública",
-      clientPosition: "Workshop",
-      clientCompany: "Prefeitura do Jaboatão dos Guararapes",
-      thumbnailUrl: "/images/shorts/workshop-ia-na-pratica-para-gestao-publica-alexandre-guimarães.webp"
+      title: "IA na Gestão Pública"
     }
   ]
 
   const testimonialVideos = [
     {
       videoId: "1dhqCP7inhU",
-      clientName: "Depoimentos Time Bluk - Alexandre Guimarães",
-      clientPosition: "Depoimentos",
-      clientCompany: "Bluk"
+      title: "Depoimentos Time Bluk - Alexandre Guimarães"
     },
     {
       videoId: "oDHZ29wHhes",
-      clientName: "Rafaela Santos",
-      clientPosition: "Radialista",
-      clientCompany: "Jornalista",
-      thumbnailUrl: "/images/testimonials/rafaela-santos-thumb.webp"
+      title: "Depoimento - Rafaela Santos"
     },
     {
       videoId: "1TRqJSdCy5w",
-      clientName: "Henrique Vila Nova",
-      clientPosition: "Coordenador do curso de CCO",
-      clientCompany: "FICR",
-      thumbnailUrl: "/images/testimonials/henrique-vila-nova-thumb.webp"
+      title: "Depoimento - Henrique Vila Nova"
     },
     {
       videoId: "Rx0j5CvY3us",
-      clientName: "Ygor Valença",
-      clientPosition: "Presidente",
-      clientCompany: "FENEAUTO BR e SINDCFC-PE",
-      thumbnailUrl: "/images/testimonials/ygor-valenca-thumb.webp"
+      title: "Depoimento - Ygor Valença"
     },
     {
       videoId: "-6I49F9sDcQ",
-      clientName: "Kleber Carvalho",
-      clientPosition: "CEO",
-      clientCompany: "Natal Home Center",
-      thumbnailUrl: "/images/testimonials/kleber-carvalho-thumb.webp"
+      title: "Depoimento - Kleber Carvalho"
     }
   ]
 
@@ -195,7 +159,7 @@ export default function VideosPage() {
             </Badge>
           </div>
 
-          <VideoCarousel
+          <YouTubeCarousel
             videos={workshopVideos}
             title="Workshops e Palestras"
             className="mb-20"
@@ -211,7 +175,7 @@ export default function VideosPage() {
             </Badge>
           </div>
 
-          <VideoCarousel
+          <YouTubeCarousel
             videos={testimonialVideos}
             title="Depoimentos de Clientes"
           />
