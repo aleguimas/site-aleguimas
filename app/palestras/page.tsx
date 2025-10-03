@@ -9,7 +9,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
-import VideoCarousel from "@/components/video-carousel"
+import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -48,39 +48,27 @@ export default function PalestrasPage() {
   const palestraVideos = [
     {
       videoId: "Bj1JL-wcIf4",
-      clientName: "Palestra Recente - Alexandre Guimarães",
-      clientPosition: "Palestra",
-      clientCompany: "Evento"
+      title: "Palestra Recente - Alexandre Guimarães"
     },
     {
       videoId: "7y5w6E6QgFM",
-      clientName: "Workshop Recente - Alexandre Guimarães",
-      clientPosition: "Workshop",
-      clientCompany: "Evento"
+      title: "Workshop Recente - Alexandre Guimarães"
     },
     {
       videoId: "yVjrAxDBx4Y",
-      clientName: "Palestra sobre Inteligência Artificial",
-      clientPosition: "Palestra",
-      clientCompany: "Evento"
+      title: "Palestra sobre Inteligência Artificial"
     },
     {
       videoId: "jnFA1c9NnhU",
-      clientName: "Workshop sobre Transformação Digital",
-      clientPosition: "Workshop",
-      clientCompany: "Evento"
+      title: "Workshop sobre Transformação Digital"
     },
     {
       videoId: "12k3ay8YB3w",
-      clientName: "Palestra sobre Liderança na Era Digital",
-      clientPosition: "Palestra",
-      clientCompany: "Evento"
+      title: "Palestra sobre Liderança na Era Digital"
     },
     {
       videoId: "0CuPmu49yo4",
-      clientName: "Workshop sobre IA Generativa",
-      clientPosition: "Workshop",
-      clientCompany: "Evento"
+      title: "Workshop sobre IA Generativa"
     }
   ]
 
@@ -593,7 +581,7 @@ export default function PalestrasPage() {
             </p>
           </div>
 
-          <VideoCarousel
+          <YouTubeCarousel
             videos={palestraVideos}
             title="Assista trechos de palestras realizadas"
             className="mb-12"
