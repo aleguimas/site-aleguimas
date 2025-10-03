@@ -40,28 +40,34 @@ export default function VideosPage() {
   // Dados dos vídeos organizados por categoria (do mais novo para o mais antigo)
   const workshopVideos = [
     {
+      videoId: "QlpxFDwocgE",
+      clientName: "Innovation Meeting BR 2025",
+      clientPosition: "Evento",
+      clientCompany: "Innovation Meeting"
+    },
+    {
       videoId: "oE9N_FrcceA",
-      clientName: "Workshop de IA - Alexandre Guimarães",
-      clientPosition: "Workshop",
-      clientCompany: "Evento Recente"
+      clientName: "Imersão de IA - In Company",
+      clientPosition: "Imersão",
+      clientCompany: "In Company"
     },
     {
       videoId: "E08kJTSTO0Q",
-      clientName: "Transformação Digital - Alexandre Guimarães",
-      clientPosition: "Palestra",
-      clientCompany: "Evento Recente"
+      clientName: "Oficina Marketing Digital - Alexandre Guimarães",
+      clientPosition: "Oficina",
+      clientCompany: "Evento"
     },
     {
       videoId: "2v7P9rZQEes",
-      clientName: "Workshop de Inovação - Alexandre Guimarães",
+      clientName: "Workshop IA Time Bluk - Alexandre Guimarães",
       clientPosition: "Workshop",
-      clientCompany: "Evento Recente"
+      clientCompany: "Bluk"
     },
     {
       videoId: "X9RXkSHYSsQ",
-      clientName: "IA Aplicada - Alexandre Guimarães",
-      clientPosition: "Palestra",
-      clientCompany: "Evento Recente"
+      clientName: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães",
+      clientPosition: "Workshop",
+      clientCompany: "Shopping Tacaruna"
     },
     {
       videoId: "yVjrAxDBx4Y",
@@ -96,9 +102,9 @@ export default function VideosPage() {
   const testimonialVideos = [
     {
       videoId: "1dhqCP7inhU",
-      clientName: "Depoimento de Cliente - Alexandre Guimarães",
-      clientPosition: "Cliente",
-      clientCompany: "Empresa Parceira"
+      clientName: "Depoimentos Time Bluk - Alexandre Guimarães",
+      clientPosition: "Depoimentos",
+      clientCompany: "Bluk"
     },
     {
       videoId: "oDHZ29wHhes",
