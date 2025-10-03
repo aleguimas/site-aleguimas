@@ -9,6 +9,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
+import VideoCarousel from "@/components/video-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -43,6 +44,46 @@ export const metadata: Metadata = {
 }
 
 export default function PalestrasPage() {
+  // Dados dos vídeos de palestras (do mais novo para o mais antigo)
+  const palestraVideos = [
+    {
+      videoId: "Bj1JL-wcIf4",
+      clientName: "Palestra Recente - Alexandre Guimarães",
+      clientPosition: "Palestra",
+      clientCompany: "Evento"
+    },
+    {
+      videoId: "7y5w6E6QgFM",
+      clientName: "Workshop Recente - Alexandre Guimarães",
+      clientPosition: "Workshop",
+      clientCompany: "Evento"
+    },
+    {
+      videoId: "yVjrAxDBx4Y",
+      clientName: "Palestra sobre Inteligência Artificial",
+      clientPosition: "Palestra",
+      clientCompany: "Evento"
+    },
+    {
+      videoId: "jnFA1c9NnhU",
+      clientName: "Workshop sobre Transformação Digital",
+      clientPosition: "Workshop",
+      clientCompany: "Evento"
+    },
+    {
+      videoId: "12k3ay8YB3w",
+      clientName: "Palestra sobre Liderança na Era Digital",
+      clientPosition: "Palestra",
+      clientCompany: "Evento"
+    },
+    {
+      videoId: "0CuPmu49yo4",
+      clientName: "Workshop sobre IA Generativa",
+      clientPosition: "Workshop",
+      clientCompany: "Evento"
+    }
+  ]
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -552,44 +593,11 @@ export default function PalestrasPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/yVjrAxDBx4Y"
-                title="Palestra sobre Inteligência Artificial"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-            <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                className="absolute inset-0  w-full h-full"
-                src="https://www.youtube.com/embed/jnFA1c9NnhU"
-                title="Workshop sobre Transformação Digital"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-            <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/12k3ay8YB3w"
-                title="Palestra sobre Liderança na Era Digital"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-            <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/0CuPmu49yo4"
-                title="Workshop sobre IA Generativa"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
+          <VideoCarousel
+            videos={palestraVideos}
+            title="Assista trechos de palestras realizadas"
+            className="mb-12"
+          />
 
           <div className="text-center mb-12">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">
