@@ -41,25 +41,25 @@ export default function VideosPage() {
   const workshopVideos = [
     {
       videoId: "oE9N_FrcceA",
-      clientName: "Workshop de IA",
+      clientName: "Workshop de IA - Alexandre Guimarães",
       clientPosition: "Workshop",
       clientCompany: "Evento Recente"
     },
     {
       videoId: "E08kJTSTO0Q",
-      clientName: "Palestra Transformação Digital",
+      clientName: "Transformação Digital - Alexandre Guimarães",
       clientPosition: "Palestra",
       clientCompany: "Evento Recente"
     },
     {
       videoId: "2v7P9rZQEes",
-      clientName: "Workshop Inovação",
+      clientName: "Workshop de Inovação - Alexandre Guimarães",
       clientPosition: "Workshop",
       clientCompany: "Evento Recente"
     },
     {
       videoId: "X9RXkSHYSsQ",
-      clientName: "Palestra IA Aplicada",
+      clientName: "IA Aplicada - Alexandre Guimarães",
       clientPosition: "Palestra",
       clientCompany: "Evento Recente"
     },
@@ -96,7 +96,7 @@ export default function VideosPage() {
   const testimonialVideos = [
     {
       videoId: "1dhqCP7inhU",
-      clientName: "Depoimento Recente",
+      clientName: "Depoimento de Cliente - Alexandre Guimarães",
       clientPosition: "Cliente",
       clientCompany: "Empresa Parceira"
     },
