@@ -17,6 +17,9 @@ export default function ClientLogos() {
     { name: "Work Avanti Soluções", logo: "/images/logos/logo-work-avanti.webp" },
     { name: "Magno Tech Gestão", logo: "/images/logos/logo-magno-tech.webp" },
     { name: "Mundo do Cabeleireiro", logo: "/images/logos/logo-mundo-do-cabeleireiro.webp" },
+    { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
+    { name: "Plaza", logo: "/images/logos/logo-plaza.webp" },
+    { name: "Tacaruna", logo: "/images/logos/logo-tacaruna.webp" },
   ]
 
   return (

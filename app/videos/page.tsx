@@ -3,6 +3,7 @@ import Footer from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import FeaturedVideo from "@/components/featured-video"
 import VideoTestimonial from "@/components/video-testimonial"
+import VideoCarousel from "@/components/video-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -36,6 +37,99 @@ export const metadata: Metadata = {
 }
 
 export default function VideosPage() {
+  // Dados dos vídeos organizados por categoria (do mais novo para o mais antigo)
+  const workshopVideos = [
+    {
+      videoId: "oE9N_FrcceA",
+      clientName: "Workshop de IA",
+      clientPosition: "Workshop",
+      clientCompany: "Evento Recente"
+    },
+    {
+      videoId: "E08kJTSTO0Q",
+      clientName: "Palestra Transformação Digital",
+      clientPosition: "Palestra",
+      clientCompany: "Evento Recente"
+    },
+    {
+      videoId: "2v7P9rZQEes",
+      clientName: "Workshop Inovação",
+      clientPosition: "Workshop",
+      clientCompany: "Evento Recente"
+    },
+    {
+      videoId: "X9RXkSHYSsQ",
+      clientName: "Palestra IA Aplicada",
+      clientPosition: "Palestra",
+      clientCompany: "Evento Recente"
+    },
+    {
+      videoId: "yVjrAxDBx4Y",
+      clientName: "Agentes de IA e Automação",
+      clientPosition: "Imersão",
+      clientCompany: "MagnoTech SP",
+      thumbnailUrl: "/images/shorts/imersão-agentes-ia-automacao-alexandre-guimarães.webp"
+    },
+    {
+      videoId: "dW67Ldv3oWM",
+      clientName: "A Nova Revolução da IA",
+      clientPosition: "Workshop",
+      clientCompany: "Fecomércio PE",
+      thumbnailUrl: "/images/shorts/workshop-ia-a-nova-revolucao-alexandre-guimarães.webp"
+    },
+    {
+      videoId: "Fgp0wXLuPO8",
+      clientName: "Marketing Digital o Básico Bem Feito",
+      clientPosition: "Oficina",
+      clientCompany: "SEBRAE PE",
+      thumbnailUrl: "/images/shorts/oficina-marketing-digital-o-básico-bem-feito-alexandre-guimarães.webp"
+    },
+    {
+      videoId: "-xtOHXqwjwJ0",
+      clientName: "IA na Gestão Pública",
+      clientPosition: "Workshop",
+      clientCompany: "Prefeitura do Jaboatão dos Guararapes",
+      thumbnailUrl: "/images/shorts/workshop-ia-na-pratica-para-gestao-publica-alexandre-guimarães.webp"
+    }
+  ]
+
+  const testimonialVideos = [
+    {
+      videoId: "1dhqCP7inhU",
+      clientName: "Depoimento Recente",
+      clientPosition: "Cliente",
+      clientCompany: "Empresa Parceira"
+    },
+    {
+      videoId: "oDHZ29wHhes",
+      clientName: "Rafaela Santos",
+      clientPosition: "Radialista",
+      clientCompany: "Jornalista",
+      thumbnailUrl: "/images/testimonials/rafaela-santos-thumb.webp"
+    },
+    {
+      videoId: "1TRqJSdCy5w",
+      clientName: "Henrique Vila Nova",
+      clientPosition: "Coordenador do curso de CCO",
+      clientCompany: "FICR",
+      thumbnailUrl: "/images/testimonials/henrique-vila-nova-thumb.webp"
+    },
+    {
+      videoId: "Rx0j5CvY3us",
+      clientName: "Ygor Valença",
+      clientPosition: "Presidente",
+      clientCompany: "FENEAUTO BR e SINDCFC-PE",
+      thumbnailUrl: "/images/testimonials/ygor-valenca-thumb.webp"
+    },
+    {
+      videoId: "-6I49F9sDcQ",
+      clientName: "Kleber Carvalho",
+      clientPosition: "CEO",
+      clientCompany: "Natal Home Center",
+      thumbnailUrl: "/images/testimonials/kleber-carvalho-thumb.webp"
+    }
+  ]
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -85,84 +179,36 @@ export default function VideosPage() {
             />
           </div>
 
+          {/* Separador visual */}
+          <div className="border-t border-gray-200 dark:border-gray-700 mb-16"></div>
+
+          {/* Shorts - Workshops e Palestras */}
           <div className="mb-12">
             <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
               Shorts
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Workshops e Palestras</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
-            <VideoTestimonial
-              videoId="-xtOHXqwjwJ0"
-              clientName="IA na Gestão Pública"
-              clientPosition="Workshop"
-              clientCompany="Prefeitura do Jaboatão dos Guararapes"
-              thumbnailUrl="/images/shorts/workshop-ia-na-pratica-para-gestao-publica-alexandre-guimarães.webp"
-            />
-            <VideoTestimonial
-              videoId="Fgp0wXLuPO8"
-              clientName="Marketing Digital o Básico Bem Feito"
-              clientPosition="Oficina"
-              clientCompany="SEBRAE PE"
-              thumbnailUrl="/images/shorts/oficina-marketing-digital-o-básico-bem-feito-alexandre-guimarães.webp"
-            />
-            <VideoTestimonial
-              videoId="dW67Ldv3oWM"
-              clientName="A Nova Revolução da IA"
-              clientPosition="Workshop"
-              clientCompany="Fecomércio PE"
-              thumbnailUrl="/images/shorts/workshop-ia-a-nova-revolucao-alexandre-guimarães.webp"
-            />
-            <VideoTestimonial
-              videoId="yVjrAxDBx4Y"
-              clientName="Agentes de IA e Automação"
-              clientPosition="Imersão"
-              clientCompany="MagnoTech SP"
-              thumbnailUrl="/images/shorts/imersão-agentes-ia-automacao-alexandre-guimarães.webp"
-            />
-          </div>
+          <VideoCarousel
+            videos={workshopVideos}
+            title="Workshops e Palestras"
+            className="mb-20"
+          />
 
           {/* Separador visual */}
           <div className="border-t border-gray-200 dark:border-gray-700 mb-16"></div>
 
-          <div className="mb-16">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-6">
+          {/* Depoimentos */}
+          <div className="mb-12">
+            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
               Depoimentos
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Depoimentos de Clientes</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <VideoTestimonial
-              videoId="-6I49F9sDcQ"
-              clientName="Kleber Carvalho"
-              clientPosition="CEO"
-              clientCompany="Natal Home Center"
-              thumbnailUrl="/images/testimonials/kleber-carvalho-thumb.webp"
-            />
-            <VideoTestimonial
-              videoId="Rx0j5CvY3us"
-              clientName="Ygor Valença"
-              clientPosition="Presidente"
-              clientCompany="FENEAUTO BR e SINDCFC-PE"
-              thumbnailUrl="/images/testimonials/ygor-valenca-thumb.webp"
-            />
-            <VideoTestimonial
-              videoId="1TRqJSdCy5w"
-              clientName="Henrique Vila Nova"
-              clientPosition="Coordenador do curso de CCO"
-              clientCompany="FICR"
-              thumbnailUrl="/images/testimonials/henrique-vila-nova-thumb.webp"
-            />
-            <VideoTestimonial
-              videoId="oDHZ29wHhes"
-              clientName="Rafaela Santos"
-              clientPosition="Radialista"
-              clientCompany="Jornalista"
-              thumbnailUrl="/images/testimonials/rafaela-santos-thumb.webp"
-            />
-          </div>
+          <VideoCarousel
+            videos={testimonialVideos}
+            title="Depoimentos de Clientes"
+          />
         </div>
       </section>
 

@@ -672,6 +672,9 @@ export default function PalestrasPage() {
               { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
               { name: "Natal Home Center", logo: "/images/logos/logo-natal-home-center.webp" },
               { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
+              { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
+              { name: "Plaza", logo: "/images/logos/logo-plaza.webp" },
+              { name: "Tacaruna", logo: "/images/logos/logo-tacaruna.webp" },
             ].map((client, index) => (
               <div
                 key={index}
