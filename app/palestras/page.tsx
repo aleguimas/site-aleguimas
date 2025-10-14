@@ -816,7 +816,7 @@ export default function PalestrasPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-blue-600 font-semibold">
+              <Button size="lg" variant="outline" className="text-blue-600 border-blue-600 bg-white hover:bg-blue-50 font-semibold">
                 Fale Diretamente Conosco
               </Button>
             </a>
