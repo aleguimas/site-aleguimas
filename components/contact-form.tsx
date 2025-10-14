@@ -16,6 +16,9 @@ export default function ContactForm() {
     phone: '',
     company: '',
     topic: '',
+    eventType: '',
+    participants: '',
+    datePreference: '',
     message: ''
   })
 
@@ -35,8 +38,11 @@ export default function ContactForm() {
           phone: formData.phone,
           company: formData.company,
           topic: formData.topic,
+          eventType: formData.eventType,
+          participants: formData.participants,
+          datePreference: formData.datePreference,
           message: formData.message,
-          _subject: 'Nova solicitação de palestra - Site Alexandre Guimarães'
+          _subject: 'Nova solicitação de palestra/workshop - Site Alexandre Guimarães'
         })
       })
 
@@ -51,6 +57,9 @@ export default function ContactForm() {
           phone: '',
           company: '',
           topic: '',
+          eventType: '',
+          participants: '',
+          datePreference: '',
           message: ''
         })
       } else {
@@ -146,14 +155,75 @@ export default function ContactForm() {
               required
             >
               <option value="">Selecione um tema</option>
-              <option value="ia-novo-basico">IA o Novo Básico</option>
-              <option value="transformacao-digital">Transformação Digital na Prática</option>
-              <option value="lideranca-ia">Liderança na Era da IA</option>
-              <option value="ia-generativa">O Impacto da IA Generativa nos Negócios</option>
-              <option value="workshop-ia">Workshop: Implementando IA na sua Empresa</option>
-              <option value="workshop-lideranca">Treinamento: Liderança na Era Digital</option>
-              <option value="personalizado">Tema personalizado</option>
+              <optgroup label="Palestras">
+                <option value="ia-novo-basico">IA o Novo Básico</option>
+                <option value="transformacao-digital">Transformação Digital na Prática</option>
+                <option value="lideranca-ia">Liderança na Era da IA</option>
+                <option value="ia-generativa">O Impacto da IA Generativa nos Negócios</option>
+              </optgroup>
+              <optgroup label="Workshops">
+                <option value="workshop-ia-negocios">Workshop: IA para Negócios (4 horas)</option>
+                <option value="imersao-ia">Imersão de IA (8 horas)</option>
+              </optgroup>
+              <optgroup label="Outros">
+                <option value="personalizado">Tema personalizado</option>
+                <option value="consultoria">Consultoria em IA</option>
+                <option value="treinamento-equipe">Treinamento para Equipe</option>
+              </optgroup>
             </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="eventType" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Tipo de evento
+              </label>
+              <select
+                id="eventType"
+                name="eventType"
+                value={formData.eventType}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+              >
+                <option value="">Selecione o tipo</option>
+                <option value="presencial">Presencial</option>
+                <option value="online">Online</option>
+                <option value="hibrido">Híbrido</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="participants" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Número de participantes
+              </label>
+              <select
+                id="participants"
+                name="participants"
+                value={formData.participants}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+              >
+                <option value="">Selecione a quantidade</option>
+                <option value="1-20">1-20 pessoas</option>
+                <option value="21-50">21-50 pessoas</option>
+                <option value="51-100">51-100 pessoas</option>
+                <option value="101-200">101-200 pessoas</option>
+                <option value="200+">Mais de 200 pessoas</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="datePreference" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Data preferencial
+            </label>
+            <Input 
+              id="datePreference" 
+              name="datePreference"
+              type="text"
+              value={formData.datePreference}
+              onChange={handleChange}
+              placeholder="Ex: Janeiro 2025, Q1 2025, ou data específica" 
+            />
           </div>
 
           <div>
@@ -165,7 +235,7 @@ export default function ContactForm() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Conte-nos mais sobre o evento, público esperado, data preferencial, etc."
+              placeholder="Conte-nos mais sobre o evento: público-alvo, objetivos, localização, orçamento disponível, necessidades específicas da empresa, etc."
               className="min-h-[120px]"
             />
           </div>
