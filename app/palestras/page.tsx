@@ -9,7 +9,6 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
-import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -115,8 +114,7 @@ export default function PalestrasPage() {
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="bg-blue-600/20 text-white border-white hover:bg-blue-600/30"
+                  className="bg-transparent text-white border-2 border-white hover:bg-white hover:text-blue-600 font-semibold"
                 >
                   <a href="/workshops">Ver Workshops</a>
                 </Button>
@@ -493,11 +491,24 @@ export default function PalestrasPage() {
             </p>
           </div>
 
-          <YouTubeCarousel
-            videos={palestraVideos}
-            title="Assista trechos de palestras realizadas"
-            className="mb-12"
-          />
+          <div className="flex overflow-x-auto gap-4 pb-4 mb-12">
+            {palestraVideos.map((video, index) => (
+              <div key={video.videoId} className="flex-shrink-0 w-64 space-y-3">
+                <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="text-center text-sm text-gray-700 dark:text-gray-300 font-semibold">
+                  {video.title}
+                </p>
+              </div>
+            ))}
+          </div>
 
           <div className="text-center mb-12">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">

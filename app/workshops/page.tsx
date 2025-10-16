@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Star, Users, Clock, Award, TrendingUp } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
 import YouTubeCarousel from "@/components/video-carousel"
 import type { Metadata } from "next"
@@ -400,31 +399,16 @@ export default function WorkshopsPage() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TestimonialCard
-              name="Hallisson Lima"
-              position="CEO"
-              company="Agência Dumã"
-              testimonial="Foi incrível ver o time imerso nesse workshop, posso dizer que foi um dia marcante para nossa empresa e poder ver que dispertou vários insights me faz pensar o quanto esse momento foi acertivo para nossa empresa."
-              image="/images/testimonials/hallison-lima.webp"
-              linkedinUrl="https://www.linkedin.com/in/hallisson-lima/"
-            />
-            <TestimonialCard
-              name="Marjorie Cristina"
-              position="Diretora"
-              company="Empresa Parceira"
-              testimonial="O workshop superou todas as nossas expectativas. A equipe saiu com uma visão clara de como implementar IA em nossos processos."
-              image="/images/testimonials/marjorie-cristina.webp"
-              linkedinUrl="https://www.linkedin.com/in/marjorie-cristina/"
-            />
-            <TestimonialCard
-              name="Carlos Eduardo"
-              position="Gerente de TI"
-              company="TechCorp"
-              testimonial="Excelente workshop! Alexandre conseguiu tornar conceitos complexos de IA em algo prático e aplicável para nosso negócio."
-              image="/images/testimonials/carlos-eduardo.webp"
-              linkedinUrl="https://www.linkedin.com/in/carlos-eduardo/"
-            />
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-8 text-white">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                "Transforme sua equipe em especialistas em IA em apenas um dia"
+              </h3>
+              <p className="text-lg md:text-xl text-blue-100">
+                Mais de 500 profissionais já foram capacitados em nossos workshops, 
+                implementando soluções de IA que geraram resultados reais para suas empresas.
+              </p>
+            </div>
           </div>
         </div>
       </section>
