@@ -134,8 +134,7 @@ export default function WorkshopsPage() {
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-white border-white hover:bg-white hover:text-blue-600 font-semibold"
+                  className="bg-transparent text-white border-2 border-white hover:bg-white hover:text-blue-600 font-semibold"
                 >
                   <a href="/palestras">Ver Palestras</a>
                 </Button>
@@ -354,9 +353,9 @@ export default function WorkshopsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="flex overflow-x-auto gap-4 pb-4 mb-12">
             {workshopVideos.map((video, index) => (
-              <div key={video.videoId} className="space-y-3">
+              <div key={video.videoId} className="flex-shrink-0 w-64 space-y-3">
                 <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
                   <iframe
                     className="absolute inset-0 w-full h-full"
