@@ -402,11 +402,11 @@ export default function WorkshopsPage() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-8 text-white">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                "Transforme sua equipe em especialistas em IA em apenas um dia"
+                "Comece a usar a IA como uma parceira estratégica do seu negócio"
               </h3>
               <p className="text-lg md:text-xl text-blue-100">
-                Mais de 500 profissionais já foram capacitados em nossos workshops, 
-                implementando soluções de IA que geraram resultados reais para suas empresas.
+                Mais de 500 profissionais já descobriram como a IA pode ser uma aliada poderosa, 
+                implementando soluções que geraram resultados reais e transformaram seus processos de trabalho.
               </p>
             </div>
           </div>
