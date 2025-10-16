@@ -13,33 +13,33 @@ import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Palestras Corporativas e Workshops de IA | Alexandre Guimarães - Especialista em Inteligência Artificial",
-  description: "Contrate palestras corporativas e workshops de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h). Alexandre Guimarães é especialista em IA aplicada para empresas. A questão não é mais se vamos utilizar a IA, mas por que ainda não utilizamos?",
+  title: "Palestras Corporativas de IA | Alexandre Guimarães - Especialista em Inteligência Artificial",
+  description: "Contrate palestras corporativas de IA para sua empresa. Palestras inspiradoras sobre Inteligência Artificial, Transformação Digital e Inovação. Alexandre Guimarães é especialista em IA aplicada para empresas.",
   keywords: [
     "palestras corporativas inteligência artificial",
-    "workshop IA empresas",
     "palestrante IA corporativo",
-    "workshop inteligência artificial negócios",
-    "imersão IA empresas",
     "palestras IA para gestores",
-    "workshop IA para executivos",
+    "palestras IA para executivos",
     "palestrante transformação digital corporativa",
-    "workshop IA aplicada negócios",
-    "treinamento IA empresas",
     "palestras IA para liderança",
-    "workshop IA estratégico",
     "consultoria IA corporativa",
     "palestras motivacionais IA",
-    "workshop IA prático",
     "palestrante inovação corporativa",
-    "workshop IA para equipes",
     "palestras IA para RH",
-    "workshop IA para marketing",
-    "palestras IA para vendas"
+    "palestras IA para marketing",
+    "palestras IA para vendas",
+    "palestras IA inspiradoras",
+    "palestrante IA motivacional",
+    "palestras IA para CEOs",
+    "palestras IA para diretores",
+    "palestras IA para gerentes",
+    "palestras IA para equipes",
+    "palestras IA para eventos corporativos",
+    "palestrante IA para conferências"
   ],
   openGraph: {
-    title: "Palestras Corporativas e Workshops de IA | Alexandre Guimarães",
-    description: "Contrate palestras corporativas e workshops de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h). Especialista em IA aplicada para empresas.",
+    title: "Palestras Corporativas de IA | Alexandre Guimarães",
+    description: "Contrate palestras corporativas de IA para sua empresa. Palestras inspiradoras sobre Inteligência Artificial, Transformação Digital e Inovação.",
     url: "https://www.aleguimas.com.br/palestras",
     images: [
       {
@@ -94,17 +94,17 @@ export default function PalestrasPage() {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2 space-y-6">
               <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Palestras Corporativas & Workshops de IA
+                Palestras Corporativas de IA
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Palestras Corporativas e Workshops de{" "}
+                Palestras Inspiradoras sobre{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
                   Inteligência Artificial
                 </span>
               </h1>
               <p className="text-xl text-gray-300 mb-4">
                 Inspire sua equipe, impulsione a inovação e prepare sua empresa para o futuro digital com palestras 
-                corporativas e workshops de IA personalizados para o seu negócio.
+                corporativas personalizadas sobre IA, Transformação Digital e Inovação.
               </p>
               <p className="text-lg font-semibold text-blue-200 italic">
                 "A questão não é mais se vamos utilizar a IA, mas por que ainda não utilizamos?"
@@ -118,7 +118,7 @@ export default function PalestrasPage() {
                   variant="outline"
                   className="bg-blue-600/20 text-white border-white hover:bg-blue-600/30"
                 >
-                  <a href="#temas">Ver Temas</a>
+                  <a href="/workshops">Ver Workshops</a>
                 </Button>
               </div>
             </div>
@@ -285,9 +285,8 @@ export default function PalestrasPage() {
           </div>
 
           <Tabs defaultValue="palestras" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-1 mb-12">
               <TabsTrigger value="palestras">Palestras</TabsTrigger>
-              <TabsTrigger value="workshops">Workshops</TabsTrigger>
             </TabsList>
 
             <TabsContent value="palestras" className="space-y-8">
@@ -475,123 +474,6 @@ export default function PalestrasPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="workshops" className="space-y-8">
-              <div className="text-center mb-12">
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  <em>"A questão não é mais se vamos utilizar a IA, mas por que ainda não utilizamos?"</em>
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-4">
-                      <Badge className="bg-blue-600 text-white hover:bg-blue-700">4 horas</Badge>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                      Workshop: IA para Negócios
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
-                      O que vivemos de IA, prompts de IA, dicas de ferramentas, cases, troca de experiências e muito mais. 
-                      Um workshop completo que aborda o panorama atual da Inteligência Artificial, ensina técnicas de prompts eficazes, 
-                      apresenta ferramentas práticas para diferentes áreas de negócio e compartilha cases reais de sucesso. 
-                      Ideal para equipes que querem compreender o potencial da IA sem exercícios práticos.
-                    </p>
-                    <div className="mt-auto">
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge
-                          variant="outline"
-                          className="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                        >
-                          Teórico
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                        >
-                          Cases Reais
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                        >
-                          Prompts IA
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center">
-                          <div className="flex">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star key={star} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                            ))}
-                          </div>
-                          <span className="text-sm text-gray-500 ml-2">4.9 (23 avaliações)</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-4">
-                      <Badge className="bg-purple-600 text-white hover:bg-purple-700">8 horas</Badge>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                      Imersão de IA
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
-                      Trabalhamos os mesmos pontos do Workshop IA para Negócios, mas acrescentamos a questão fundamental: 
-                      onde os participantes vão levantar oportunidades no negócio. Uma imersão completa que combina teoria 
-                      e prática, incluindo exercícios práticos onde os participantes identificam e mapeiam oportunidades 
-                      reais de aplicação de IA em seus negócios, criando um plano de ação personalizado.
-                    </p>
-                    <div className="mt-auto">
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge
-                          variant="outline"
-                          className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
-                        >
-                          Imersivo
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
-                        >
-                          Exercício Prático
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
-                        >
-                          Plano de Ação
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center">
-                          <div className="flex">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star key={star} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                            ))}
-                          </div>
-                          <span className="text-sm text-gray-500 ml-2">5.0 (18 avaliações)</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="text-center mt-12">
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Todos os workshops podem ser adaptados em formato e duração para atender às necessidades específicas
-                  da sua empresa.
-                </p>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                  <a href="#solicitar-cotacao">Solicitar Cotação Personalizada</a>
-                </Button>
-              </div>
-            </TabsContent>
           </Tabs>
         </div>
       </section>

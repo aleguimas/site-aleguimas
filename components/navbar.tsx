@@ -11,6 +11,7 @@ import { useTheme } from "next-themes"
 const navigation = [
   { name: "Início", href: "/" },
   { name: "Palestras", href: "/palestras" },
+  { name: "Workshops", href: "/workshops" },
   { name: "Consultoria", href: "/consultoria" },
   { name: "Blog", href: "/blog" },
   { name: "Vídeos", href: "/videos" },
