@@ -13,7 +13,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Workshops de IA para Empresas | Alexandre Guimarães - Especialista em Inteligência Artificial",
-  description: "Contrate workshops de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h). Alexandre Guimarães é especialista em IA aplicada para empresas. A questão não é mais se vamos utilizar a IA, mas por que ainda não utilizamos?",
+  description: "Contrate workshops práticos de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h) com exercícios hands-on. Alexandre Guimarães é especialista em IA aplicada para empresas. Capacite sua equipe com competências reais em Inteligência Artificial.",
   keywords: [
     "workshop IA empresas",
     "workshop inteligência artificial negócios",
@@ -33,11 +33,32 @@ export const metadata: Metadata = {
     "capacitação IA empresas",
     "workshop IA hands-on",
     "workshop IA imersivo",
-    "workshop IA personalizado"
+    "workshop IA personalizado",
+    "workshop IA hands-on empresas",
+    "treinamento IA prático",
+    "workshop IA para CEOs",
+    "workshop IA para diretores",
+    "workshop IA para gerentes",
+    "workshop IA para liderança",
+    "workshop IA para inovação",
+    "workshop IA para transformação digital",
+    "workshop IA para automação",
+    "workshop IA para produtividade",
+    "workshop IA para resultados",
+    "workshop IA para competitividade",
+    "workshop IA para futuro",
+    "workshop IA para crescimento",
+    "workshop IA para eficiência",
+    "workshop IA para otimização",
+    "workshop IA para processos",
+    "workshop IA para estratégia",
+    "workshop IA para implementação",
+    "workshop IA para aplicação",
+    "workshop IA para desenvolvimento"
   ],
   openGraph: {
-    title: "Workshops de IA para Empresas | Alexandre Guimarães",
-    description: "Contrate workshops de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h). Especialista em IA aplicada para empresas.",
+    title: "Workshops Práticos de IA para Empresas | Alexandre Guimarães",
+    description: "Contrate workshops práticos de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h) com exercícios hands-on. Especialista em IA aplicada para empresas.",
     url: "https://www.aleguimas.com.br/workshops",
     images: [
       {
@@ -102,7 +123,7 @@ export default function WorkshopsPage() {
               </h1>
               <p className="text-xl text-gray-300 mb-4">
                 Transforme sua equipe com workshops práticos e imersivos de IA. 
-                Desenvolva competências reais e implemente soluções que geram resultados.
+                Desenvolva competências reais em Inteligência Artificial e implemente soluções que geram resultados tangíveis para sua empresa.
               </p>
               <p className="text-lg font-semibold text-blue-200 italic">
                 "A questão não é mais se vamos utilizar a IA, mas por que ainda não utilizamos?"
@@ -114,7 +135,7 @@ export default function WorkshopsPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-white border-white hover:bg-white/10 hover:text-white"
+                  className="text-white border-white hover:bg-white hover:text-blue-600 font-semibold"
                 >
                   <a href="/palestras">Ver Palestras</a>
                 </Button>
@@ -146,7 +167,7 @@ export default function WorkshopsPage() {
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Benefícios dos Workshops</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Descubra como nossos workshops práticos podem transformar sua organização e impulsionar resultados.
+              Descubra como nossos workshops práticos de IA podem transformar sua organização, desenvolver competências reais em Inteligência Artificial e impulsionar resultados tangíveis.
             </p>
           </div>
 
@@ -199,7 +220,7 @@ export default function WorkshopsPage() {
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Nossos Workshops de IA</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Workshops práticos e imersivos desenvolvidos para capacitar sua equipe com competências reais em IA.
+              Workshops práticos e imersivos de Inteligência Artificial desenvolvidos para capacitar sua equipe com competências reais em IA, promovendo transformação digital e inovação empresarial.
             </p>
           </div>
 
@@ -333,11 +354,24 @@ export default function WorkshopsPage() {
             </p>
           </div>
 
-          <YouTubeCarousel
-            videos={workshopVideos}
-            title="Assista trechos de workshops realizados"
-            className="mb-12"
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {workshopVideos.map((video, index) => (
+              <div key={video.videoId} className="space-y-3">
+                <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="text-center text-sm text-gray-700 dark:text-gray-300 font-semibold">
+                  {video.title}
+                </p>
+              </div>
+            ))}
+          </div>
 
           <div className="text-center mb-12">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">
