@@ -64,7 +64,7 @@ export default function PalestrasPage() {
     },
     {
       videoId: "7y5w6E6QgFM",
-      title: "Workshop Recente - Alexandre Guimarães"
+      title: "Palestra Recente - Alexandre Guimarães"
     },
     {
       videoId: "yVjrAxDBx4Y",
@@ -72,7 +72,7 @@ export default function PalestrasPage() {
     },
     {
       videoId: "jnFA1c9NnhU",
-      title: "Workshop sobre Transformação Digital"
+      title: "Palestra sobre Transformação Digital"
     },
     {
       videoId: "12k3ay8YB3w",
@@ -80,7 +80,7 @@ export default function PalestrasPage() {
     },
     {
       videoId: "0CuPmu49yo4",
-      title: "Workshop sobre IA Generativa"
+      title: "Palestra sobre IA Generativa"
     }
   ]
 
@@ -148,7 +148,7 @@ export default function PalestrasPage() {
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Benefícios para sua empresa</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Descubra como minhas palestras e workshops podem transformar sua organização e impulsionar resultados.
+              Descubra como minhas palestras podem transformar sua organização e impulsionar resultados.
             </p>
           </div>
 
@@ -277,7 +277,7 @@ export default function PalestrasPage() {
             <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
               Temas
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Principais palestras e workshops</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Principais palestras</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Conheça os temas mais solicitados, todos personalizáveis para atender às necessidades específicas da sua
               empresa.
@@ -489,7 +489,7 @@ export default function PalestrasPage() {
               Assista trechos de palestras realizadas
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Confira alguns momentos de palestras e workshops que realizei em diferentes eventos e empresas.
+              Confira alguns momentos de palestras que realizei em diferentes eventos e empresas.
             </p>
           </div>
 
@@ -522,7 +522,7 @@ export default function PalestrasPage() {
                   <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                   <path d="m10 15 5-3-5-3z" />
                 </svg>
-                Ver mais conteúdos de palestras e workshops
+                Ver mais conteúdos de palestras
               </a>
             </Button>
           </div>
@@ -532,7 +532,7 @@ export default function PalestrasPage() {
               name="Hallisson Lima"
               position="CEO"
               company="Agência Dumã"
-              testimonial="Foi incrível ver o time imerso nesse workshop, posso dizer que foi um dia marcante para nossa empresa e poder ver que dispertou vários insights me faz pensar o quanto esse momento foi acertivo para nossa empresa."
+              testimonial="Foi incrível ver o time imerso nessa palestra, posso dizer que foi um dia marcante para nossa empresa e poder ver que dispertou vários insights me faz pensar o quanto esse momento foi acertivo para nossa empresa."
               image="/images/testimonials/hallison-lima.webp"
               linkedinUrl="https://www.linkedin.com/in/hallisson-lima/"
             />
@@ -617,7 +617,7 @@ export default function PalestrasPage() {
               </Badge>
               <h2 className="text-3xl font-bold mb-4">Transforme sua empresa hoje</h2>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                Preencha o formulário abaixo para solicitar uma cotação personalizada para palestras ou workshops em sua
+                Preencha o formulário abaixo para solicitar uma cotação personalizada para palestras em sua
                 empresa.
               </p>
             </div>
@@ -635,7 +635,7 @@ export default function PalestrasPage() {
               Perguntas Frequentes
             </Badge>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Dúvidas comuns sobre palestras e workshops
+              Dúvidas comuns sobre palestras
             </h2>
           </div>
 
@@ -644,12 +644,12 @@ export default function PalestrasPage() {
               {
                 question: "Qual é a duração média das palestras?",
                 answer:
-                  "As palestras têm duração média de 60 minutos, mas podem ser ajustadas conforme a necessidade do evento, variando de 45 a 90 minutos. Workshops e treinamentos podem ter duração de 4 a 8 horas, dependendo do conteúdo e formato.",
+                  "As palestras têm duração média de 60 minutos, mas podem ser ajustadas conforme a necessidade do evento, variando de 45 a 90 minutos.",
               },
               {
                 question: "É possível personalizar o conteúdo para o meu setor específico?",
                 answer:
-                  "Sim, todas as palestras e workshops podem ser personalizados para atender às necessidades específicas da sua empresa e setor de atuação. Durante o processo de contratação, realizamos uma reunião de briefing para entender seus objetivos e adaptar o conteúdo.",
+                  "Sim, todas as palestras podem ser personalizadas para atender às necessidades específicas da sua empresa e setor de atuação. Durante o processo de contratação, realizamos uma reunião de briefing para entender seus objetivos e adaptar o conteúdo.",
               },
               {
                 question: "Quais recursos técnicos são necessários para a realização da palestra?",
@@ -686,7 +686,7 @@ export default function PalestrasPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Pronto para transformar sua empresa?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Agende uma palestra ou workshop e descubra como a Inteligência Artificial e a inovação podem impulsionar
+            Agende uma palestra e descubra como a Inteligência Artificial e a inovação podem impulsionar
             seus resultados.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
