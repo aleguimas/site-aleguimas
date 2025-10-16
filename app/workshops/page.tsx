@@ -57,28 +57,28 @@ export default function WorkshopsPage() {
   // Dados dos vídeos de workshops (do mais novo para o mais antigo)
   const workshopVideos = [
     {
+      videoId: "1dhqCP7inhU",
+      title: "Depoimentos Time Bluk - Alexandre Guimarães"
+    },
+    {
       videoId: "Bj1JL-wcIf4",
       title: "Workshop Recente - Alexandre Guimarães"
     },
     {
-      videoId: "7y5w6E6QgFM",
-      title: "Workshop Recente - Alexandre Guimarães"
+      videoId: "zFCELMsvzVc",
+      title: "Workshop de IA - Alexandre Guimarães"
     },
     {
-      videoId: "yVjrAxDBx4Y",
-      title: "Workshop sobre Inteligência Artificial"
+      videoId: "X9RXkSHYSsQ",
+      title: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães"
     },
     {
-      videoId: "jnFA1c9NnhU",
-      title: "Workshop sobre Transformação Digital"
+      videoId: "MRpvxwEEJB8",
+      title: "Workshop de IA - Alexandre Guimarães"
     },
     {
-      videoId: "12k3ay8YB3w",
-      title: "Workshop sobre Liderança na Era Digital"
-    },
-    {
-      videoId: "0CuPmu49yo4",
-      title: "Workshop sobre IA Generativa"
+      videoId: "oE9N_FrcceA",
+      title: "Imersão de IA - In Company"
     }
   ]
 
@@ -114,22 +114,23 @@ export default function WorkshopsPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-white border-white hover:bg-white hover:text-blue-600"
+                  className="text-white border-white hover:bg-white/10 hover:text-white"
                 >
                   <a href="/palestras">Ver Palestras</a>
                 </Button>
               </div>
             </div>
             <div className="lg:w-1/2">
-              <div className="relative w-full max-w-[400px] mx-auto">
-                <Image
-                  src="/images/alexandre_guimas_palestrante_principal.webp"
-                  alt="Alexandre Guimarães - Especialista em IA"
-                  width={400}
-                  height={500}
-                  className="rounded-xl shadow-2xl"
-                  priority
-                />
+              <div className="relative w-full max-w-[280px] mx-auto">
+                <div className="aspect-[9/16] relative rounded-xl overflow-hidden shadow-2xl bg-black">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/2v7P9rZQEes"
+                    title="Workshop de IA - Alexandre Guimarães"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
           </div>
