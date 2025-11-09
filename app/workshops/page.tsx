@@ -102,6 +102,31 @@ export default function WorkshopsPage() {
     }
   ]
 
+  const clientLogos = [
+    { name: "FICR", logo: "/images/logos/logo-ficr.webp" },
+    { name: "Fecomércio PE", logo: "/images/logos/logo-fecomercio-pe.webp" },
+    { name: "SENAC", logo: "/images/logos/logo-senac.webp" },
+    { name: "SEBRAE", logo: "/images/logos/logo-sebrae.webp" },
+    { name: "Prefeitura de Jaboatão", logo: "/images/logos/logo-prefeitura-jaboatao.webp" },
+    { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
+    { name: "Natal Home Center", logo: "/images/logos/logo-natal-home-center.webp" },
+    { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
+    { name: "Kiosk Brands", logo: "/images/logos/logo-kiosk-brands.png" },
+    { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
+    { name: "Plaza Shopping", logo: "/images/logos/logo-plaza.webp" },
+    { name: "Shopping Tacaruna", logo: "/images/logos/logo-tacaruna.webp" },
+    { name: "Touti Cosmetics", logo: "/images/logos/logo-touti-cosmetics.png" },
+    { name: "Yes! Cosmetics", logo: "/images/logos/logo-yes-cosmetics.png" },
+    { name: "Usina Trapiche", logo: "/images/logos/logo-usina-trapiche.png" },
+    { name: "Usina Serra Grande", logo: "/images/logos/logo-usina-serra-grande.png" },
+    { name: "Mundo do Cabeleireiro", logo: "/images/logos/logo-mundo-do-cabeleireiro.webp" },
+    { name: "Work Avanti Soluções", logo: "/images/logos/logo-work-avanti.webp" },
+    { name: "Mirroah", logo: "/images/logos/logo-mirroah.webp" },
+    { name: "Liner", logo: "/images/logos/logo-liner.webp" },
+    { name: "EBDI", logo: "/images/logos/logo-ebdi.webp" },
+    { name: "Broomer", logo: "/images/logos/logo-broomer.webp" }
+  ]
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -428,23 +453,11 @@ export default function WorkshopsPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {[
-              { name: "FICR", logo: "/images/logos/logo-ficr.webp" },
-              { name: "Fecomércio PE", logo: "/images/logos/logo-fecomercio-pe.webp" },
-              { name: "SENAC", logo: "/images/logos/logo-senac.webp" },
-              { name: "SEBRAE", logo: "/images/logos/logo-sebrae.webp" },
-              { name: "Prefeitura de Jaboatão", logo: "/images/logos/logo-prefeitura-jaboatao.webp" },
-              { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
-              { name: "Natal Home Center", logo: "/images/logos/logo-natal-home-center.webp" },
-              { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
-              { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
-              { name: "Plaza", logo: "/images/logos/logo-plaza.webp" },
-              { name: "Tacaruna", logo: "/images/logos/logo-tacaruna.webp" },
-            ].map((client, index) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            {clientLogos.map((client, index) => (
               <div
                 key={index}
-                className="w-36 h-20 md:w-44 md:h-24 grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-full h-20 md:h-24 grayscale hover:grayscale-0 transition-all duration-300"
               >
                 <div className="relative w-full h-full">
                   <Image
