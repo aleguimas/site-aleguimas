@@ -15,7 +15,7 @@ export default function ClientLogos() {
     { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
     { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
     { name: "Work Avanti Soluções", logo: "/images/logos/logo-work-avanti.webp" },
-    { name: "Magno Tech Gestão", logo: "/images/logos/logo-magno-tech.webp" },
+    { name: "Kiosk Brands", logo: "/images/logos/logo-kiosk-brands.png" },
     { name: "Mundo do Cabeleireiro", logo: "/images/logos/logo-mundo-do-cabeleireiro.webp" },
     { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
     { name: "Plaza", logo: "/images/logos/logo-plaza.webp" },
