@@ -91,14 +91,14 @@ export default function EbookLeadForm() {
   return (
     <Card className="border-none shadow-xl">
       <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-2 text-2xl">
-          <Download className="h-6 w-6 text-blue-600" />
+        <CardTitle className="flex items-center gap-2 text-xl sm:text-2xl">
+          <Download className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 flex-shrink-0" />
           Baixe o ebook
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Nome</Label>
               <Input
@@ -172,11 +172,11 @@ export default function EbookLeadForm() {
             </div>
           )}
 
-          {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+          {errorMessage && <p className="text-xs sm:text-sm text-red-600">{errorMessage}</p>}
 
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base py-2 sm:py-2.5"
             disabled={!isFormValid || isSubmitting}
           >
             {isSubmitting ? (
@@ -192,24 +192,24 @@ export default function EbookLeadForm() {
             )}
           </Button>
 
-          <p className="text-xs text-gray-500">
-            Os dados sao usados apenas para liberar o download e enviar atualizacoes sobre novos conteudos.
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Os dados são usados apenas para liberar o download e enviar atualizações sobre novos conteúdos.
           </p>
 
           {isSuccess && (
-            <div className="mt-4 flex flex-col gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+            <div className="mt-4 flex flex-col gap-3 rounded-lg border border-green-200 bg-green-50 p-3 sm:p-4 text-xs sm:text-sm text-green-800">
               <div className="flex items-center gap-2 font-semibold">
-                <CheckCircle className="h-4 w-4" />
-                Download liberado! Obrigado por se inscrever.
+                <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                <span>Download liberado! Obrigado por se inscrever.</span>
               </div>
               <a
                 href={DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-blue-700 underline underline-offset-4"
+                className="inline-flex items-center gap-2 text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
               >
-                <Download className="h-4 w-4" />
-                Abrir ebook "Domine a Arte do Prompt"
+                <Download className="h-4 w-4 flex-shrink-0" />
+                <span>Abrir ebook "Domine a Arte do Prompt"</span>
               </a>
             </div>
           )}
