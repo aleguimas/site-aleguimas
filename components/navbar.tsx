@@ -15,6 +15,7 @@ const navigation = [
   { name: "Consultoria", href: "/consultoria" },
   { name: "Blog", href: "/blog" },
   { name: "Vídeos", href: "/videos" },
+  { name: "E-book", href: "/ebook" },
   { name: "Contato", href: "/contato" },
 ]
 
@@ -24,17 +25,11 @@ type NavbarProps = {
 
 export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(true)
 
   useEffect(() => {
     setMounted(true)
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   // Mantém header fixa; fechamento do menu apenas por ação explícita
@@ -47,7 +42,7 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm" : "bg-slate-900",
+        "bg-white dark:bg-slate-900 backdrop-blur-md shadow-sm",
       )}
     >
       <nav className="container mx-auto px-4 flex items-center justify-between py-4">
@@ -69,13 +64,13 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
 
         <div className="flex items-center gap-4 lg:hidden">
           {mounted && !hideThemeToggle && (
-            <button type="button" className="p-2 rounded-full text-gray-700 dark:text-gray-300" onClick={toggleTheme}>
+            <button type="button" className="p-2 rounded-full text-gray-900 dark:text-gray-300" onClick={toggleTheme}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
           )}
           <button
             type="button"
-            className="p-2 rounded-full text-gray-700 dark:text-gray-300"
+            className="p-2 rounded-full text-gray-900 dark:text-gray-300"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Abrir menu principal</span>
@@ -99,7 +94,7 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
           {mounted && !hideThemeToggle && (
             <button
               type="button"
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
+              className="p-2 rounded-full text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
               onClick={toggleTheme}
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -146,7 +141,7 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
           </Link>
           <button
             type="button"
-            className="rounded-md p-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
+            className="rounded-md p-1 text-gray-900 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
             onClick={() => setMobileMenuOpen(false)}
           >
             <span className="sr-only">Fechar menu</span>
