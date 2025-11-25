@@ -113,6 +113,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ebook" className="text-gray-400 hover:text-white transition-colors">
+                  Ebook
+                </Link>
+              </li>
+              <li>
                 <Link href="/kit-imprensa" className="text-gray-400 hover:text-white transition-colors">
                   Kit de Imprensa
                 </Link>

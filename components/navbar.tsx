@@ -18,7 +18,11 @@ const navigation = [
   { name: "Contato", href: "/contato" },
 ]
 
-export default function Navbar() {
+type NavbarProps = {
+  hideThemeToggle?: boolean
+}
+
+export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
@@ -33,6 +37,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Mantém header fixa; fechamento do menu apenas por ação explícita
+
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }
@@ -40,8 +46,8 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm" : "bg-transparent",
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        scrolled ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm" : "bg-slate-900",
       )}
     >
       <nav className="container mx-auto px-4 flex items-center justify-between py-4">
@@ -62,7 +68,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4 lg:hidden">
-          {mounted && (
+          {mounted && !hideThemeToggle && (
             <button type="button" className="p-2 rounded-full text-gray-700 dark:text-gray-300" onClick={toggleTheme}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
@@ -90,7 +96,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
-          {mounted && (
+          {mounted && !hideThemeToggle && (
             <button
               type="button"
               className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800"
