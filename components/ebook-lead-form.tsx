@@ -57,20 +57,13 @@ export default function EbookLeadForm() {
         _subject: "Download Ebook - Domine a Arte do Prompt",
       }
 
-      const [webhookResponse, formspreeResponse] = await Promise.all([
-        fetch("https://webhook.n8n1.agenciaevodigital.com/webhook/ebook", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }),
-        fetch("https://formspree.io/f/xzzvgnqk", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }),
-      ])
+      const webhookResponse = await fetch("https://webhook.n8n1.agenciaevodigital.com/webhook/ebook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
 
-      if (!webhookResponse.ok || !formspreeResponse.ok) {
+      if (!webhookResponse.ok) {
         throw new Error("Erro ao enviar suas informacoes. Tente novamente.")
       }
 

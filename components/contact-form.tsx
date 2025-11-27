@@ -27,7 +27,8 @@ export default function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('https://formspree.io/f/xzzvgnqk', {
+      // TODO: Configurar endpoint para envio do formulário
+      const response = await fetch('SEU_ENDPOINT_AQUI', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +48,6 @@ export default function ContactForm() {
       })
 
       if (response.ok) {
-        // Rastreamento temporariamente desabilitado
         console.log('Form submitted successfully')
         
         setShowSuccessModal(true)
