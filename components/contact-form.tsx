@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import SuccessModal from "@/components/success-modal"
 
+const WEBHOOK_URL = 'https://webhook.n8n1.agenciaevodigital.com/webhook/forms-guimas'
+
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -27,46 +29,41 @@ export default function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      // TODO: Configurar endpoint para envio do formulário
-      const response = await fetch('SEU_ENDPOINT_AQUI', {
+      const payload = {
+        ...formData,
+        page: typeof window !== 'undefined' ? window.location.pathname : '',
+        _subject: 'Nova solicitacao de palestra/workshop - Site Alexandre Guimaraes'
+      }
+
+      const response = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          topic: formData.topic,
-          eventType: formData.eventType,
-          participants: formData.participants,
-          datePreference: formData.datePreference,
-          message: formData.message,
-          _subject: 'Nova solicitação de palestra/workshop - Site Alexandre Guimarães'
-        })
+        body: JSON.stringify(payload)
       })
 
-      if (response.ok) {
-        console.log('Form submitted successfully')
-        
-        setShowSuccessModal(true)
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          topic: '',
-          eventType: '',
-          participants: '',
-          datePreference: '',
-          message: ''
-        })
-      } else {
-        alert('Erro ao enviar formulário. Tente novamente.')
+      if (!response.ok) {
+        throw new Error('Webhook returned a non-OK response')
       }
+
+      console.log('Form submitted successfully')
+      
+      setShowSuccessModal(true)
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        topic: '',
+        eventType: '',
+        participants: '',
+        datePreference: '',
+        message: ''
+      })
     } catch (error) {
-      alert('Erro ao enviar formulário. Tente novamente.')
+      console.error('Erro ao enviar formulario', error)
+      alert('Erro ao enviar formulario. Tente novamente.')
     } finally {
       setIsSubmitting(false)
     }
@@ -263,4 +260,4 @@ export default function ContactForm() {
     />
     </>
   )
-} 
+}
