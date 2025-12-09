@@ -159,19 +159,19 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={5000} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={8000} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
-              <p className="text-gray-600 dark:text-gray-400">Pessoas Impactadas em 2024</p>
+              <p className="text-gray-600 dark:text-gray-400">Pessoas Impactadas em 2025</p>
             </div>
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={100} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={150} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
               <p className="text-gray-600 dark:text-gray-400">Palestras Realizadas</p>
             </div>
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={50} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={70} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
               <p className="text-gray-600 dark:text-gray-400">Empresas Atendidas</p>
             </div>
