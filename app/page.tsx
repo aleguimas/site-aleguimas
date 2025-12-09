@@ -171,7 +171,7 @@ export default function Home() {
             </div>
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={70} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={130} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
               <p className="text-gray-600 dark:text-gray-400">Empresas Atendidas</p>
             </div>
