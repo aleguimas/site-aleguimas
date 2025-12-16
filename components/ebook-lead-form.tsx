@@ -57,7 +57,7 @@ export default function EbookLeadForm() {
         _subject: "Download Ebook - Domine a Arte do Prompt",
       }
 
-      const webhookResponse = await fetch("https://webhook.n8n1.agenciaevodigital.com/webhook/ebook", {
+      const webhookResponse = await fetch("https://webhook.n8n.simplidigital.dev/webhook/ebook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import SuccessModal from "@/components/success-modal"
 
-const WEBHOOK_URL = 'https://webhook.n8n1.agenciaevodigital.com/webhook/forms-guimas'
+const WEBHOOK_URL = 'https://webhook.n8n.simplidigital.dev/webhook/forms-guimas'
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
