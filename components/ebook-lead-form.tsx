@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle, Download, Loader2 } from "lucide-react"
 
 const DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=11w5nxT2MdOtH3SRnPNTq08ezk9AJ9Lr8"
+const WEBHOOK_URL = "https://webhook.n8n.simplidigital.dev/webhook/ebook"
 
 export default function EbookLeadForm() {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ export default function EbookLeadForm() {
         _subject: "Download Ebook - Domine a Arte do Prompt",
       }
 
-      const webhookResponse = await fetch("https://webhook.n8n.simplidigital.dev/webhook/ebook", {
+      const webhookResponse = await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
