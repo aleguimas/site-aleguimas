@@ -8,6 +8,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import ContactForm from "@/components/contact-form"
 import YouTubeCarousel from "@/components/video-carousel"
+import YouTubeVideoCard from "@/components/youtube-video-card"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -166,15 +167,11 @@ export default function WorkshopsPage() {
             </div>
             <div className="lg:w-1/2">
               <div className="relative w-full max-w-[280px] mx-auto">
-                <div className="aspect-[9/16] relative rounded-xl overflow-hidden shadow-2xl bg-black">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/2v7P9rZQEes"
-                    title="Workshop de IA - Alexandre Guimarães"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
+                <YouTubeVideoCard
+                  videoId="2v7P9rZQEes"
+                  title="Workshop de IA - Alexandre Guimarães"
+                  aspectRatio="9/16"
+                />
               </div>
             </div>
           </div>
@@ -380,15 +377,11 @@ export default function WorkshopsPage() {
           <div className="flex overflow-x-auto gap-4 pb-4 mb-12">
             {workshopVideos.map((video, index) => (
               <div key={video.videoId} className="flex-shrink-0 w-64 space-y-3">
-                <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${video.videoId}`}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
+                <YouTubeVideoCard
+                  videoId={video.videoId}
+                  title={video.title}
+                  aspectRatio="9/16"
+                />
                 <p className="text-center text-sm text-gray-700 dark:text-gray-300 font-semibold">
                   {video.title}
                 </p>

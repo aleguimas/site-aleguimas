@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface YouTubeVideo {
@@ -17,6 +17,7 @@ interface YouTubeCarouselProps {
 
 export default function YouTubeCarousel({ videos, title, className = "" }: YouTubeCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set())
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const itemsPerView = {
@@ -57,6 +58,14 @@ export default function YouTubeCarousel({ videos, title, className = "" }: YouTu
     scrollToIndex(currentIndex - 1)
   }
 
+  const handlePlay = (index: number) => {
+    setPlayingVideos(prev => new Set(prev).add(index))
+  }
+
+  const getThumbnailUrl = (videoId: string) => {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+  }
+
   return (
     <div className={`relative ${className}`}>
       <div className="flex items-center justify-between mb-6">
@@ -91,23 +100,50 @@ export default function YouTubeCarousel({ videos, title, className = "" }: YouTu
             transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`
           }}
         >
-          {videos.map((video, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0"
-              style={{ width: `${100 / visibleItems}%` }}
-            >
-              <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${video.videoId}`}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+          {videos.map((video, index) => {
+            const isPlaying = playingVideos.has(index)
+            const thumbnailUrl = getThumbnailUrl(video.videoId)
+
+            return (
+              <div
+                key={index}
+                className="flex-shrink-0"
+                style={{ width: `${100 / visibleItems}%` }}
+              >
+                <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
+                  {!isPlaying ? (
+                    <div 
+                      className="relative w-full h-full cursor-pointer group"
+                      onClick={() => handlePlay(index)}
+                    >
+                      <img
+                        src={thumbnailUrl}
+                        alt={video.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-10 group-hover:bg-black/30 transition-colors">
+                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
+                            <Play className="h-6 w-6 text-white ml-1" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
