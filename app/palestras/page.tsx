@@ -582,7 +582,6 @@ export default function PalestrasPage() {
               { name: "SEBRAE", logo: "/images/logos/logo-sebrae.webp" },
               { name: "Prefeitura de Jaboatão", logo: "/images/logos/logo-prefeitura-jaboatao.webp" },
               { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
-              { name: "Natal Home Center", logo: "/images/logos/logo-natal-home-center.webp" },
               { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
               { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },
               { name: "Plaza", logo: "/images/logos/logo-plaza.webp" },

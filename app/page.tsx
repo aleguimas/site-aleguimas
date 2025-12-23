@@ -8,8 +8,8 @@ import TopicCard from "@/components/topic-card"
 import TestimonialCard from "@/components/testimonial-card"
 import { Badge } from "@/components/ui/badge"
 import ClientLogos from "@/components/client-logos"
-import VideoTestimonial from "@/components/video-testimonial"
 import AnimatedCounter from "@/components/animated-counter"
+import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -470,37 +470,31 @@ export default function Home() {
 
           {/* Video Testimonials */}
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-center mb-8">Depoimentos em Vídeo</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <VideoTestimonial
-                videoId="-6I49F9sDcQ"
-                clientName="Kleber Carvalho"
-                clientPosition="CEO"
-                clientCompany="Natal Home Center"
-                thumbnailUrl="/images/testimonials/kleber-carvalho-thumb.webp"
-              />
-              <VideoTestimonial
-                videoId="Rx0j5CvY3us"
-                clientName="Ygor Valença"
-                clientPosition="Presidente"
-                clientCompany="FENEAUTO BR e SINDCFC-PE"
-                thumbnailUrl="/images/testimonials/ygor-valenca-thumb.webp"
-              />
-              <VideoTestimonial
-                videoId="1TRqJSdCy5w"
-                clientName="Henrique Vila Nova"
-                clientPosition="Coordenador do curso de CCO"
-                clientCompany="FICR"
-                thumbnailUrl="/images/testimonials/henrique-vila-nova-thumb.webp"
-              />
-              <VideoTestimonial
-                videoId="oDHZ29wHhes"
-                clientName="Rafaela Santos"
-                clientPosition="Radialista"
-                clientCompany="Jornalista"
-                thumbnailUrl="/images/testimonials/rafaela-santos-thumb.webp"
-              />
-            </div>
+            <YouTubeCarousel
+              videos={[
+                {
+                  videoId: "1QV5v4gOTyU",
+                  title: "Depoimento em Vídeo"
+                },
+                {
+                  videoId: "MRpvxwEEJB8",
+                  title: "Depoimento em Vídeo"
+                },
+                {
+                  videoId: "1dhqCP7inhU",
+                  title: "Depoimentos Time Bluk"
+                },
+                {
+                  videoId: "GnG4Six-1bM",
+                  title: "Depoimento em Vídeo"
+                },
+                {
+                  videoId: "1TRqJSdCy5w",
+                  title: "Depoimento - Henrique Vila Nova"
+                }
+              ]}
+              title="Depoimentos em Vídeo"
+            />
           </div>
         </div>
       </section>
