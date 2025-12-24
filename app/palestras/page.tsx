@@ -10,6 +10,7 @@ import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
 import ContactForm from "@/components/contact-form"
 import YouTubeVideoCard from "@/components/youtube-video-card"
+import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -494,20 +495,12 @@ export default function PalestrasPage() {
             </p>
           </div>
 
-          <div className="flex overflow-x-auto gap-4 pb-4 mb-12">
-            {palestraVideos.map((video, index) => (
-              <div key={video.videoId} className="flex-shrink-0 w-64 space-y-3">
-                <YouTubeVideoCard
-                  videoId={video.videoId}
-                  title={video.title}
-                  aspectRatio="9/16"
-                />
-                <p className="text-center text-sm text-gray-700 dark:text-gray-300 font-semibold">
-                  {video.title}
-                </p>
-              </div>
-            ))}
-          </div>
+          <YouTubeCarousel
+            videos={palestraVideos}
+            title=""
+            className="mb-12"
+            aspectRatio="16/9"
+          />
 
           <div className="text-center mb-12">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">
