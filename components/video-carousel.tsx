@@ -100,7 +100,7 @@ export default function VideoCarousel({ videos, title, className = "" }: VideoCa
       <div className="relative overflow-hidden touch-pan-x">
         <div
           ref={scrollContainerRef}
-          className="flex gap-4 sm:gap-6 transition-transform duration-300 ease-in-out"
+          className="flex gap-2 sm:gap-3 transition-transform duration-300 ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`
           }}

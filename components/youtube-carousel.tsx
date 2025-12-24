@@ -109,7 +109,9 @@ export default function YouTubeCarousel({ videos, title, className = "", aspectR
       <div className="relative overflow-hidden touch-pan-x">
         <div
           ref={scrollContainerRef}
-          className="flex gap-4 sm:gap-6 transition-transform duration-300 ease-in-out"
+          className={`flex transition-transform duration-300 ease-in-out ${
+            aspectRatio === "9/16" ? "gap-2 sm:gap-3" : "gap-4 sm:gap-6"
+          }`}
           style={{
             transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`
           }}
