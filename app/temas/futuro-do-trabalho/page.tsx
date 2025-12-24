@@ -35,6 +35,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/futuro-do-trabalho",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Futuro do Trabalho - Palestras e Consultoria | Alexandre Guimarães",
+    description: "Palestras e consultoria sobre o Futuro do Trabalho. Descubra como se preparar para as mudanças no mercado de trabalho, automação e novas formas de trabalho.",
+    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
+  },
 }
 
 export default function FuturoDoTrabalhoPage() {

@@ -53,6 +53,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/palestras",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Palestras Corporativas de IA | Alexandre Guimarães",
+    description: "Contrate palestras corporativas de IA para sua empresa. Palestras inspiradoras sobre Inteligência Artificial, Transformação Digital e Inovação.",
+    images: ["/images/alexandre-guimaraes-palestrante-consultor-ia-2.webp"],
+  },
 }
 
 export default function PalestrasPage() {

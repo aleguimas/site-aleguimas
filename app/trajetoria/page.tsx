@@ -31,6 +31,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/trajetoria",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Trajetória e Experiência - Alexandre Guimarães",
+    description: "Conheça a trajetória profissional de Alexandre Guimarães, especialista em Inteligência Artificial com mais de 20 anos de experiência em tecnologia e transformação digital.",
+    images: ["/images/alexandre-guimaraes-palestrante-consultor-ia-3.webp"],
+  },
 }
 
 export default function TrajetoriaPage() {

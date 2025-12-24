@@ -72,6 +72,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/workshops",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Workshops Práticos de IA para Empresas | Alexandre Guimarães",
+    description: "Contrate workshops práticos de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h) com exercícios hands-on. Especialista em IA aplicada para empresas.",
+    images: ["/images/alexandre-guimaraes-palestrante-consultor-ia-2.webp"],
+  },
 }
 
 export default function WorkshopsPage() {

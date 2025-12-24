@@ -35,6 +35,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/inteligencia-artificial",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Inteligência Artificial - Palestras e Consultoria | Alexandre Guimarães",
+    description: "Palestras e consultoria especializada em Inteligência Artificial. Descubra como a IA está transformando negócios e como implementar soluções inteligentes em sua empresa.",
+    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
+  },
 }
 
 export default function InteligenciaArtificialPage() {

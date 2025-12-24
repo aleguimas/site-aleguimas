@@ -36,6 +36,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/kit-imprensa",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Kit de Imprensa - Alexandre Guimarães",
+    description: "Kit de imprensa com fotos, biografia, currículo e informações sobre Alexandre Guimarães. Material para jornalistas e veículos de comunicação.",
+    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
+  },
 }
 
 export default function KitImprensaPage() {

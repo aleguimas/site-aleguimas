@@ -78,7 +78,10 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'seu-google-verification-code', // Substitua pelo código real do Google Search Console
+    // TODO: Substituir pelo código real do Google Search Console
+    // Para obter o código, acesse: https://search.google.com/search-console
+    // Adicione a propriedade do site e escolha o método de verificação HTML tag
+    google: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION || 'seu-google-verification-code',
   },
   manifest: '/manifest.json',
   icons: {

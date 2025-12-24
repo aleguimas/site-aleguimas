@@ -32,6 +32,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/videos",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Vídeos e Conteúdos - Palestras e Workshops",
+    description: "Assista palestras, workshops e depoimentos sobre Inteligência Artificial, Transformação Digital e Inovação. Conteúdo exclusivo de Alexandre Guimarães.",
+    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
+  },
 }
 
 export default function VideosPage() {
