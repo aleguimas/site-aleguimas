@@ -84,6 +84,10 @@ export default function WorkshopsPage() {
   // Dados dos vídeos de workshops (do mais novo para o mais antigo)
   const workshopVideos = [
     {
+      videoId: "4_qgMVxQWVM",
+      title: "Workshop - Alexandre Guimarães"
+    },
+    {
       videoId: "1dhqCP7inhU",
       title: "Depoimentos Time Bluk - Alexandre Guimarães"
     },
