@@ -13,18 +13,30 @@ interface YouTubeCarouselProps {
   videos: YouTubeVideo[]
   title: string
   className?: string
+  aspectRatio?: "9/16" | "16/9"
 }
 
-export default function YouTubeCarousel({ videos, title, className = "" }: YouTubeCarouselProps) {
+export default function YouTubeCarousel({ videos, title, className = "", aspectRatio = "9/16" }: YouTubeCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set())
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  const itemsPerView = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 4
+  const getItemsPerView = () => {
+    if (aspectRatio === "16/9") {
+      return {
+        mobile: 1,
+        tablet: 2,
+        desktop: 3
+      }
+    }
+    return {
+      mobile: 1,
+      tablet: 2,
+      desktop: 4
+    }
   }
+  
+  const itemsPerView = getItemsPerView()
 
   const getVisibleItems = () => {
     if (typeof window === 'undefined') return itemsPerView.mobile
@@ -110,7 +122,7 @@ export default function YouTubeCarousel({ videos, title, className = "" }: YouTu
                 className="flex-shrink-0"
                 style={{ width: `${100 / visibleItems}%` }}
               >
-                <div className="aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg">
+                <div className={aspectRatio === "16/9" ? "aspect-video relative rounded-lg overflow-hidden shadow-lg" : "aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg"}>
                   {!isPlaying ? (
                     <div 
                       className="relative w-full h-full cursor-pointer group"

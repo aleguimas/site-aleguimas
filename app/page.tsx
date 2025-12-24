@@ -9,7 +9,7 @@ import TestimonialCard from "@/components/testimonial-card"
 import { Badge } from "@/components/ui/badge"
 import ClientLogos from "@/components/client-logos"
 import AnimatedCounter from "@/components/animated-counter"
-import YouTubeCarousel from "@/components/youtube-carousel"
+import VideoTestimonial from "@/components/video-testimonial"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -470,31 +470,39 @@ export default function Home() {
 
           {/* Video Testimonials */}
           <div className="mt-16">
-            <YouTubeCarousel
-              videos={[
-                {
-                  videoId: "1QV5v4gOTyU",
-                  title: "Depoimento em Vídeo"
-                },
-                {
-                  videoId: "MRpvxwEEJB8",
-                  title: "Depoimento em Vídeo"
-                },
-                {
-                  videoId: "1dhqCP7inhU",
-                  title: "Depoimentos Time Bluk"
-                },
-                {
-                  videoId: "GnG4Six-1bM",
-                  title: "Depoimento em Vídeo"
-                },
-                {
-                  videoId: "1TRqJSdCy5w",
-                  title: "Depoimento - Henrique Vila Nova"
-                }
-              ]}
-              title="Depoimentos em Vídeo"
-            />
+            <h3 className="text-2xl font-bold text-center mb-8">Depoimentos em Vídeo</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <VideoTestimonial
+                videoId="1QV5v4gOTyU"
+                clientName="Depoimento"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="MRpvxwEEJB8"
+                clientName="Depoimento"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="1dhqCP7inhU"
+                clientName="Depoimentos Time Bluk"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="GnG4Six-1bM"
+                clientName="Depoimento"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="1TRqJSdCy5w"
+                clientName="Henrique Vila Nova"
+                clientPosition="Coordenador do curso de CCO"
+                clientCompany="FICR"
+              />
+            </div>
           </div>
         </div>
       </section>

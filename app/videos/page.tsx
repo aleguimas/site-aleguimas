@@ -140,6 +140,7 @@ export default function VideosPage() {
             videos={palestraVideos}
             title="Palestras"
             className="mb-20"
+            aspectRatio="16/9"
           />
 
           {/* Separador visual */}

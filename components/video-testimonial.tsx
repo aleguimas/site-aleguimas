@@ -62,9 +62,11 @@ export default function VideoTestimonial({
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-gray-900 dark:text-white">{clientName}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {clientPosition}, {clientCompany}
-          </p>
+          {(clientPosition || clientCompany) && (
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {[clientPosition, clientCompany].filter(Boolean).join(", ")}
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>
