@@ -117,10 +117,6 @@ export default function VideosPage() {
     {
       videoId: "Rx0j5CvY3us",
       title: "Depoimento - Ygor Valença"
-    },
-    {
-      videoId: "-6I49F9sDcQ",
-      title: "Depoimento - Kleber Carvalho"
     }
   ]
 
