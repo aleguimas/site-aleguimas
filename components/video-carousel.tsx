@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import VideoTestimonial from "@/components/video-testimonial"
@@ -21,11 +21,12 @@ interface VideoCarouselProps {
 
 export default function VideoCarousel({ videos, title, className = "" }: VideoCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [visibleItems, setVisibleItems] = useState(1)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const itemsPerView = {
-    mobile: 2,
-    tablet: 3,
+    mobile: 1,
+    tablet: 2,
     desktop: 4
   }
 
@@ -37,7 +38,16 @@ export default function VideoCarousel({ videos, title, className = "" }: VideoCa
     return itemsPerView.mobile
   }
 
-  const visibleItems = getVisibleItems()
+  useEffect(() => {
+    const updateVisibleItems = () => {
+      setVisibleItems(getVisibleItems())
+    }
+    
+    updateVisibleItems()
+    window.addEventListener('resize', updateVisibleItems)
+    return () => window.removeEventListener('resize', updateVisibleItems)
+  }, [])
+
   const maxIndex = Math.max(0, videos.length - visibleItems)
 
   const scrollToIndex = (index: number) => {
@@ -63,34 +73,34 @@ export default function VideoCarousel({ videos, title, className = "" }: VideoCa
 
   return (
     <div className={`relative ${className}`}>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{title}</h2>
+      <div className="flex items-center justify-between mb-6 flex-col sm:flex-row gap-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{title}</h2>
         <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className="h-8 w-8 p-0"
+            className="h-10 w-10 p-0 touch-manipulation"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-5 w-5" />
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={nextSlide}
             disabled={currentIndex >= maxIndex}
-            className="h-8 w-8 p-0"
+            className="h-10 w-10 p-0 touch-manipulation"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
       </div>
 
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden touch-pan-x">
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 transition-transform duration-300 ease-in-out"
+          className="flex gap-4 sm:gap-6 transition-transform duration-300 ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`
           }}
