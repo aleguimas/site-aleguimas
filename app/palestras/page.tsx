@@ -499,7 +499,7 @@ export default function PalestrasPage() {
             videos={palestraVideos}
             title=""
             className="mb-12"
-            aspectRatio="16/9"
+            aspectRatio="9/16"
           />
 
           <div className="text-center mb-12">
