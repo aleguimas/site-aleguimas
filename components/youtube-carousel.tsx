@@ -118,10 +118,14 @@ export default function YouTubeCarousel({ videos, title, className = "", aspectR
             return (
               <div
                 key={index}
-                className="flex-shrink-0"
+                className="flex-shrink-0 flex items-center justify-center"
                 style={{ width: `${100 / visibleItems}%` }}
               >
-                <div className={aspectRatio === "16/9" ? "aspect-video relative rounded-lg overflow-hidden shadow-lg" : "aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg"}>
+                <div 
+                  className={aspectRatio === "16/9" 
+                    ? "aspect-video relative rounded-lg overflow-hidden shadow-lg w-full" 
+                    : "aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg w-[70%] mx-auto"}
+                >
                   <iframe
                     className="absolute inset-0 w-full h-full"
                     src={`https://www.youtube.com/embed/${video.videoId}`}

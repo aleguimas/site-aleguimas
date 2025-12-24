@@ -16,8 +16,8 @@ export default function VideoTestimonial({
 }: VideoTestimonialProps) {
   return (
     <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-      <CardContent className="p-0">
-        <div className="relative">
+      <CardContent className="p-0 flex items-center justify-center">
+        <div className="relative w-[70%]">
           <div className="aspect-[9/16]">
             <iframe
               width="100%"
