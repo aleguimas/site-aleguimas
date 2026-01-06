@@ -8,8 +8,8 @@ import TopicCard from "@/components/topic-card"
 import TestimonialCard from "@/components/testimonial-card"
 import { Badge } from "@/components/ui/badge"
 import ClientLogos from "@/components/client-logos"
+import VideoTestimonial from "@/components/video-testimonial"
 import AnimatedCounter from "@/components/animated-counter"
-import VideoCarousel from "@/components/video-carousel"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -105,6 +105,68 @@ export default function Home() {
           })
         }}
       />
+      {/* Schema de vídeo para depoimentos */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Depoimentos em Vídeo - Alexandre Guimarães",
+            "description": "Depoimentos de clientes sobre palestras e workshops de Inteligência Artificial",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "VideoObject",
+                  "name": "Depoimento - Cliente",
+                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
+                  "thumbnailUrl": "https://img.youtube.com/vi/1QV5v4gOTyU/hqdefault.jpg",
+                  "contentUrl": "https://www.youtube.com/watch?v=1QV5v4gOTyU",
+                  "embedUrl": "https://www.youtube.com/embed/1QV5v4gOTyU"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "VideoObject",
+                  "name": "Depoimento - Cliente",
+                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
+                  "thumbnailUrl": "https://img.youtube.com/vi/MRpvxwEEJB8/hqdefault.jpg",
+                  "contentUrl": "https://www.youtube.com/watch?v=MRpvxwEEJB8",
+                  "embedUrl": "https://www.youtube.com/embed/MRpvxwEEJB8"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "VideoObject",
+                  "name": "Depoimento - Cliente",
+                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
+                  "thumbnailUrl": "https://img.youtube.com/vi/1dhqCP7inhU/hqdefault.jpg",
+                  "contentUrl": "https://www.youtube.com/watch?v=1dhqCP7inhU",
+                  "embedUrl": "https://www.youtube.com/embed/1dhqCP7inhU"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "VideoObject",
+                  "name": "Depoimento - Cliente",
+                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
+                  "thumbnailUrl": "https://img.youtube.com/vi/GnG4Six-1bM/hqdefault.jpg",
+                  "contentUrl": "https://www.youtube.com/watch?v=GnG4Six-1bM",
+                  "embedUrl": "https://www.youtube.com/embed/GnG4Six-1bM"
+                }
+              }
+            ]
+          })
+        }}
+      />
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
@@ -159,19 +221,19 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={8000} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={5000} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
-              <p className="text-gray-600 dark:text-gray-400">Pessoas Impactadas em 2025</p>
+              <p className="text-gray-600 dark:text-gray-400">Pessoas Impactadas em 2024</p>
             </div>
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={150} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={100} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
               <p className="text-gray-600 dark:text-gray-400">Palestras Realizadas</p>
             </div>
             <div>
                 <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={130} suffix="+" className="text-4xl font-bold text-blue-600" />
+                <AnimatedCounter end={50} suffix="+" className="text-4xl font-bold text-blue-600" />
                 </div>
               <p className="text-gray-600 dark:text-gray-400">Empresas Atendidas</p>
             </div>
@@ -470,41 +532,33 @@ export default function Home() {
 
           {/* Video Testimonials */}
           <div className="mt-16">
-            <VideoCarousel
-              videos={[
-                {
-                  videoId: "1QV5v4gOTyU",
-                  clientName: "Depoimento",
-                  clientPosition: "",
-                  clientCompany: ""
-                },
-                {
-                  videoId: "MRpvxwEEJB8",
-                  clientName: "Depoimento",
-                  clientPosition: "",
-                  clientCompany: ""
-                },
-                {
-                  videoId: "1dhqCP7inhU",
-                  clientName: "Depoimentos Time Bluk",
-                  clientPosition: "",
-                  clientCompany: ""
-                },
-                {
-                  videoId: "GnG4Six-1bM",
-                  clientName: "Depoimento",
-                  clientPosition: "",
-                  clientCompany: ""
-                },
-                {
-                  videoId: "1TRqJSdCy5w",
-                  clientName: "Henrique Vila Nova",
-                  clientPosition: "Coordenador do curso de CCO",
-                  clientCompany: "FICR"
-                }
-              ]}
-              title="Depoimentos em Vídeo"
-            />
+            <h3 className="text-2xl font-bold text-center mb-8">Depoimentos em Vídeo</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <VideoTestimonial
+                videoId="1QV5v4gOTyU"
+                clientName="Cliente"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="MRpvxwEEJB8"
+                clientName="Cliente"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="1dhqCP7inhU"
+                clientName="Cliente"
+                clientPosition=""
+                clientCompany=""
+              />
+              <VideoTestimonial
+                videoId="GnG4Six-1bM"
+                clientName="Cliente"
+                clientPosition=""
+                clientCompany=""
+              />
+            </div>
           </div>
         </div>
       </section>

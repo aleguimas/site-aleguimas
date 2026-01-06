@@ -85,31 +85,38 @@ export default function WorkshopsPage() {
   const workshopVideos = [
     {
       videoId: "4_qgMVxQWVM",
-      title: "Workshop - Alexandre Guimarães"
+      title: "Workshop - Alexandre Guimarães",
+      description: "Workshop prático sobre Inteligência Artificial com exercícios hands-on e casos reais"
     },
     {
       videoId: "1dhqCP7inhU",
-      title: "Depoimentos Time Bluk - Alexandre Guimarães"
+      title: "Depoimentos Time Bluk - Alexandre Guimarães",
+      description: "Depoimentos de participantes do workshop de IA realizado para o time da Bluk"
     },
     {
       videoId: "Bj1JL-wcIf4",
-      title: "Workshop Recente - Alexandre Guimarães"
+      title: "Workshop Recente - Alexandre Guimarães",
+      description: "Workshop recente sobre Inteligência Artificial aplicada para negócios"
     },
     {
       videoId: "zFCELMsvzVc",
-      title: "Workshop de IA - Alexandre Guimarães"
+      title: "Workshop de IA - Alexandre Guimarães",
+      description: "Workshop completo sobre Inteligência Artificial com foco em aplicações práticas"
     },
     {
       videoId: "X9RXkSHYSsQ",
-      title: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães"
+      title: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães",
+      description: "Workshop de IA realizado para o time do Shopping Tacaruna, explorando automações e melhorias de processos"
     },
     {
       videoId: "MRpvxwEEJB8",
-      title: "Workshop de IA - Alexandre Guimarães"
+      title: "Workshop de IA - Alexandre Guimarães",
+      description: "Workshop prático sobre Inteligência Artificial com exercícios e identificação de oportunidades"
     },
     {
       videoId: "oE9N_FrcceA",
-      title: "Imersão de IA - In Company"
+      title: "Imersão de IA - In Company",
+      description: "Imersão completa de Inteligência Artificial para empresas, com exercícios práticos e plano de ação"
     }
   ]
 
@@ -137,9 +144,46 @@ export default function WorkshopsPage() {
     { name: "Broomer", logo: "/images/logos/logo-broomer.webp" }
   ]
 
+  // Schema de vídeo para SEO
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Workshops de IA para Empresas - Alexandre Guimarães",
+    "description": "Workshops práticos de Inteligência Artificial para empresas",
+    "url": "https://www.aleguimas.com.br/workshops",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": workshopVideos.map((video, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "VideoObject",
+          "name": video.title,
+          "description": video.description || `${video.title} - Workshop prático sobre Inteligência Artificial por Alexandre Guimarães`,
+          "thumbnailUrl": `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`,
+          "uploadDate": new Date().toISOString(),
+          "contentUrl": `https://www.youtube.com/watch?v=${video.videoId}`,
+          "embedUrl": `https://www.youtube.com/embed/${video.videoId}`,
+          "publisher": {
+            "@type": "Person",
+            "name": "Alexandre Guimarães",
+            "url": "https://www.aleguimas.com.br"
+          }
+        }
+      }))
+    }
+  }
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema)
+        }}
+      />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
@@ -514,6 +558,7 @@ export default function WorkshopsPage() {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   )
 }

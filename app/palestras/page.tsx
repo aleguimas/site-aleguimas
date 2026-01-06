@@ -67,33 +67,76 @@ export default function PalestrasPage() {
   const palestraVideos = [
     {
       videoId: "Bj1JL-wcIf4",
-      title: "Palestra Recente - Alexandre Guimarães"
+      title: "Palestra Recente - Alexandre Guimarães",
+      description: "Palestra recente sobre Inteligência Artificial e Transformação Digital ministrada por Alexandre Guimarães"
     },
     {
       videoId: "7y5w6E6QgFM",
-      title: "Palestra Recente - Alexandre Guimarães"
+      title: "Palestra Recente - Alexandre Guimarães",
+      description: "Palestra sobre inovação e tecnologia ministrada por Alexandre Guimarães"
     },
     {
       videoId: "yVjrAxDBx4Y",
-      title: "Palestra sobre Inteligência Artificial"
+      title: "Palestra sobre Inteligência Artificial",
+      description: "Palestra completa sobre Inteligência Artificial, explorando aplicações práticas e casos de uso empresariais"
     },
     {
       videoId: "jnFA1c9NnhU",
-      title: "Palestra sobre Transformação Digital"
+      title: "Palestra sobre Transformação Digital",
+      description: "Palestra sobre Transformação Digital, estratégias de implementação e superação de desafios organizacionais"
     },
     {
       videoId: "12k3ay8YB3w",
-      title: "Palestra sobre Liderança na Era Digital"
+      title: "Palestra sobre Liderança na Era Digital",
+      description: "Palestra sobre Liderança na Era Digital, desenvolvendo habilidades para conduzir equipes em ambientes de transformação tecnológica"
     },
     {
       videoId: "0CuPmu49yo4",
-      title: "Palestra sobre IA Generativa"
+      title: "Palestra sobre IA Generativa",
+      description: "Palestra sobre IA Generativa, explorando ferramentas como ChatGPT e DALL-E e seu impacto nos negócios"
     }
   ]
 
+  // Schema de vídeo para SEO
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Palestras Corporativas de IA - Alexandre Guimarães",
+    "description": "Palestras inspiradoras sobre Inteligência Artificial, Transformação Digital e Inovação",
+    "url": "https://www.aleguimas.com.br/palestras",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": palestraVideos.map((video, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "VideoObject",
+          "name": video.title,
+          "description": video.description || `${video.title} - Palestra sobre Inteligência Artificial, Transformação Digital e Inovação por Alexandre Guimarães`,
+          "thumbnailUrl": `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`,
+          "uploadDate": new Date().toISOString(),
+          "contentUrl": `https://www.youtube.com/watch?v=${video.videoId}`,
+          "embedUrl": `https://www.youtube.com/embed/${video.videoId}`,
+          "publisher": {
+            "@type": "Person",
+            "name": "Alexandre Guimarães",
+            "url": "https://www.aleguimas.com.br"
+          }
+        }
+      }))
+    }
+  }
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(videoSchema)
+        }}
+      />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
@@ -709,6 +752,7 @@ export default function PalestrasPage() {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   )
 }
