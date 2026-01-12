@@ -35,12 +35,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/transformacao-digital",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Transformação Digital - Palestras e Consultoria | Alexandre Guimarães",
-    description: "Palestras e consultoria especializada em Transformação Digital. Estratégias e implementação prática para transformar sua empresa digitalmente.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function TransformacaoDigitalPage() {

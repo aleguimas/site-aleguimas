@@ -48,12 +48,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/consultoria",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Consultoria - Transformação Digital, Marketing Digital e IA | Alexandre Guimarães",
-    description: "Consultoria especializada em Transformação Digital, Marketing Digital e Inteligência Artificial. Transforme sua empresa com estratégias comprovadas e implementação prática.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function ConsultoriaPage() {

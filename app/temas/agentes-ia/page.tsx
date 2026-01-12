@@ -35,12 +35,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/agentes-ia",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Agentes de IA - Palestras e Consultoria | Alexandre Guimarães",
-    description: "Palestras e consultoria sobre Agentes de IA. Descubra como implementar agentes inteligentes, automação avançada e sistemas autônomos em sua empresa.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function AgentesIAPage() {

@@ -50,12 +50,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contato",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Contato - Alexandre Guimarães",
-    description: "Entre em contato com Alexandre Guimarães para palestras, workshops e consultoria em Inteligência Artificial e Transformação Digital. Solicite orçamento e informações.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function ContactPage() {

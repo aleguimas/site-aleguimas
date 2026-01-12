@@ -8,6 +8,7 @@ export default function ClientLogos() {
     { name: "Sebrae", logo: "/images/logos/logo-sebrae.webp" },
     { name: "Prefeitura de Jaboatão dos Guararapes", logo: "/images/logos/logo-prefeitura-jaboatao.webp" },
     { name: "FENEAUTO BR", logo: "/images/logos/logo-feneauto-br.webp" },
+    { name: "Natal Home Center", logo: "/images/logos/logo-natal-home-center.webp" },
     { name: "UNINASSAU", logo: "/images/logos/logo-uninassau.webp" },
     { name: "Kiosk Brands", logo: "/images/logos/logo-kiosk-brands.png" },
     { name: "Bluk", logo: "/images/logos/logo-bluk.webp" },

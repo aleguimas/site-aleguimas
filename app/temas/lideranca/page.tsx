@@ -35,12 +35,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/lideranca",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Liderança na Era Digital - Palestras e Consultoria | Alexandre Guimarães",
-    description: "Palestras e consultoria sobre Liderança na Era Digital. Aprenda como liderar equipes remotas, gerenciar mudanças e inspirar inovação em tempos de transformação digital.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function LiderancaPage() {

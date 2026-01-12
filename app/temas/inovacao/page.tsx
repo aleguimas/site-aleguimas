@@ -35,12 +35,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/temas/inovacao",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Inovação - Palestras e Consultoria | Alexandre Guimarães",
-    description: "Palestras e consultoria em Inovação. Descubra como criar uma cultura de inovação, desenvolver produtos inovadores e se destacar no mercado competitivo.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
-  },
 }
 
 export default function InovacaoPage() {
