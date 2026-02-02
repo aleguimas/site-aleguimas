@@ -3,15 +3,16 @@ import Script from "next/script"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import EbookLeadForm from "@/components/ebook-lead-form"
+import StrategicRoadmap from "@/components/strategic-roadmap"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Download, ShieldCheck, Sparkles } from "lucide-react"
+import { CheckCircle, Download, Layers, ShieldCheck, Sparkles, TrendingUp } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Ebook Gratuito: Domine a Arte do Prompt | Guia Completo de Prompts para IA",
+  title: "Ebook Gratuito: Domine a Arte do Prompt e Playbook Executivo de Agentes de IA | Alexandre Guimarães",
   description:
-    "Baixe gratuitamente o ebook 'Domine a Arte do Prompt' e aprenda a escrever prompts eficazes para ChatGPT, Claude e outras IAs. Estruturas prontas, exemplos práticos e checklists para criar prompts que geram respostas claras e aplicáveis para seu negócio. Alexandre Guimarães - Especialista em IA.",
+    "Baixe gratuitamente o ebook 'Domine a Arte do Prompt' e o Playbook Executivo de Agentes de IA. Aprenda prompts eficazes para ChatGPT e Claude, e leve agentes de IA do piloto à escala com governança, ROI e segurança. Alexandre Guimarães - Especialista em IA.",
   keywords: [
     "ebook prompts IA",
     "ebook gratuito prompts",
@@ -32,12 +33,25 @@ export const metadata: Metadata = {
     "templates de prompts",
     "melhores práticas prompts",
     "ebook transformação digital",
-    "guia completo prompts IA"
+    "guia completo prompts IA",
+    "agentes de IA para empresas",
+    "governança de IA",
+    "ROI em inteligência artificial",
+    "automação com agentes",
+    "estratégia de IA para líderes",
+    "playbook executivo agentes de IA",
+    "agentes de IA do piloto à escala",
+    "OWASP IA",
+    "multiagente",
+    "governança de agentes de IA",
+    "ROI em IA",
+    "estratégia de automação executiva",
+    "Alexandre Guimarães"
   ],
   openGraph: {
-    title: "Ebook Gratuito: Domine a Arte do Prompt | Guia Completo de Prompts para IA",
+    title: "Ebook Gratuito: Domine a Arte do Prompt e Playbook Executivo de Agentes de IA | Alexandre Guimarães",
     description:
-      "Baixe gratuitamente o ebook e aprenda a criar prompts que funcionam de primeira. Estruturas prontas, exemplos práticos e checklists para aumentar a qualidade das respostas de IA no seu dia a dia.",
+      "Baixe o ebook de prompts e o Playbook Executivo de Agentes de IA. Do piloto à escala: governança, ROI e segurança. Estruturas prontas e frameworks para líderes.",
     url: "https://www.aleguimas.com.br/ebook",
     type: "website",
     images: [
@@ -47,14 +61,20 @@ export const metadata: Metadata = {
         height: 1600,
         alt: "Capa do ebook Domine a Arte do Prompt - Alexandre Guimarães",
       },
+      {
+        url: "https://www.aleguimas.com.br/images/playbook-agentes.png",
+        width: 720,
+        height: 860,
+        alt: "Capa do Playbook Executivo de Agentes de IA - Alexandre Guimarães",
+      },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ebook Gratuito: Domine a Arte do Prompt | Guia Completo de Prompts para IA",
+    title: "Ebook Gratuito: Domine a Arte do Prompt e Playbook Executivo de Agentes de IA | Alexandre Guimarães",
     description:
-      "Baixe gratuitamente o ebook e aprenda a criar prompts eficazes para ChatGPT, Claude e outras IAs. Estruturas prontas e exemplos práticos.",
-    images: ["https://www.aleguimas.com.br/ebook.png"],
+      "Baixe o ebook de prompts e o Playbook de Agentes de IA. Do piloto à escala com governança, ROI e segurança.",
+    images: ["https://www.aleguimas.com.br/ebook.png", "https://www.aleguimas.com.br/images/playbook-agentes.png"],
   },
   alternates: {
     canonical: "https://www.aleguimas.com.br/ebook",
@@ -117,6 +137,57 @@ export default function EbookPage() {
     }
   }
 
+  // Segundo ativo: Playbook Executivo de Agentes de IA (SEO - dois ativos independentes)
+  const playbookJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Playbook Executivo de Agentes de IA: do piloto à escala",
+    "description": "Guia para líderes: saia do piloto bonito e coloque agentes de IA em produção com controle, métricas e segurança. Inclui os 5 níveis de autonomia, framework de governança (OWASP), riscos e cálculo de ROI real para projetos de IA.",
+    "author": {
+      "@type": "Person",
+      "name": "Alexandre Guimarães",
+      "url": "https://www.aleguimas.com.br"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Alexandre Guimarães",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.aleguimas.com.br/images/alexandre_guimas_palestrante_principal.webp"
+      }
+    },
+    "image": "https://www.aleguimas.com.br/images/playbook-agentes.png",
+    "inLanguage": "pt-BR",
+    "bookFormat": "https://schema.org/EBook",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.aleguimas.com.br/ebook"
+    },
+    "keywords": "agentes de IA, governança de IA, ROI inteligência artificial, automação com agentes, estratégia de IA para líderes, OWASP IA, multiagente, piloto à escala"
+  }
+
+  const playbookProductJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Playbook Executivo de Agentes de IA",
+    "description": "Playbook gratuito para líderes: agentes de IA do piloto à escala, com governança, segurança (OWASP) e cálculo de ROI real.",
+    "image": "https://www.aleguimas.com.br/images/playbook-agentes.png",
+    "brand": {
+      "@type": "Brand",
+      "name": "Alexandre Guimarães"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.aleguimas.com.br/ebook"
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Script
@@ -131,6 +202,20 @@ export default function EbookPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productJsonLd)
+        }}
+      />
+      <Script
+        id="playbook-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(playbookJsonLd)
+        }}
+      />
+      <Script
+        id="playbook-product-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(playbookProductJsonLd)
         }}
       />
       <Navbar hideThemeToggle />
@@ -235,7 +320,95 @@ export default function EbookPage() {
         </div>
       </section>
 
-      <section id="ebook-form" className="py-12 md:py-16 lg:py-20 bg-white text-slate-900">
+      {/* Playbook Executivo de Agentes de IA - Hero (bg-slate-950 para transição suave com Roadmap) */}
+      <section
+        className="relative border-t border-white/5 bg-slate-950 text-white py-20 md:py-24 lg:py-28 overflow-hidden"
+        aria-labelledby="playbook-heading"
+      >
+        {/* Gradiente radial sutil roxo */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(88, 28, 135, 0.2) 0%, transparent 60%)",
+          }}
+        />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+            <div className="space-y-6 order-2 md:order-1">
+              <Badge className="bg-purple-500/20 text-purple-200 border border-white/5 hover:bg-purple-500/30 px-4 py-1 rounded-full w-fit">
+                Nível Executivo
+              </Badge>
+              <h2 id="playbook-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                Playbook Executivo de Agentes de IA:{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-violet-200">
+                  do piloto à escala
+                </span>
+              </h2>
+              <p className="text-base sm:text-lg text-purple-100/90 max-w-xl">
+                Governança, segurança e ROI — sem transformar copiloto em piloto automático.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transition-colors duration-200 hover:border-purple-500/50">
+                  <Layers className="h-6 w-6 text-purple-300 mt-0.5 mb-2 flex-shrink-0" />
+                  <p className="text-sm text-purple-50/90">
+                    Os 5 níveis de autonomia: do assistido ao multiagente.
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transition-colors duration-200 hover:border-purple-500/50">
+                  <ShieldCheck className="h-6 w-6 text-purple-300 mt-0.5 mb-2 flex-shrink-0" />
+                  <p className="text-sm text-purple-50/90">
+                    Framework de Governança e Segurança (OWASP Top 10).
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transition-colors duration-200 hover:border-purple-500/50">
+                  <TrendingUp className="h-6 w-6 text-purple-300 mt-0.5 mb-2 flex-shrink-0" />
+                  <p className="text-sm text-purple-50/90">
+                    Cálculo de ROI Real para projetos de IA.
+                  </p>
+                </div>
+              </div>
+
+              <a href="#ebook-form" className="inline-block">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white border-0 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:brightness-110 transition-all duration-200"
+                >
+                  <Download className="h-5 w-5 mr-2" />
+                  Quero baixar o Playbook
+                </Button>
+              </a>
+            </div>
+
+            {/* Mockup capa com animação bounce lenta e sombra suave */}
+            <div className="relative max-w-md mx-auto w-full order-1 md:order-2">
+              <div className="absolute -inset-4 bg-purple-500/20 blur-3xl rounded-3xl" aria-hidden="true" />
+              <div
+                className="relative rounded-2xl border border-white/10 bg-white/5 p-4 shadow-2xl backdrop-blur animate-bounce-slow"
+                style={{
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 40px -10px rgba(88, 28, 135, 0.3)",
+                }}
+              >
+                <div className="overflow-hidden rounded-xl border border-white/5 bg-slate-950/50">
+                  <Image
+                    src="/images/playbook-agentes.png"
+                    alt="Capa do Playbook Executivo de Agentes de IA - do piloto à escala - Alexandre Guimarães"
+                    width={720}
+                    height={860}
+                    className="w-full h-auto object-contain"
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* StrategicRoadmap logo abaixo do Playbook (bg-slate-950 para transição suave) */}
+      <StrategicRoadmap />
+
+      <section id="ebook-form" className="py-16 md:py-20 lg:py-24 bg-white text-slate-900">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
           <div className="space-y-6">
             <div className="space-y-3">
