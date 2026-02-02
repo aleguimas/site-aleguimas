@@ -18,12 +18,24 @@ export default function EbookLeadForm() {
     email: "",
     hasCompany: "",
     companyName: "",
+    selectedEbook: "domine-arte-prompt", // Default selection
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
   const hasCompanySelected = formData.hasCompany === "sim"
+
+  const ebooks = {
+    "domine-arte-prompt": {
+      name: "Domine a Arte do Prompt",
+      url: "https://drive.google.com/uc?export=download&id=11w5nxT2MdOtH3SRnPNTq08ezk9AJ9Lr8",
+    },
+    "playbook-executivo-ia": {
+      name: "Playbook Executivo de Agentes de IA",
+      url: "https://drive.google.com/uc?export=download&id=1qNR6-vR3kDSr0vnXEldgy-0RqWzm2VNV",
+    },
+  }
 
   const isFormValid = useMemo(() => {
     const baseValid =
@@ -48,14 +60,17 @@ export default function EbookLeadForm() {
     setErrorMessage("")
 
     try {
+      const selectedEbookData = ebooks[formData.selectedEbook as keyof typeof ebooks]
+
       const payload = {
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
         hasCompany: formData.hasCompany,
         companyName: formData.companyName,
-        source: "ebook-domine-a-arte-do-prompt",
-        _subject: "Download Ebook - Domine a Arte do Prompt",
+        source: "ebook-page",
+        _subject: `Download Ebook - ${selectedEbookData.name}`,
+        ebook_name: selectedEbookData.name,
       }
 
       const webhookResponse = await fetch(WEBHOOK_URL, {
@@ -81,6 +96,11 @@ export default function EbookLeadForm() {
     const { name, value } = event.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
+
+  const handleSelectChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, selectedEbook: value }))
+  }
+
 
   return (
     <Card className="border-none shadow-xl">
@@ -128,6 +148,22 @@ export default function EbookLeadForm() {
               placeholder="voce@exemplo.com"
               required
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label>Qual ebook você deseja baixar?</Label>
+            <Select
+              value={formData.selectedEbook}
+              onValueChange={handleSelectChange}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione o ebook" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="domine-arte-prompt">Domine a Arte do Prompt</SelectItem>
+                <SelectItem value="playbook-executivo-ia">Playbook Executivo de Agentes de IA</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="space-y-2">
@@ -197,13 +233,13 @@ export default function EbookLeadForm() {
                 <span>Download liberado! Obrigado por se inscrever.</span>
               </div>
               <a
-                href={DOWNLOAD_URL}
+                href={ebooks[formData.selectedEbook as keyof typeof ebooks].url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
               >
                 <Download className="h-4 w-4 flex-shrink-0" />
-                <span>Abrir ebook "Domine a Arte do Prompt"</span>
+                <span>Abrir ebook "{ebooks[formData.selectedEbook as keyof typeof ebooks].name}"</span>
               </a>
             </div>
           )}
