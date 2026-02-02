@@ -71,6 +71,8 @@ export default function EbookLeadForm() {
         source: "ebook-page",
         _subject: `Download Ebook - ${selectedEbookData.name}`,
         ebook_name: selectedEbookData.name,
+        nome_ebook: selectedEbookData.name,
+        origem: "Aleguimas",
       }
 
       const webhookResponse = await fetch(WEBHOOK_URL, {
