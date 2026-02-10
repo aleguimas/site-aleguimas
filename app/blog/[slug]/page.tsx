@@ -205,15 +205,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <main className="py-20">
         <div className="container mx-auto px-4">
           <article className="max-w-4xl mx-auto">
-            {/* Imagem destacada */}
-            <div className="relative aspect-video rounded-lg overflow-hidden mb-12">
+            {/* Imagem destacada (940x726 - exibida por inteiro) */}
+            <div className="relative w-full rounded-lg overflow-hidden mb-12" style={{ aspectRatio: '940/726' }}>
               <Image
                 src={post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : '/placeholder.jpg'}
                 alt={`Imagem de capa: ${post.title}`}
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
-                sizes="(max-width: 768px) 100vw, 800px"
+                sizes="(max-width: 768px) 100vw, 940px"
               />
             </div>
 

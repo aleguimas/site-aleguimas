@@ -62,12 +62,12 @@ export default async function BlogPage() {
             {posts.map((post: any) => (
               <Card key={post._id} className="group hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  <div className="relative aspect-video overflow-hidden rounded-t-lg">
+                  <div className="relative w-full overflow-hidden rounded-t-lg" style={{ aspectRatio: '940/726' }}>
                     <Image
                       src={post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : '/placeholder.jpg'}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain group-hover:opacity-95 transition-opacity duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
