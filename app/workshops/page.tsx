@@ -87,6 +87,11 @@ export default function WorkshopsPage() {
   // Dados dos vídeos de workshops (do mais novo para o mais antigo)
   const workshopVideos = [
     {
+      videoId: "6HYangwgwi0",
+      title: "Workshop de IA - Alexandre Guimarães",
+      description: "Workshop prático sobre Inteligência Artificial com exercícios hands-on e casos reais"
+    },
+    {
       videoId: "4_qgMVxQWVM",
       title: "Workshop - Alexandre Guimarães",
       description: "Workshop prático sobre Inteligência Artificial com exercícios hands-on e casos reais"

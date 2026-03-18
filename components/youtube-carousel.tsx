@@ -39,7 +39,7 @@ export default function YouTubeCarousel({ videos, title, className = "", aspectR
     return {
       mobile: 1,
       tablet: 2,
-      desktop: 4
+      desktop: 3
     }
   }
   
@@ -156,13 +156,13 @@ export default function YouTubeCarousel({ videos, title, className = "", aspectR
             return (
               <div
                 key={`${video.videoId}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center"
+                className="flex-shrink-0 flex flex-col items-center justify-start"
                 style={{ width: `${100 / visibleItems}%` }}
               >
-                <div 
-                  className={aspectRatio === "16/9" 
-                    ? "aspect-video relative rounded-lg overflow-hidden shadow-lg w-full" 
-                    : "aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg w-[70%] mx-auto"}
+                <div
+                  className={aspectRatio === "16/9"
+                    ? "aspect-video relative rounded-lg overflow-hidden shadow-lg w-full"
+                    : "aspect-[9/16] relative rounded-lg overflow-hidden shadow-lg w-[80%] mx-auto"}
                 >
                   {!isPlaying || hasError ? (
                     <div 
@@ -214,6 +214,13 @@ export default function YouTubeCarousel({ videos, title, className = "", aspectR
                     />
                   )}
                 </div>
+                {video.title && (
+                  <p className={`mt-2 text-xs text-center text-gray-600 dark:text-gray-400 line-clamp-2 leading-snug ${
+                    aspectRatio === "9/16" ? "w-[80%]" : "w-full"
+                  }`}>
+                    {video.title}
+                  </p>
+                )}
               </div>
             )
           })}
