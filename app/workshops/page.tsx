@@ -13,8 +13,11 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Workshops de IA para Empresas | Alexandre Guimarães - Especialista em Inteligência Artificial",
-  description: "Contrate workshops práticos de IA para sua empresa. Workshop IA para Negócios (4h) e Imersão de IA (8h) com exercícios hands-on. Alexandre Guimarães é especialista em IA aplicada para empresas. Capacite sua equipe com competências reais em Inteligência Artificial.",
+  description: "Contrate workshops práticos de IA para sua empresa. Workshop IA para Negócios (4h), Ecossistema Google AI (4h) e Imersão de IA (8h) com exercícios hands-on. Alexandre Guimarães é especialista em IA aplicada para empresas. Capacite sua equipe com competências reais em Inteligência Artificial.",
   keywords: [
+    "workshop ecossistema google ai",
+    "workshop gemini empresas",
+    "workshop google ai studio",
     "workshop IA empresas",
     "workshop inteligência artificial negócios",
     "imersão IA empresas",
@@ -303,7 +306,7 @@ export default function WorkshopsPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="mb-4">
@@ -313,9 +316,9 @@ export default function WorkshopsPage() {
                   Workshop: IA para Negócios
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
-                  O que vivemos de IA, prompts de IA, dicas de ferramentas, cases, troca de experiências e muito mais. 
-                  Um workshop completo que aborda o panorama atual da Inteligência Artificial, ensina técnicas de prompts eficazes, 
-                  apresenta ferramentas práticas para diferentes áreas de negócio e compartilha cases reais de sucesso. 
+                  O que vivemos de IA, prompts de IA, dicas de ferramentas, cases, troca de experiências e muito mais.
+                  Um workshop completo que aborda o panorama atual da Inteligência Artificial, ensina técnicas de prompts eficazes,
+                  apresenta ferramentas práticas para diferentes áreas de negócio e compartilha cases reais de sucesso.
                   Ideal para equipes que querem compreender o potencial da IA sem exercícios práticos.
                 </p>
                 <div className="mt-auto">
@@ -353,6 +356,58 @@ export default function WorkshopsPage() {
               </CardContent>
             </Card>
 
+            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full border-2 border-green-200 dark:border-green-800/50">
+              <CardContent className="p-6 flex flex-col h-full">
+                <div className="mb-4 flex items-center gap-2">
+                  <Badge className="bg-green-600 text-white hover:bg-green-700">4 horas</Badge>
+                  <Badge className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 hover:bg-green-100">Novo</Badge>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  Workshop: O Ecossistema Google AI
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
+                  O Google vai muito além do Gemini. Este workshop revela o ecossistema completo de IA do Google:
+                  modelos de raciocínio avançado (Gemini 3 Pro e Flash), geração de imagens fotorrealistas com Nano Banana 2,
+                  vídeo cinematográfico com Veo 3.1, pesquisa autônoma com Deep Research e gestão do conhecimento com NotebookLM.
+                  Exploramos também como escolher o plano certo — Free, Advanced, Business ou Enterprise — e como integrar tudo
+                  isso ao Google Workspace para automatizar processos reais na sua empresa. Ideal para gestores e empresários que
+                  querem dominar o arsenal de IA do Google de forma prática e estratégica.
+                </p>
+                <div className="mt-auto">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge
+                      variant="outline"
+                      className="bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                    >
+                      Ecossistema Google
+                    </Badge>
+                    <Badge
+                      variant="outline"
+                      className="bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                    >
+                      Multimodal
+                    </Badge>
+                    <Badge
+                      variant="outline"
+                      className="bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                    >
+                      Workspace
+                    </Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <div className="flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star key={star} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-500 ml-2">Novo</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="mb-4">
@@ -362,9 +417,9 @@ export default function WorkshopsPage() {
                   Imersão de IA
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
-                  Trabalhamos os mesmos pontos do Workshop IA para Negócios, mas acrescentamos a questão fundamental: 
-                  onde os participantes vão levantar oportunidades no negócio. Uma imersão completa que combina teoria 
-                  e prática, incluindo exercícios práticos onde os participantes identificam e mapeiam oportunidades 
+                  Trabalhamos os mesmos pontos do Workshop IA para Negócios, mas acrescentamos a questão fundamental:
+                  onde os participantes vão levantar oportunidades no negócio. Uma imersão completa que combina teoria
+                  e prática, incluindo exercícios práticos onde os participantes identificam e mapeiam oportunidades
                   reais de aplicação de IA em seus negócios, criando um plano de ação personalizado.
                 </p>
                 <div className="mt-auto">
