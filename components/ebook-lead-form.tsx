@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle, Download, Loader2 } from "lucide-react"
 
-const DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=11w5nxT2MdOtH3SRnPNTq08ezk9AJ9Lr8"
 const WEBHOOK_URL = "https://webhook.n8n.simplidigital.dev/webhook/ebook"
 
 export default function EbookLeadForm() {
@@ -59,39 +58,43 @@ export default function EbookLeadForm() {
     setIsSubmitting(true)
     setErrorMessage("")
 
+    const selectedEbookData = ebooks[formData.selectedEbook as keyof typeof ebooks]
+
+    const payload = {
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      hasCompany: formData.hasCompany,
+      companyName: formData.companyName,
+      source: "ebook-page",
+      _subject: `Download Ebook - ${selectedEbookData.name}`,
+      ebook_name: selectedEbookData.name,
+      nome_ebook: selectedEbookData.name,
+      origem: "Aleguimas",
+    }
+
+    // Envia para o webhook com timeout de 10s.
+    // O download é liberado independentemente do resultado do webhook —
+    // o webhook é apenas para captura de lead, não deve bloquear o acesso ao ebook.
     try {
-      const selectedEbookData = ebooks[formData.selectedEbook as keyof typeof ebooks]
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
 
-      const payload = {
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-        hasCompany: formData.hasCompany,
-        companyName: formData.companyName,
-        source: "ebook-page",
-        _subject: `Download Ebook - ${selectedEbookData.name}`,
-        ebook_name: selectedEbookData.name,
-        nome_ebook: selectedEbookData.name,
-        origem: "Aleguimas",
-      }
-
-      const webhookResponse = await fetch(WEBHOOK_URL, {
+      await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
-      if (!webhookResponse.ok) {
-        throw new Error("Erro ao enviar suas informacoes. Tente novamente.")
-      }
-
-      setIsSuccess(true)
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Nao foi possivel enviar o formulario. Tente novamente."
-      setErrorMessage(message)
-    } finally {
-      setIsSubmitting(false)
+      clearTimeout(timeoutId)
+    } catch {
+      // Falha silenciosa: o lead pode não ter sido registrado,
+      // mas o usuário ainda recebe o ebook.
     }
+
+    setIsSuccess(true)
+    setIsSubmitting(false)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
