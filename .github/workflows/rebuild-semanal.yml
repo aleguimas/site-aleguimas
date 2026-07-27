@@ -1,0 +1,25 @@
+name: Rebuild semanal (Netlify)
+
+# Dispara um novo build/deploy no Netlify uma vez por semana, para o site
+# estático (output: export) recapturar os vídeos mais novos das playlists do YouTube.
+
+on:
+  schedule:
+    # Toda segunda-feira às 09:00 BRT (12:00 UTC). Cron do GitHub Actions é em UTC.
+    - cron: "0 12 * * 1"
+  workflow_dispatch: {} # permite disparar manualmente pela aba Actions
+
+jobs:
+  trigger-netlify-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar build hook do Netlify
+        env:
+          BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$BUILD_HOOK" ]; then
+            echo "::error::Secret NETLIFY_BUILD_HOOK não configurado no repositório." >&2
+            exit 1
+          fi
+          curl -fsSL -X POST -d '{}' "$BUILD_HOOK"
+          echo "Build do Netlify disparado com sucesso."
