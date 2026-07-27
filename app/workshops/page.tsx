@@ -6,9 +6,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Star, Users, Clock, Award, TrendingUp } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import SectionEyebrow from "@/components/section-eyebrow"
 import ContactForm from "@/components/contact-form"
 import YouTubeCarousel from "@/components/youtube-carousel"
 import YouTubeVideoCard from "@/components/youtube-video-card"
+import { getPartitionedPlaylistVideos } from "@/lib/youtube"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -83,50 +85,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function WorkshopsPage() {
-  // Dados dos vídeos de workshops (do mais novo para o mais antigo)
-  const workshopVideos = [
-    {
-      videoId: "6HYangwgwi0",
-      title: "Workshop de IA - Alexandre Guimarães",
-      description: "Workshop prático sobre Inteligência Artificial com exercícios hands-on e casos reais"
-    },
-    {
-      videoId: "4_qgMVxQWVM",
-      title: "Workshop - Alexandre Guimarães",
-      description: "Workshop prático sobre Inteligência Artificial com exercícios hands-on e casos reais"
-    },
-    {
-      videoId: "1dhqCP7inhU",
-      title: "Depoimentos Time Bluk - Alexandre Guimarães",
-      description: "Depoimentos de participantes do workshop de IA realizado para o time da Bluk"
-    },
-    {
-      videoId: "Bj1JL-wcIf4",
-      title: "Workshop Recente - Alexandre Guimarães",
-      description: "Workshop recente sobre Inteligência Artificial aplicada para negócios"
-    },
-    {
-      videoId: "zFCELMsvzVc",
-      title: "Workshop de IA - Alexandre Guimarães",
-      description: "Workshop completo sobre Inteligência Artificial com foco em aplicações práticas"
-    },
-    {
-      videoId: "X9RXkSHYSsQ",
-      title: "Workshop IA Time Shopping Tacaruna - Alexandre Guimarães",
-      description: "Workshop de IA realizado para o time do Shopping Tacaruna, explorando automações e melhorias de processos"
-    },
-    {
-      videoId: "MRpvxwEEJB8",
-      title: "Workshop de IA - Alexandre Guimarães",
-      description: "Workshop prático sobre Inteligência Artificial com exercícios e identificação de oportunidades"
-    },
-    {
-      videoId: "oE9N_FrcceA",
-      title: "Imersão de IA - In Company",
-      description: "Imersão completa de Inteligência Artificial para empresas, com exercícios práticos e plano de ação"
-    }
-  ]
+export default async function WorkshopsPage() {
+  // Vídeos da playlist "Palestras & Workshops" — metade dos mais novos (índices ímpares).
+  // A página de Palestras usa a outra metade, então as duas nunca repetem vídeos.
+  // Exclui o Short do hero para não repetir na mesma página.
+  const playlistVideos = await getPartitionedPlaylistVideos("PLgNysRy3xi51EqRQIZUoAsDMsm7qJK07_", "odd", 8, ["2v7P9rZQEes"])
+  const workshopVideos = playlistVideos.map((video) => ({
+    videoId: video.id,
+    title: video.title,
+    description: video.title,
+    publishedAt: video.publishedAt,
+  }))
 
   const clientLogos = [
     { name: "FICR", logo: "/images/logos/logo-ficr.webp" },
@@ -169,7 +138,7 @@ export default function WorkshopsPage() {
           "name": video.title,
           "description": video.description || `${video.title} - Workshop prático sobre Inteligência Artificial por Alexandre Guimarães`,
           "thumbnailUrl": `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`,
-          "uploadDate": new Date().toISOString(),
+          "uploadDate": video.publishedAt || new Date().toISOString(),
           "contentUrl": `https://www.youtube.com/watch?v=${video.videoId}`,
           "embedUrl": `https://www.youtube.com/embed/${video.videoId}`,
           "publisher": {
@@ -198,14 +167,10 @@ export default function WorkshopsPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Workshops de IA para Empresas
-              </Badge>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Workshops Práticos de{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                  Inteligência Artificial
-                </span>
+              <SectionEyebrow label="Workshops de IA para Empresas" tone="dark" meta="Mão na massa" />
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-[-0.03em]">
+                Workshops práticos de{" "}
+                <span className="text-blue-400">Inteligência Artificial</span>
               </h1>
               <p className="text-xl text-gray-300 mb-4">
                 Transforme sua equipe com workshops práticos e imersivos de IA. 
@@ -242,10 +207,8 @@ export default function WorkshopsPage() {
       {/* Benefits Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Por que contratar
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Por que contratar" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Benefícios dos Workshops</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Descubra como nossos workshops práticos de IA podem transformar sua organização, desenvolver competências reais em Inteligência Artificial e impulsionar resultados tangíveis.
@@ -295,10 +258,8 @@ export default function WorkshopsPage() {
       {/* Workshops Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Workshops
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Workshops" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Nossos Workshops de IA</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Workshops práticos e imersivos de Inteligência Artificial desenvolvidos para capacitar sua equipe com competências reais em IA, promovendo transformação digital e inovação empresarial.
@@ -478,10 +439,8 @@ export default function WorkshopsPage() {
       {/* Video Testimonials */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Workshops em Vídeo
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Workshops em Vídeo" className="mb-5" />
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Confira alguns momentos de workshops que realizei em diferentes empresas e eventos.
             </p>
@@ -523,7 +482,7 @@ export default function WorkshopsPage() {
           </div>
 
           <div className="text-center max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 "Comece a usar a IA como uma parceira estratégica do seu negócio"
               </h3>
@@ -539,10 +498,8 @@ export default function WorkshopsPage() {
       {/* Clients Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Clientes
-            </Badge>
+          <div className="mb-12 max-w-3xl">
+            <SectionEyebrow label="Clientes" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Empresas que confiam no nosso trabalho
             </h2>
@@ -577,10 +534,8 @@ export default function WorkshopsPage() {
       <section id="solicitar-cotacao" className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-                Solicite seu Workshop
-              </Badge>
+            <div className="mb-12">
+              <SectionEyebrow label="Solicite seu Workshop" tone="dark" className="mb-5" />
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Pronto para capacitar sua equipe?
               </h2>
@@ -594,10 +549,13 @@ export default function WorkshopsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-violet-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Pronto para capacitar sua equipe?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative overflow-hidden py-20 bg-slate-900 text-white">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl font-bold mb-6 tracking-[-0.02em]">Pronto para capacitar sua equipe?</h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Agende um workshop e desenvolva competências reais em IA que impulsionarão os resultados da sua empresa.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

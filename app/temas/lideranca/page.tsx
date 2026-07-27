@@ -43,15 +43,13 @@ export default function LiderancaPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 py-20 text-white">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/20 px-4 py-1 rounded-full mb-6">
-            Liderança na Era Digital
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-6">Liderança na Era Digital</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">
             Liderança na Era Digital: Inspire e Transforme
           </h1>
-          <p className="text-xl max-w-3xl mx-auto text-indigo-100">
+          <p className="text-xl max-w-3xl mx-auto text-blue-100">
             Descubra como liderar equipes remotas, gerenciar mudanças e inspirar inovação 
             em tempos de transformação digital.
           </p>
@@ -79,16 +77,16 @@ export default function LiderancaPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
                   Solicitar Palestra sobre Liderança
                 </Button>
               </a>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
-                <Crown className="w-16 h-16 mb-6 text-indigo-200" />
+              <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
+                <Crown className="w-16 h-16 mb-6 text-blue-200" />
                 <h3 className="text-2xl font-bold mb-4">Competências do Líder Digital</h3>
-                <ul className="space-y-3 text-indigo-100">
+                <ul className="space-y-3 text-blue-100">
                   <li className="flex items-center">
                     <Users className="w-5 h-5 mr-3 text-yellow-300" />
                     Gestão de equipes remotas
@@ -118,8 +116,8 @@ export default function LiderancaPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-indigo-100 dark:bg-indigo-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Crown className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Crown className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Liderança Remota Eficaz
@@ -128,7 +126,7 @@ export default function LiderancaPage() {
                     Como liderar equipes distribuídas, manter engajamento e produtividade 
                     em ambientes virtuais.
                   </p>
-                  <Badge className="bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     75 min
                   </Badge>
                 </CardContent>
@@ -136,8 +134,8 @@ export default function LiderancaPage() {
 
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Heart className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Heart className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Gestão de Mudanças
@@ -146,7 +144,7 @@ export default function LiderancaPage() {
                     Como conduzir transformações organizacionais e ajudar equipes a 
                     navegar períodos de mudança.
                   </p>
-                  <Badge className="bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     90 min
                   </Badge>
                 </CardContent>
@@ -173,12 +171,12 @@ export default function LiderancaPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
             <Star className="w-16 h-16 mx-auto mb-6 text-yellow-300" />
             <h2 className="text-3xl font-bold mb-4">
               Pronto para se tornar um líder da era digital?
             </h2>
-            <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Agende uma palestra ou workshop sobre Liderança na Era Digital e descubra 
               como inspirar e transformar sua equipe.
             </p>
@@ -188,7 +186,7 @@ export default function LiderancaPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                   Solicitar Palestra
                 </Button>
               </a>
@@ -197,7 +195,7 @@ export default function LiderancaPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
                   Consultoria em Liderança
                 </Button>
               </a>

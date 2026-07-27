@@ -60,7 +60,8 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-6">Entre em Contato</h1>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-5">Vamos conversar</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">Entre em Contato</h1>
           <p className="text-xl max-w-3xl mx-auto">
             Estou à disposição para ajudar você e sua empresa a navegar pelo mundo da Inteligência Artificial e
             Transformação Digital.

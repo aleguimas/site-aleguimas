@@ -26,3 +26,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 node_modules
+
+# os / editor
+.DS_Store
+**/.DS_Store
+
+# package manager store
+/.pnpm-store/
+
+# local certs
+cacert.pem

@@ -294,7 +294,6 @@ export default function EbookPage() {
                   height={860}
                   className="w-full h-auto object-contain"
                   priority
-                  unoptimized
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-sm text-blue-50">
@@ -340,7 +339,7 @@ export default function EbookPage() {
               </Badge>
               <h2 id="playbook-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
                 Playbook Executivo de Agentes de IA:{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-violet-200">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-100">
                   do piloto à escala
                 </span>
               </h2>
@@ -372,7 +371,7 @@ export default function EbookPage() {
               <a href="#ebook-form" className="inline-block">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white border-0 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:brightness-110 transition-all duration-200"
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white border-0 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:brightness-110 transition-all duration-200"
                 >
                   <Download className="h-5 w-5 mr-2" />
                   Quero baixar o Playbook
@@ -396,7 +395,6 @@ export default function EbookPage() {
                     width={720}
                     height={860}
                     className="w-full h-auto object-contain"
-                    unoptimized
                   />
                 </div>
               </div>

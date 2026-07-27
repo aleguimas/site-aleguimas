@@ -39,14 +39,10 @@ export default async function BlogPage() {
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6">
-            <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-              Blog & Artigos
-            </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Blog &amp; Artigos</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-[-0.03em]">
               Insights sobre{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                Inteligência Artificial e Inovação
-              </span>
+              <span className="text-blue-400">Inteligência Artificial e Inovação</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Artigos, análises e insights sobre como a tecnologia está transformando os negócios e a sociedade.

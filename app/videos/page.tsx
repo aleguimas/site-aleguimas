@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import SectionEyebrow from "@/components/section-eyebrow"
 import { Badge } from "@/components/ui/badge"
 import YouTubeCarousel from "@/components/youtube-carousel"
 import type { Metadata } from "next"
@@ -182,7 +183,8 @@ export default function VideosPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-6">Vídeos e Conteúdos</h1>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-5">Conteúdo</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">Vídeos e Conteúdos</h1>
           <p className="text-xl max-w-3xl mx-auto">
             Confira trechos de palestras, workshops e conteúdos sobre Inteligência Artificial, Transformação Digital,
             Inovação e Marketing Digital.
@@ -205,9 +207,7 @@ export default function VideosPage() {
 
           {/* Shorts - Workshops e Palestras */}
           <div className="mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Shorts
-            </Badge>
+            <SectionEyebrow label="Shorts" />
           </div>
 
           <YouTubeCarousel
@@ -221,9 +221,7 @@ export default function VideosPage() {
 
           {/* Depoimentos */}
           <div className="mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Depoimentos
-            </Badge>
+            <SectionEyebrow label="Depoimentos" />
           </div>
 
           <YouTubeCarousel

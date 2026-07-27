@@ -46,7 +46,8 @@ export default function KitImprensaPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-6">Kit de Imprensa</h1>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-5">Imprensa</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">Kit de Imprensa</h1>
           <p className="text-xl max-w-3xl mx-auto">
             Recursos oficiais para jornalistas, organizadores de eventos e profissionais de mídia.
           </p>
@@ -413,10 +414,13 @@ export default function KitImprensaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-violet-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Precisa de mais informações?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative overflow-hidden py-20 bg-slate-900 text-white">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl font-bold mb-6 tracking-[-0.02em]">Precisa de mais informações?</h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Entre em contato com nossa equipe para solicitar materiais adicionais ou agendar uma entrevista com
             Alexandre Guimarães.
           </p>

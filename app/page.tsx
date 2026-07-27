@@ -6,11 +6,16 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TopicCard from "@/components/topic-card"
 import TestimonialCard from "@/components/testimonial-card"
+import SectionEyebrow from "@/components/section-eyebrow"
 import { Badge } from "@/components/ui/badge"
 import ClientLogos from "@/components/client-logos"
-import VideoTestimonial from "@/components/video-testimonial"
+import YoutubeTestimonials from "@/components/youtube-testimonials"
+import YoutubeFacade from "@/components/youtube-facade"
 import AnimatedCounter from "@/components/animated-counter"
 import type { Metadata } from "next"
+
+// Playlist "Depoimentos" do canal @aleguimas — os últimos vídeos entram sozinhos.
+const TESTIMONIALS_PLAYLIST_ID = "PLgNysRy3xi51-egG0g9hTXcXVkpmmXFEN"
 
 export const metadata: Metadata = {
   title: "Alexandre Guimarães - Palestrante e Consultor em IA e Transformação Digital",
@@ -105,150 +110,105 @@ export default function Home() {
           })
         }}
       />
-      {/* Schema de vídeo para depoimentos */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Depoimentos em Vídeo - Alexandre Guimarães",
-            "description": "Depoimentos de clientes sobre palestras e workshops de Inteligência Artificial",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "item": {
-                  "@type": "VideoObject",
-                  "name": "Depoimento - Cliente",
-                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
-                  "thumbnailUrl": "https://img.youtube.com/vi/1QV5v4gOTyU/hqdefault.jpg",
-                  "contentUrl": "https://www.youtube.com/watch?v=1QV5v4gOTyU",
-                  "embedUrl": "https://www.youtube.com/embed/1QV5v4gOTyU"
-                }
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "item": {
-                  "@type": "VideoObject",
-                  "name": "Depoimento - Cliente",
-                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
-                  "thumbnailUrl": "https://img.youtube.com/vi/MRpvxwEEJB8/hqdefault.jpg",
-                  "contentUrl": "https://www.youtube.com/watch?v=MRpvxwEEJB8",
-                  "embedUrl": "https://www.youtube.com/embed/MRpvxwEEJB8"
-                }
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "item": {
-                  "@type": "VideoObject",
-                  "name": "Depoimento - Cliente",
-                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
-                  "thumbnailUrl": "https://img.youtube.com/vi/1dhqCP7inhU/hqdefault.jpg",
-                  "contentUrl": "https://www.youtube.com/watch?v=1dhqCP7inhU",
-                  "embedUrl": "https://www.youtube.com/embed/1dhqCP7inhU"
-                }
-              },
-              {
-                "@type": "ListItem",
-                "position": 4,
-                "item": {
-                  "@type": "VideoObject",
-                  "name": "Depoimento - Cliente",
-                  "description": "Depoimento de cliente sobre palestras e workshops de Inteligência Artificial",
-                  "thumbnailUrl": "https://img.youtube.com/vi/GnG4Six-1bM/hqdefault.jpg",
-                  "contentUrl": "https://www.youtube.com/watch?v=GnG4Six-1bM",
-                  "embedUrl": "https://www.youtube.com/embed/GnG4Six-1bM"
-                }
-              }
-            ]
-          })
-        }}
-      />
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* Hero Section — editorial, assimétrico, retrato full-bleed à direita */}
+      <section className="relative overflow-hidden flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-28 pb-16 lg:pt-0 lg:pb-0 lg:min-h-[88vh]">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
         </div>
-        <div className="container mx-auto px-4 z-10 relative py-20">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Palestrante & Consultor
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-                Transformando negócios através da{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                  Inteligência Artificial
-                </span>
+
+        {/* Retrato sangrando na metade direita (lg+), emergindo do fundo */}
+        <div className="hidden lg:block absolute inset-y-0 right-0 w-[50%] z-0">
+          <Image
+            src="/images/alexandre_guimas_palestrante_principal.webp"
+            alt="Alexandre Guimarães, palestrante e consultor em IA"
+            fill
+            className="object-cover object-[center_top]"
+            priority
+            sizes="50vw"
+          />
+          {/* Funde a borda esquerda da foto no hero */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent" />
+          {/* Suaviza topo e base */}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-900 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-slate-900/70 to-transparent" />
+        </div>
+
+        <div className="container mx-auto px-4 z-10 relative">
+          <div className="grid lg:grid-cols-12 items-center gap-10">
+            <div className="lg:col-span-7 space-y-7 lg:py-24">
+              <SectionEyebrow label="Palestrante & Consultor" tone="dark" meta="IA · Transformação Digital" />
+              <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-[1.05] tracking-[-0.03em] max-w-[16ch]">
+                IA deixou de ser tendência. Virou o{" "}
+                <span className="text-blue-400">novo básico</span>.
               </h1>
-              <p className="text-xl text-gray-300">
-                Ajudo empresas a implementar estratégias de inovação e transformação digital com foco em resultados
-                reais.
+              <p className="text-lg md:text-xl text-gray-300 max-w-[46ch]">
+                Ajudo empresas a sair do hype e colocar Inteligência Artificial para rodar — com foco em
+                resultado, não em slide bonito.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                    <Link href="/contato">Contratar palestra</Link>
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <Link href="/contato">Contratar palestra</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-white/25 bg-transparent text-white hover:bg-white/10"
+                >
+                  <Link href="/videos">Assistir palestras</Link>
                 </Button>
               </div>
             </div>
-            <div className="lg:w-1/2 flex justify-center">
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10">
+
+            {/* Retrato contido no mobile */}
+            <div className="lg:hidden">
+              <div className="relative aspect-[4/5] w-full max-w-xs mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/50">
                 <Image
                   src="/images/alexandre_guimas_palestrante_principal.webp"
-                  alt="Alexandre Guimarães"
+                  alt="Alexandre Guimarães, palestrante e consultor em IA"
                   fill
                   className="object-cover object-[center_top]"
-                  priority // Mantém priority apenas para a imagem principal acima da dobra
-                  sizes="(max-width: 768px) 288px, 384px"
-                    unoptimized
+                  sizes="320px"
                 />
-                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent"></div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-slate-50 dark:bg-slate-900/50">
+      {/* Stats Section — faixa editorial com régua azul e números tabulares */}
+      <section className="border-t-[3px] border-blue-600 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={8000} suffix="+" className="text-4xl font-bold text-blue-600" />
-                </div>
-              <p className="text-gray-600 dark:text-gray-400">Pessoas Impactadas em 2025</p>
-            </div>
-            <div>
-                <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={150} suffix="+" className="text-4xl font-bold text-blue-600" />
-                </div>
-              <p className="text-gray-600 dark:text-gray-400">Palestras Realizadas</p>
-            </div>
-            <div>
-                <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={130} suffix="+" className="text-4xl font-bold text-blue-600" />
-                </div>
-              <p className="text-gray-600 dark:text-gray-400">Empresas Atendidas</p>
-            </div>
-            <div>
-                <div className="text-4xl font-bold text-blue-600">
-                <AnimatedCounter end={20} suffix="+" className="text-4xl font-bold text-blue-600" />
-                </div>
-              <p className="text-gray-600 dark:text-gray-400">Anos de Experiência</p>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {[
+              { end: 8000, suffix: "+", label: "Pessoas impactadas · 2025" },
+              { end: 150, suffix: "+", label: "Palestras realizadas" },
+              { end: 130, suffix: "+", label: "Empresas atendidas" },
+              { end: 20, suffix: "+", label: "Anos de experiência" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="px-4 sm:px-6 py-8 sm:py-10 border-t border-slate-200 dark:border-slate-800 md:border-t-0 md:border-l md:first:border-l-0"
+              >
+                <AnimatedCounter
+                  end={stat.end}
+                  suffix={stat.suffix}
+                  className="block text-4xl md:text-5xl font-extrabold tracking-[-0.03em] tabular-nums text-slate-900 dark:text-white"
+                />
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-20">
+      <section className="py-20 border-t border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
               <div className="w-full md:w-1/2">
@@ -261,14 +221,11 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 50vw"
                     priority
                     quality={85}
-                    unoptimized
                 />
               </div>
             </div>
               <div className="w-full md:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Sobre Alexandre
-              </Badge>
+              <SectionEyebrow label="Sobre Alexandre" />
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                 Especialista em Transformação Digital e IA
               </h2>
@@ -319,82 +276,74 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Serviços
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Serviços" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Como posso ajudar sua empresa</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Ofereço soluções personalizadas para impulsionar a inovação e a transformação digital na sua organização.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
-                <MessageSquare className="h-7 w-7 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Palestras e Workshops</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Apresentações dinâmicas e interativas sobre IA, inovação e transformação digital, adaptadas para
-                diferentes públicos e objetivos.
-              </p>
-              <Link href="/palestras" className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center">
-                Saiba mais <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
-                <Users className="h-7 w-7 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Consultoria Estratégica</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Assessoria personalizada para implementação de estratégias de inovação e transformação digital alinhadas
-                aos objetivos do seu negócio.
-              </p>
-              <Link
-                href="/consultoria"
-                className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
+            {[
+              {
+                index: "01",
+                Icon: MessageSquare,
+                title: "Palestras e Workshops",
+                desc: "Apresentações dinâmicas e interativas sobre IA, inovação e transformação digital, adaptadas para diferentes públicos e objetivos.",
+                href: "/palestras",
+              },
+              {
+                index: "02",
+                Icon: Users,
+                title: "Consultoria Estratégica",
+                desc: "Assessoria personalizada para implementação de estratégias de inovação e transformação digital alinhadas aos objetivos do seu negócio.",
+                href: "/consultoria",
+              },
+              {
+                index: "03",
+                Icon: Calendar,
+                title: "Treinamentos In-Company",
+                desc: "Programas de capacitação sob medida para equipes, focados em desenvolver habilidades práticas em IA e novas tecnologias.",
+                href: "/workshops",
+              },
+            ].map(({ index, Icon, title, desc, href }) => (
+              <div
+                key={index}
+                className="group relative bg-white dark:bg-slate-900 p-8 border-t-2 border-transparent hover:border-blue-600 dark:hover:border-blue-500 transition-colors"
               >
-                Saiba mais <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-6">
-                <Calendar className="h-7 w-7 text-blue-600 dark:text-blue-400" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-sm font-bold tracking-[0.1em] tabular-nums text-blue-600 dark:text-blue-400">
+                    {index}
+                  </span>
+                  <Icon className="h-6 w-6 text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">{desc}</p>
+                <Link
+                  href={href}
+                  className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center"
+                >
+                  Saiba mais <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Treinamentos In-Company</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Programas de capacitação sob medida para equipes, focados em desenvolver habilidades práticas em IA e
-                novas tecnologias.
-              </p>
-              <Link
-                href="/treinamentos"
-                className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center"
-              >
-                Saiba mais <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Topics Section */}
-      <section className="py-20">
+      <section className="py-20 border-t border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Especialidades
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Especialidades" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Principais temas abordados</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Conheça os tópicos que são minha especialidade e como eles podem transformar o seu negócio.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
             <TopicCard
               title="Inteligência Artificial Aplicada"
               description="Como implementar soluções de IA que geram resultados reais para o seu negócio, desde agentes de atendimentos inteligentes até sistemas de previsão."
@@ -433,30 +382,15 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2 relative aspect-video rounded-xl overflow-hidden shadow-xl">
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-                <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <Image
-                  src="/images/alexandre-guimaraes-palestrante-consultor-ia-2.webp"
-                alt="IA o Novo Básico - Palestra em destaque"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                loading="lazy"
-                  unoptimized
+            <div className="w-full lg:w-1/2">
+              <YoutubeFacade
+                id="_nZTxmazs8Y"
+                title="IA o Novo Básico — palestra de Alexandre Guimarães"
+                className="shadow-xl ring-1 ring-white/10"
               />
             </div>
             <div className="lg:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Palestra em Destaque
-              </Badge>
+              <SectionEyebrow label="Palestra em Destaque" tone="dark" />
               <h2 className="text-3xl font-bold">IA o Novo Básico</h2>
               <p className="text-xl text-gray-300">
                 Nesta palestra, exploro como a Inteligência Artificial se tornou uma habilidade fundamental para
@@ -494,10 +428,8 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Depoimentos
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Depoimentos" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">O que dizem sobre meu trabalho</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Feedback de clientes e participantes de palestras e consultorias.
@@ -530,50 +462,20 @@ export default function Home() {
             />
           </div>
 
-          {/* Video Testimonials */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold text-center mb-8">Depoimentos em Vídeo</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <VideoTestimonial
-                videoId="1QV5v4gOTyU"
-                clientName="Cliente"
-                clientPosition=""
-                clientCompany=""
-              />
-              <VideoTestimonial
-                videoId="MRpvxwEEJB8"
-                clientName="Cliente"
-                clientPosition=""
-                clientCompany=""
-              />
-              <VideoTestimonial
-                videoId="1dhqCP7inhU"
-                clientName="Cliente"
-                clientPosition=""
-                clientCompany=""
-              />
-              <VideoTestimonial
-                videoId="GnG4Six-1bM"
-                clientName="Cliente"
-                clientPosition=""
-                clientCompany=""
-              />
-            </div>
-          </div>
+          {/* Depoimentos em vídeo — puxados automaticamente da playlist do YouTube (RSS, revalida 1h) */}
+          <YoutubeTestimonials playlistId={TESTIMONIALS_PLAYLIST_ID} limit={8} />
         </div>
       </section>
 
       {/* Clients Section */}
       <section className="py-16 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Clientes
-            </Badge>
+          <div className="mb-12 max-w-3xl">
+            <SectionEyebrow label="Clientes" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Empresas que confiam no meu trabalho
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Tenho orgulho de colaborar com organizações que valorizam inovação e transformação digital.
             </p>
           </div>
@@ -584,12 +486,18 @@ export default function Home() {
 
 
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-violet-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold">Pronto para transformar seu negócio com IA e inovação?</h2>
-            <p className="text-xl text-blue-100">
+      {/* CTA Section — fecho escuro, par visual do hero */}
+      <section className="relative overflow-hidden py-24 bg-slate-900 text-white">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
+        </div>
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-blue-600/20 blur-3xl pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-balance">
+              Pronto para transformar seu negócio com IA e inovação?
+            </h2>
+            <p className="text-xl text-slate-300">
               Entre em contato para discutirmos como posso ajudar sua empresa a se destacar na era digital.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -603,11 +511,12 @@ export default function Home() {
               </Button>
                 </a>
               <Button
+                asChild
                 size="lg"
                 variant="outline"
                 className="bg-blue-600/20 text-white border-white hover:bg-blue-600/30"
               >
-                Ver Calendário de Palestras
+                <Link href="/contato">Solicitar proposta</Link>
               </Button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import SectionEyebrow from "@/components/section-eyebrow"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -56,12 +57,10 @@ export default function ConsultoriaPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 py-20 text-white">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-6">
-            Consultoria Especializada
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-6">Consultoria Especializada</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">
             Consultoria Estratégica para o Futuro Digital
           </h1>
           <p className="text-xl max-w-3xl mx-auto text-blue-100 mb-8">
@@ -84,7 +83,8 @@ export default function ConsultoriaPage() {
       {/* Áreas de Consultoria */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Áreas" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
               Áreas de Consultoria Especializada
             </h2>
@@ -230,7 +230,8 @@ export default function ConsultoriaPage() {
       {/* Metodologia */}
       <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Metodologia" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
               Metodologia de Consultoria
             </h2>
@@ -299,7 +300,8 @@ export default function ConsultoriaPage() {
       {/* Benefícios */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Benefícios" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
               Benefícios da Consultoria
             </h2>
@@ -404,12 +406,15 @@ export default function ConsultoriaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
+      <section className="relative overflow-hidden py-20 bg-slate-900">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl font-bold text-white mb-6 tracking-[-0.02em]">
             Pronto para transformar sua empresa?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Agende uma consultoria personalizada e descubra como posicionar sua empresa 
             para o sucesso na era digital.
           </p>
@@ -428,7 +433,7 @@ export default function ConsultoriaPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
                 Falar sobre Projeto Específico
               </Button>
             </a>

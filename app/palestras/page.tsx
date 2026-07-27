@@ -8,10 +8,14 @@ import { CheckCircle, Star, Users } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import TestimonialCard from "@/components/testimonial-card"
+import SectionEyebrow from "@/components/section-eyebrow"
 import ContactForm from "@/components/contact-form"
 import YouTubeVideoCard from "@/components/youtube-video-card"
 import YouTubeCarousel from "@/components/youtube-carousel"
+import { getPartitionedPlaylistVideos } from "@/lib/youtube"
 import type { Metadata } from "next"
+
+const PALESTRAS_WORKSHOPS_PLAYLIST = "PLgNysRy3xi51EqRQIZUoAsDMsm7qJK07_"
 
 export const metadata: Metadata = {
   title: "Palestras Corporativas de IA | Alexandre Guimarães - Especialista em Inteligência Artificial",
@@ -62,40 +66,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PalestrasPage() {
-  // Dados dos vídeos de palestras (do mais novo para o mais antigo)
-  const palestraVideos = [
-    {
-      videoId: "Bj1JL-wcIf4",
-      title: "Palestra Recente - Alexandre Guimarães",
-      description: "Palestra recente sobre Inteligência Artificial e Transformação Digital ministrada por Alexandre Guimarães"
-    },
-    {
-      videoId: "7y5w6E6QgFM",
-      title: "Palestra Recente - Alexandre Guimarães",
-      description: "Palestra sobre inovação e tecnologia ministrada por Alexandre Guimarães"
-    },
-    {
-      videoId: "yVjrAxDBx4Y",
-      title: "Palestra sobre Inteligência Artificial",
-      description: "Palestra completa sobre Inteligência Artificial, explorando aplicações práticas e casos de uso empresariais"
-    },
-    {
-      videoId: "jnFA1c9NnhU",
-      title: "Palestra sobre Transformação Digital",
-      description: "Palestra sobre Transformação Digital, estratégias de implementação e superação de desafios organizacionais"
-    },
-    {
-      videoId: "12k3ay8YB3w",
-      title: "Palestra sobre Liderança na Era Digital",
-      description: "Palestra sobre Liderança na Era Digital, desenvolvendo habilidades para conduzir equipes em ambientes de transformação tecnológica"
-    },
-    {
-      videoId: "0CuPmu49yo4",
-      title: "Palestra sobre IA Generativa",
-      description: "Palestra sobre IA Generativa, explorando ferramentas como ChatGPT e DALL-E e seu impacto nos negócios"
-    }
-  ]
+export default async function PalestrasPage() {
+  // Vídeos da playlist "Palestras & Workshops" — metade dos mais novos (índices pares).
+  // A página de Workshops usa a outra metade, então as duas nunca repetem vídeos.
+  // Exclui o Short do hero para não repetir na mesma página.
+  const playlistVideos = await getPartitionedPlaylistVideos(PALESTRAS_WORKSHOPS_PLAYLIST, "even", 8, ["SsDUQ-gCTCw"])
+  const palestraVideos = playlistVideos.map((video) => ({
+    videoId: video.id,
+    title: video.title,
+    description: video.title,
+    publishedAt: video.publishedAt,
+  }))
 
   // Schema de vídeo para SEO
   const videoSchema = {
@@ -114,7 +95,7 @@ export default function PalestrasPage() {
           "name": video.title,
           "description": video.description || `${video.title} - Palestra sobre Inteligência Artificial, Transformação Digital e Inovação por Alexandre Guimarães`,
           "thumbnailUrl": `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`,
-          "uploadDate": new Date().toISOString(),
+          "uploadDate": video.publishedAt || new Date().toISOString(),
           "contentUrl": `https://www.youtube.com/watch?v=${video.videoId}`,
           "embedUrl": `https://www.youtube.com/embed/${video.videoId}`,
           "publisher": {
@@ -143,14 +124,10 @@ export default function PalestrasPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="lg:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                Palestras Corporativas de IA
-              </Badge>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Palestras Inspiradoras sobre{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                  Inteligência Artificial
-                </span>
+              <SectionEyebrow label="Palestras Corporativas de IA" tone="dark" meta="IA aplicada" />
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-[-0.03em]">
+                Palestras inspiradoras sobre{" "}
+                <span className="text-blue-400">Inteligência Artificial</span>
               </h1>
               <p className="text-xl text-gray-300 mb-4">
                 Inspire sua equipe, impulsione a inovação e prepare sua empresa para o futuro digital com palestras 
@@ -187,10 +164,8 @@ export default function PalestrasPage() {
       {/* Benefits Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Por que contratar
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Por que contratar" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Benefícios para sua empresa</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Descubra como minhas palestras podem transformar sua organização e impulsionar resultados.
@@ -318,10 +293,8 @@ export default function PalestrasPage() {
       {/* Topics Section */}
       <section id="temas" className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Temas
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Temas" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Principais palestras</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               Conheça os temas mais solicitados, todos personalizáveis para atender às necessidades específicas da sua
@@ -526,10 +499,8 @@ export default function PalestrasPage() {
       {/* Video Testimonials */}
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Palestras em Vídeo
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Palestras em Vídeo" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Assista trechos de palestras realizadas
             </h2>
@@ -604,10 +575,8 @@ export default function PalestrasPage() {
       {/* Clients Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Clientes
-            </Badge>
+          <div className="mb-12 max-w-3xl">
+            <SectionEyebrow label="Clientes" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Empresas que confiam no meu trabalho
             </h2>
@@ -656,10 +625,8 @@ export default function PalestrasPage() {
       >
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-                Solicite uma Proposta
-              </Badge>
+            <div className="mb-12">
+              <SectionEyebrow label="Solicite uma Proposta" tone="dark" className="mb-5" />
               <h2 className="text-3xl font-bold mb-4">Transforme sua empresa hoje</h2>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
                 Preencha o formulário abaixo para solicitar uma cotação personalizada para palestras em sua
@@ -675,10 +642,8 @@ export default function PalestrasPage() {
       {/* FAQ Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-              Perguntas Frequentes
-            </Badge>
+          <div className="mb-16 max-w-3xl">
+            <SectionEyebrow label="Perguntas Frequentes" className="mb-5" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Dúvidas comuns sobre palestras
             </h2>
@@ -727,10 +692,13 @@ export default function PalestrasPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-violet-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Pronto para transformar sua empresa?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative overflow-hidden py-20 bg-slate-900 text-white">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute inset-0 bg-grid-white/[0.2] bg-[length:50px_50px]" />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl font-bold mb-6 tracking-[-0.02em]">Pronto para transformar sua empresa?</h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Agende uma palestra e descubra como a Inteligência Artificial e a inovação podem impulsionar
             seus resultados.
           </p>

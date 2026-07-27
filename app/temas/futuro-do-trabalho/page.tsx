@@ -43,15 +43,13 @@ export default function FuturoDoTrabalhoPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 py-20 text-white">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-teal-500/20 text-teal-300 hover:bg-teal-500/20 px-4 py-1 rounded-full mb-6">
-            Futuro do Trabalho
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-6">Futuro do Trabalho</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">
             Futuro do Trabalho: Prepare-se para o Amanhã
           </h1>
-          <p className="text-xl max-w-3xl mx-auto text-teal-100">
+          <p className="text-xl max-w-3xl mx-auto text-blue-100">
             Descubra como se preparar para as mudanças no mercado de trabalho, automação 
             e as novas formas de trabalho que estão surgindo.
           </p>
@@ -79,16 +77,16 @@ export default function FuturoDoTrabalhoPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-teal-600 hover:bg-teal-700 text-white">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
                   Solicitar Palestra sobre Futuro do Trabalho
                 </Button>
               </a>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-teal-600 to-blue-600 rounded-2xl p-8 text-white">
-                <Clock className="w-16 h-16 mb-6 text-teal-200" />
+              <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
+                <Clock className="w-16 h-16 mb-6 text-blue-200" />
                 <h3 className="text-2xl font-bold mb-4">Tendências do Futuro do Trabalho</h3>
-                <ul className="space-y-3 text-teal-100">
+                <ul className="space-y-3 text-blue-100">
                   <li className="flex items-center">
                     <Zap className="w-5 h-5 mr-3 text-yellow-300" />
                     Automação e IA no trabalho
@@ -118,8 +116,8 @@ export default function FuturoDoTrabalhoPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-teal-100 dark:bg-teal-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Clock className="w-6 h-6 text-teal-600 dark:text-teal-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Clock className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Automação e o Futuro das Profissões
@@ -128,7 +126,7 @@ export default function FuturoDoTrabalhoPage() {
                     Como a IA e automação estão transformando diferentes setores e quais 
                     profissões estão emergindo.
                   </p>
-                  <Badge className="bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     75 min
                   </Badge>
                 </CardContent>
@@ -154,8 +152,8 @@ export default function FuturoDoTrabalhoPage() {
 
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-green-100 dark:bg-green-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Rocket className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Rocket className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Habilidades do Futuro
@@ -164,7 +162,7 @@ export default function FuturoDoTrabalhoPage() {
                     Quais habilidades desenvolver para se manter relevante e competitivo 
                     no mercado de trabalho do futuro.
                   </p>
-                  <Badge className="bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     90 min
                   </Badge>
                 </CardContent>
@@ -173,12 +171,12 @@ export default function FuturoDoTrabalhoPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-teal-600 to-blue-600 rounded-2xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
             <Rocket className="w-16 h-16 mx-auto mb-6 text-yellow-300" />
             <h2 className="text-3xl font-bold mb-4">
               Pronto para se preparar para o futuro do trabalho?
             </h2>
-            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Agende uma palestra ou workshop sobre o Futuro do Trabalho e descubra como 
               se adaptar às mudanças que estão por vir.
             </p>
@@ -188,7 +186,7 @@ export default function FuturoDoTrabalhoPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-white text-teal-600 hover:bg-gray-100">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                   Solicitar Palestra
                 </Button>
               </a>
@@ -197,7 +195,7 @@ export default function FuturoDoTrabalhoPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
                   Consultoria sobre Futuro do Trabalho
                 </Button>
               </a>

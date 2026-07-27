@@ -8,8 +8,6 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle, Download, Loader2 } from "lucide-react"
 
-const WEBHOOK_URL = "https://webhook.n8n.simplidigital.dev/webhook/ebook"
-
 export default function EbookLeadForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -57,41 +55,6 @@ export default function EbookLeadForm() {
 
     setIsSubmitting(true)
     setErrorMessage("")
-
-    const selectedEbookData = ebooks[formData.selectedEbook as keyof typeof ebooks]
-
-    const payload = {
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      hasCompany: formData.hasCompany,
-      companyName: formData.companyName,
-      source: "ebook-page",
-      _subject: `Download Ebook - ${selectedEbookData.name}`,
-      ebook_name: selectedEbookData.name,
-      nome_ebook: selectedEbookData.name,
-      origem: "Aleguimas",
-    }
-
-    // Envia para o webhook com timeout de 10s.
-    // O download é liberado independentemente do resultado do webhook —
-    // o webhook é apenas para captura de lead, não deve bloquear o acesso ao ebook.
-    try {
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10000)
-
-      await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      })
-
-      clearTimeout(timeoutId)
-    } catch {
-      // Falha silenciosa: o lead pode não ter sido registrado,
-      // mas o usuário ainda recebe o ebook.
-    }
 
     setIsSuccess(true)
     setIsSubmitting(false)

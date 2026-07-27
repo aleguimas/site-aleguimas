@@ -209,12 +209,11 @@ export default function Footer() {
                 className="transition-opacity hover:opacity-80"
               >
                 <Image
-                  src="/logo-simpli.png"
-                  alt="Simplí Digital"
-                  width={80}
-                  height={30}
+                  src="/images/logos/ico-simpli-2026.png"
+                  alt="Simplí"
+                  width={32}
+                  height={32}
                   className="h-8 w-auto"
-                  unoptimized
                 />
               </Link>
             </div>

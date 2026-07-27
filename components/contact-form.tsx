@@ -7,8 +7,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import SuccessModal from "@/components/success-modal"
 
-const WEBHOOK_URL = "https://webhook.n8n.simplidigital.dev/webhook/forms-guimas"
-
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -28,45 +26,19 @@ export default function ContactForm() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    try {
-      const payload = {
-        ...formData,
-        page: typeof window !== 'undefined' ? window.location.pathname : '',
-        _subject: 'Nova solicitacao de palestra/workshop - Site Alexandre Guimaraes'
-      }
-
-      const response = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      })
-
-      if (!response.ok) {
-        throw new Error('Webhook returned a non-OK response')
-      }
-
-      console.log('Form submitted successfully')
-      
-      setShowSuccessModal(true)
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        topic: '',
-        eventType: '',
-        participants: '',
-        datePreference: '',
-        message: ''
-      })
-    } catch (error) {
-      console.error('Erro ao enviar formulario', error)
-      alert('Erro ao enviar formulario. Tente novamente.')
-    } finally {
-      setIsSubmitting(false)
-    }
+    setShowSuccessModal(true)
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      topic: '',
+      eventType: '',
+      participants: '',
+      datePreference: '',
+      message: ''
+    })
+    setIsSubmitting(false)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

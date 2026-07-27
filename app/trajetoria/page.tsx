@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import SectionEyebrow from "@/components/section-eyebrow"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -41,7 +42,8 @@ export default function TrajetoriaPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-6">Minha Trajetória</h1>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-5">Sobre Alexandre</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">Minha Trajetória</h1>
           <p className="text-xl max-w-3xl mx-auto">
             Conheça a história e experiência que me trouxeram até aqui como especialista em Inteligência Artificial e
             Transformação Digital.
@@ -64,7 +66,6 @@ export default function TrajetoriaPage() {
                       fill
                       className="object-contain object-bottom"
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      unoptimized
                     />
                   </div>
                 </div>
@@ -130,9 +131,7 @@ export default function TrajetoriaPage() {
             {/* Timeline principal */}
             <div className="md:col-span-2 space-y-12">
               <div>
-                <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 px-4 py-1 rounded-full mb-4">
-                  Minha História
-                </Badge>
+                <SectionEyebrow label="Minha História" className="mb-5" />
                 <h2 className="text-3xl font-bold mb-6">De Estagiário a Especialista em IA</h2>
                 <div className="prose dark:prose-invert max-w-none">
                   <p>
@@ -241,13 +240,32 @@ export default function TrajetoriaPage() {
                   </div>
                   <div>
                     <span className="text-sm text-gray-500 dark:text-gray-400">2023 - Presente</span>
-                    <h3 className="text-xl font-bold mt-1 mb-3">Palestrante e Consultor em Digital e IA</h3>
+                    <h3 className="text-xl font-bold mt-1 mb-3">Founder da Simplí e da VarejoLab · Palestrante e Consultor</h3>
                     <p className="text-gray-700 dark:text-gray-300">
-                      Atualmente, atuo em projetos de transformação digital e estratégias de IA com foco em resultados
-                      tangíveis. Participo da estruturação digital de empresas, com iniciativas que incluem automação
-                      inteligente, desenvolvimento de portais e soluções com IA. Como palestrante, já realizei mais de
-                      100 apresentações para empresas de diversos setores. Tenho forte atuação junto ao SEBRAE, SENAC e
-                      Fecomércio-PE, promovendo o uso prático de tecnologias emergentes para gerar vantagem competitiva.
+                      Em 2023, dei um novo passo empreendedor ao fundar duas empresas. A{" "}
+                      <a
+                        href="https://simpli.ia.br"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-blue-600 underline underline-offset-2 hover:text-blue-700 dark:text-blue-400"
+                      >
+                        Simplí
+                      </a>{" "}
+                      leva a transformação digital para a prática, unindo desenvolvimento web, Inteligência Artificial e
+                      consultoria estratégica para modernizar as operações de empresas de diferentes portes. Já a{" "}
+                      <a
+                        href="https://varejolab.com.br"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-blue-600 underline underline-offset-2 hover:text-blue-700 dark:text-blue-400"
+                      >
+                        VarejoLab
+                      </a>{" "}
+                      é a primeira universidade de performance para o varejo brasileiro: une 30 anos de experiência em
+                      vendas ao poder da IA e do tráfego pago, com um método que funciona na segunda-feira de manhã. Em
+                      paralelo, sigo como palestrante e consultor — já realizei mais de 100 apresentações e mantenho
+                      forte atuação junto ao SEBRAE, SENAC e Fecomércio-PE, promovendo o uso prático da IA para gerar
+                      vantagem competitiva.
                     </p>
                   </div>
                 </div>

@@ -77,9 +77,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'seu-google-verification-code', // Substitua pelo código real do Google Search Console
-  },
   manifest: '/manifest.json',
   icons: {
     icon: '/images/favicon-aleguimas.png',

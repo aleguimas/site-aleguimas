@@ -43,15 +43,13 @@ export default function TransformacaoDigitalPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 text-white">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/20 px-4 py-1 rounded-full mb-6">
-            Transformação Digital
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300 mb-6">Transformação Digital</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-[-0.03em]">
             Transformação Digital: Modernize sua Empresa
           </h1>
-          <p className="text-xl max-w-3xl mx-auto text-purple-100">
+          <p className="text-xl max-w-3xl mx-auto text-blue-100">
             Descubra como digitalizar processos, modernizar operações e posicionar sua empresa 
             para o sucesso na era digital.
           </p>
@@ -79,16 +77,16 @@ export default function TransformacaoDigitalPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
                   Solicitar Palestra sobre Transformação Digital
                 </Button>
               </a>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
-                <Globe className="w-16 h-16 mb-6 text-purple-200" />
+              <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
+                <Globe className="w-16 h-16 mb-6 text-blue-200" />
                 <h3 className="text-2xl font-bold mb-4">Pilares da Transformação Digital</h3>
-                <ul className="space-y-3 text-purple-100">
+                <ul className="space-y-3 text-blue-100">
                   <li className="flex items-center">
                     <Smartphone className="w-5 h-5 mr-3 text-yellow-300" />
                     Experiência do cliente digital
@@ -118,8 +116,8 @@ export default function TransformacaoDigitalPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Globe className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Globe className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Estratégia de Transformação Digital
@@ -128,7 +126,7 @@ export default function TransformacaoDigitalPage() {
                     Como criar e executar uma estratégia de transformação digital alinhada com os 
                     objetivos de negócio da sua empresa.
                   </p>
-                  <Badge className="bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     90 min
                   </Badge>
                 </CardContent>
@@ -154,8 +152,8 @@ export default function TransformacaoDigitalPage() {
 
               <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="bg-green-100 dark:bg-green-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <Zap className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
                     Automação e Eficiência
@@ -164,7 +162,7 @@ export default function TransformacaoDigitalPage() {
                     Identifique oportunidades de automação e otimize processos para aumentar 
                     produtividade e reduzir custos.
                   </p>
-                  <Badge className="bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
+                  <Badge className="bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     60 min
                   </Badge>
                 </CardContent>
@@ -173,12 +171,12 @@ export default function TransformacaoDigitalPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
             <Zap className="w-16 h-16 mx-auto mb-6 text-yellow-300" />
             <h2 className="text-3xl font-bold mb-4">
               Pronto para transformar sua empresa digitalmente?
             </h2>
-            <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Agende uma palestra ou workshop sobre Transformação Digital e descubra como 
               modernizar sua empresa para o futuro.
             </p>
@@ -188,7 +186,7 @@ export default function TransformacaoDigitalPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                   Solicitar Palestra
                 </Button>
               </a>
@@ -197,7 +195,7 @@ export default function TransformacaoDigitalPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
                   Consultoria Digital
                 </Button>
               </a>

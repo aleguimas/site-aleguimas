@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
 import { Quote, Linkedin } from "lucide-react"
 import Link from "next/link"
 
@@ -21,48 +20,42 @@ export default function TestimonialCard({
   linkedinUrl,
 }: TestimonialCardProps) {
   return (
-    <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-      <CardContent className="p-6 flex flex-col h-full">
-        <div className="mb-6">
-          <Quote className="h-8 w-8 text-blue-600/20 dark:text-blue-400/20" />
+    <figure className="group flex h-full flex-col border border-slate-200 dark:border-slate-800 border-t-2 border-t-slate-200 dark:border-t-slate-800 hover:border-t-blue-600 dark:hover:border-t-blue-500 bg-white dark:bg-slate-900 p-8 transition-colors">
+      <Quote className="mb-6 h-8 w-8 flex-shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+
+      <blockquote className="mb-8 flex-grow text-gray-700 dark:text-gray-300 leading-relaxed">
+        &ldquo;{testimonial}&rdquo;
+      </blockquote>
+
+      <figcaption className="mt-auto flex items-center gap-4 border-t border-slate-100 dark:border-slate-800 pt-6">
+        <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full ring-1 ring-slate-200 dark:ring-slate-700">
+          <Image
+            src={image || "/placeholder.svg?height=48&width=48"}
+            alt={name}
+            width={48}
+            height={48}
+            className="h-full w-full object-cover"
+          />
         </div>
-        <div className="flex-grow mb-6">
-          <p className="text-gray-700 dark:text-gray-300 italic line-clamp-6 sm:line-clamp-none">"{testimonial}"</p>
-        </div>
-        <div className="flex items-center mt-auto">
-          <div className="mr-4 flex-shrink-0">
-            <div className="h-12 w-12 rounded-full overflow-hidden">
-              <Image
-                src={image || "/placeholder.svg?height=48&width=48"}
-                alt={name}
-                width={48}
-                height={48}
-                className="object-cover"
-                unoptimized
-              />
-            </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-2">
+            <p className="truncate font-semibold text-gray-900 dark:text-white">{name}</p>
+            {linkedinUrl && (
+              <Link
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Perfil de ${name} no LinkedIn`}
+                className="flex-shrink-0 text-slate-400 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                <Linkedin className="h-5 w-5" />
+              </Link>
+            )}
           </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center justify-between">
-              <p className="font-semibold text-gray-900 dark:text-white truncate">{name}</p>
-              {linkedinUrl && (
-                <Link
-                  href={linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors flex-shrink-0 ml-2"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </Link>
-              )}
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              <p className="truncate">{position}</p>
-              {company && <p className="truncate">{company}</p>}
-            </div>
-          </div>
+          <p className="truncate text-sm text-slate-500 dark:text-slate-400">{position}</p>
+          {company && <p className="truncate text-sm text-slate-500 dark:text-slate-400">{company}</p>}
         </div>
-      </CardContent>
-    </Card>
+      </figcaption>
+    </figure>
   )
 }

@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import SectionEyebrow from '@/components/section-eyebrow'
 import { Card, CardContent } from '@/components/ui/card'
 import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark } from 'lucide-react'
 import { getPost, getAllPostSlugs } from '@/lib/sanity-queries'
@@ -165,9 +166,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
             {/* Categoria */}
             <div className="mb-4">
-              <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 px-4 py-1 rounded-full">
-                {post.category}
-              </Badge>
+              <SectionEyebrow label={post.category} tone="dark" />
             </div>
 
             {/* Título Principal - H1 único */}
@@ -285,7 +284,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             {/* TODO: Implementar posts relacionados com Sanity */}
 
             {/* CTA */}
-            <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 mt-12">
+            <Card className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 mt-12">
               <CardContent className="p-8 text-center">
                 <h2 className="text-2xl font-bold mb-4">Gostou do artigo?</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
