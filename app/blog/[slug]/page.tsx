@@ -53,6 +53,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: seo.og_description || seo.description || post.excerpt,
       images: seo.og_image || (post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : ''),
       publishedTime: post.publishedAt,
+      modifiedTime: post._updatedAt && post._updatedAt > post.publishedAt ? post._updatedAt : post.publishedAt,
       authors: [post.author],
       tags: post.tags || [],
     },
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: seo.og_image || (post.mainImage ? `https://cdn.sanity.io/images/548uc9hr/production/${post.mainImage.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}` : ''),
     },
     alternates: {
-      canonical: seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}`,
+      canonical: seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}/`,
     },
   }
 }
@@ -105,10 +106,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       }
     },
     "datePublished": post.publishedAt,
-    "dateModified": post.publishedAt,
+    "dateModified": post._updatedAt && post._updatedAt > post.publishedAt ? post._updatedAt : post.publishedAt,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}`
+      "@id": seo.canonical || `https://www.aleguimas.com.br/blog/${params.slug}/`
     },
     "keywords": post.tags?.join(', ') || '',
     "articleSection": post.category,

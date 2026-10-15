@@ -28,6 +28,7 @@ export const postQuery = `
     category,
     tags,
     publishedAt,
+    _updatedAt,
     body,
     seo
   }
@@ -37,6 +38,15 @@ export const postQuery = `
 export const postSlugsQuery = `
   *[_type == "post" && publishedAt != null] {
     "slug": slug.current
+  }
+`
+
+// Query para o sitemap: slug + datas reais de publicação e atualização
+export const postSitemapQuery = `
+  *[_type == "post" && publishedAt != null] | order(publishedAt desc) {
+    "slug": slug.current,
+    publishedAt,
+    _updatedAt
   }
 `
 
@@ -108,6 +118,10 @@ export async function getPost(slug: string) {
 export async function getAllPostSlugs() {
   const slugs = await client.fetch(postSlugsQuery)
   return slugs.map((item: any) => item.slug)
+}
+
+export async function getPostsForSitemap() {
+  return await client.fetch(postSitemapQuery)
 }
 
 export async function getPostsByCategory(category: string) {
