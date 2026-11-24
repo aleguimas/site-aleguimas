@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: "https://www.aleguimas.com.br/videos",
     images: [
       {
-        url: "/images/alexandre_guimas_palestrante_principal.webp",
+        url: "/images/alexandre-guimaraes-palestrante-2026.webp",
         width: 1200,
         height: 630,
         alt: "Vídeos e Conteúdos - Alexandre Guimarães",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Vídeos e Conteúdos - Palestras e Workshops",
     description: "Assista palestras, workshops e depoimentos sobre Inteligência Artificial, Transformação Digital e Inovação. Conteúdo exclusivo de Alexandre Guimarães.",
-    images: ["/images/alexandre_guimas_palestrante_principal.webp"],
+    images: ["/images/alexandre-guimaraes-palestrante-2026.webp"],
   },
 }
 

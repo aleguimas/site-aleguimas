@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: "https://www.aleguimas.com.br/temas/agentes-ia",
     images: [
       {
-        url: "/images/alexandre_guimas_palestrante_principal.webp",
+        url: "/images/alexandre-guimaraes-palestrante-2026.webp",
         width: 1200,
         height: 630,
         alt: "Agentes de IA - Alexandre Guimarães",

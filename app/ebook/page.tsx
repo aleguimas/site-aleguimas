@@ -102,7 +102,7 @@ export default function EbookPage() {
       "name": "Alexandre Guimarães",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.aleguimas.com.br/images/alexandre_guimas_palestrante_principal.webp"
+        "url": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026.webp"
       }
     },
     "image": "https://www.aleguimas.com.br/ebook.png",
@@ -153,7 +153,7 @@ export default function EbookPage() {
       "name": "Alexandre Guimarães",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.aleguimas.com.br/images/alexandre_guimas_palestrante_principal.webp"
+        "url": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026.webp"
       }
     },
     "image": "https://www.aleguimas.com.br/images/playbook-agentes.png",

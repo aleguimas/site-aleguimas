@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       "name": "Alexandre Guimarães",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.aleguimas.com.br/images/alexandre_guimas_palestrante_principal.webp"
+        "url": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026.webp"
       }
     },
     "datePublished": post.publishedAt,
