@@ -79,9 +79,9 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/images/favicon-aleguimas.png',
-    shortcut: '/images/favicon-aleguimas.png',
-    apple: '/images/favicon-aleguimas.png',
+    icon: '/images/favicon-aleguimas-2026-32.png',
+    shortcut: '/images/favicon-aleguimas-2026-32.png',
+    apple: '/images/favicon-aleguimas-2026-180.png',
   },
 }
 
@@ -95,7 +95,6 @@ export default function RootLayout({
       <head>
         {/* Preload de recursos críticos */}
         <link rel="preload" href="/images/alexandre-guimaraes-palestrante-2026-sem-fundo.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/images/favicon-aleguimas.png" as="image" type="image/png" />
         
         {/* Preconnect para domínios externos */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -108,10 +107,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
         
         {/* Icons */}
-        <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/images/favicon-aleguimas.png" type="image/png" sizes="16x16" />
-        <link rel="apple-touch-icon" href="/images/favicon-aleguimas.png" />
-        <link rel="shortcut icon" href="/images/favicon-aleguimas.png" type="image/png" />
+        <link rel="icon" href="/images/favicon-aleguimas-2026-32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/images/favicon-aleguimas-2026-192.png" type="image/png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/images/favicon-aleguimas-2026-180.png" sizes="180x180" />
+        <link rel="shortcut icon" href="/images/favicon-aleguimas-2026-32.png" type="image/png" />
         
         {/* Structured Data */}
         <script
