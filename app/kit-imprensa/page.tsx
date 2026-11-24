@@ -71,7 +71,7 @@ export default function KitImprensaPage() {
                   <div className="sticky top-24">
                     <div className="rounded-lg overflow-hidden mb-6">
                       <Image
-                        src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
+                        src="/images/alexandre-guimaraes-palestrante-2026-sem-fundo.webp"
                         alt="Alexandre Guimarães"
                         width={400}
                         height={500}

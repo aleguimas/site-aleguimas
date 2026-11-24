@@ -122,7 +122,7 @@ export default function Home() {
         {/* Retrato sangrando na metade direita (lg+), emergindo do fundo */}
         <div className="hidden lg:block absolute inset-y-0 right-0 w-[50%] z-0">
           <Image
-            src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
+            src="/images/alexandre-guimaraes-palestrante-2026-sem-fundo.webp"
             alt="Alexandre Guimarães, palestrante e consultor em IA"
             fill
             className="object-cover object-[center_top]"
@@ -167,7 +167,7 @@ export default function Home() {
             <div className="lg:hidden">
               <div className="relative aspect-[4/5] w-full max-w-xs mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/50">
                 <Image
-                  src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
+                  src="/images/alexandre-guimaraes-palestrante-2026-sem-fundo.webp"
                   alt="Alexandre Guimarães, palestrante e consultor em IA"
                   fill
                   className="object-cover object-[center_top]"

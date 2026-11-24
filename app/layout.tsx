@@ -94,7 +94,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
       <head>
         {/* Preload de recursos críticos */}
-        <link rel="preload" href="/images/alexandre-guimaraes-palestrante-2026-recorte.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/alexandre-guimaraes-palestrante-2026-sem-fundo.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/favicon-aleguimas.png" as="image" type="image/png" />
         
         {/* Preconnect para domínios externos */}
