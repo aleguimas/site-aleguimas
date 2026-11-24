@@ -433,6 +433,13 @@ export default async function WorkshopsPage() {
               <a href="#solicitar-cotacao">Solicitar Cotação Personalizada</a>
             </Button>
           </div>
+          <p className="mt-10 text-center text-gray-600 dark:text-gray-400">
+            Organiza eventos para associados? Veja a versão do workshop para{" "}
+            <Link href="/para-cdls-e-sebraes/" className="font-semibold text-blue-600 dark:text-blue-400 underline underline-offset-4">
+              CDLs, Sebraes e associações empresariais
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
