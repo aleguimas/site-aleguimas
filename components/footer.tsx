@@ -28,13 +28,13 @@ export default function Footer() {
           {/* Info */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="h-10 w-10 rounded-full overflow-hidden mr-3">
+              <div className="h-10 w-10 mr-3 flex-shrink-0">
                 <Image
-                  src="/images/guimas-palestrante-header.png"
+                  src="/images/favicon-aleguimas-2026-192.png"
                   alt="Alexandre Guimarães"
                   width={40}
                   height={40}
-                  className="object-cover object-top"
+                  className="object-contain w-full h-full"
                   unoptimized
                 />
               </div>
@@ -99,6 +99,11 @@ export default function Footer() {
               <li>
                 <Link href="/palestras" className="text-gray-400 hover:text-white transition-colors">
                   Palestras
+                </Link>
+              </li>
+              <li>
+                <Link href="/para-cdls-e-sebraes/" className="text-gray-400 hover:text-white transition-colors">
+                  IA para Sebraes e associações
                 </Link>
               </li>
               <li>

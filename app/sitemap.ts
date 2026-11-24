@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url(''), lastModified: latestPostDate, priority: 1 },
     { url: url('/blog'), lastModified: latestPostDate, priority: 0.9 },
     { url: url('/palestras'), priority: 0.9 },
+    { url: url('/para-cdls-e-sebraes'), priority: 0.9 },
     { url: url('/consultoria'), priority: 0.9 },
     { url: url('/workshops'), priority: 0.9 },
     { url: url('/trajetoria'), priority: 0.8 },

@@ -7,15 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Download } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import TrackedLink from "@/components/tracked-link"
 import type { Metadata } from "next"
 
 const pageTitle = "Kit de Imprensa | Alexandre Guimarães, IA aplicada a negócios"
 const pageDescription =
   "Kit de imprensa de Alexandre Guimarães (Guimas), CEO da Simplí: biografia, números, pautas, fotos e contato para jornalistas, entidades e organizadores de eventos."
-
-const WHATSAPP_ENTIDADES =
-  "https://wa.me/5581991942628?text=" +
-  encodeURIComponent("Olá, Guimas. Quero saber como levar IA para os associados da nossa entidade.")
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -579,11 +576,15 @@ export default function KitImprensaPage() {
           {/* Espaço reservado para depoimentos da CDL de Cuiabá e do Sebrae MT.
               Inserir somente com as frases enviadas pelo Guimas. */}
 
-          <a href={WHATSAPP_ENTIDADES} target="_blank" rel="noopener noreferrer">
+          <TrackedLink
+            href="/para-cdls-e-sebraes/"
+            eventName="kit_imprensa_entidades_click"
+            eventParams={{ location: "kit-imprensa-bloco-entidades" }}
+          >
             <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
               Quero levar IA para a minha entidade
             </Button>
-          </a>
+          </TrackedLink>
         </div>
       </section>
 

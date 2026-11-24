@@ -2,15 +2,24 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, Moon, Sun, X } from "lucide-react"
+import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 
 // Remover o link "Kit Imprensa" do menu principal
-const navigation = [
+type NavItem = { name: string; href: string; children?: { name: string; href: string }[] }
+
+const navigation: NavItem[] = [
   { name: "Início", href: "/" },
-  { name: "Palestras", href: "/palestras" },
+  {
+    name: "Palestras",
+    href: "/palestras",
+    children: [
+      { name: "Todas as palestras", href: "/palestras" },
+      { name: "Para CDLs e Sebraes", href: "/para-cdls-e-sebraes/" },
+    ],
+  },
   { name: "Workshops", href: "/workshops" },
   { name: "Consultoria", href: "/consultoria" },
   { name: "Blog", href: "/blog" },
@@ -74,13 +83,13 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
           <div className="flex items-center flex-shrink-0 min-w-0 lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center min-w-0">
               <span className="sr-only">Alexandre Guimarães</span>
-              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden mr-2 sm:mr-3 flex-shrink-0">
+              <div className="h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3 flex-shrink-0">
                 <img
-                  src="/images/guimas-palestrante-header.png"
+                  src="/images/favicon-aleguimas-2026-192.png"
                   alt="Alexandre Guimarães"
                   width={40}
                   height={40}
-                  className="object-cover object-center w-full h-full"
+                  className="object-contain w-full h-full"
                 />
               </div>
               <span className="text-sm sm:text-lg font-semibold text-gray-900 dark:text-white truncate">
@@ -112,15 +121,41 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
           </div>
 
           <div className="hidden lg:flex lg:gap-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) =>
+              item.children ? (
+                <div key={item.name} className="relative group">
+                  <Link
+                    href={item.href}
+                    aria-haspopup="true"
+                    className="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1"
+                  >
+                    {item.name}
+                    <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" aria-hidden="true" />
+                  </Link>
+                  <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-opacity absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50">
+                    <div className="min-w-[220px] rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg py-2">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-2 text-sm font-medium text-gray-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400"
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ),
+            )}
           </div>
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
@@ -166,13 +201,13 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
         <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
             <span className="sr-only">Alexandre Guimarães</span>
-            <div className="h-7 w-7 rounded-full overflow-hidden mr-2 flex-shrink-0">
+            <div className="h-7 w-7 mr-2 flex-shrink-0">
               <img
-                src="/images/guimas-palestrante-header.png"
+                src="/images/favicon-aleguimas-2026-192.png"
                 alt="Alexandre Guimarães"
                 width={28}
                 height={28}
-                className="object-cover object-center w-full h-full"
+                className="object-contain w-full h-full"
               />
             </div>
             <span className="text-xs font-semibold text-gray-900 dark:text-white truncate">Alexandre Guimarães</span>
@@ -190,14 +225,27 @@ export default function Navbar({ hideThemeToggle = false }: NavbarProps) {
           <nav className="px-4" aria-label="Navegação principal">
             <div className="space-y-1">
               {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block rounded-lg px-4 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 active:bg-gray-100 dark:active:bg-slate-700 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                <div key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="block rounded-lg px-4 py-3 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 active:bg-gray-100 dark:active:bg-slate-700 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                  {item.children
+                    ?.filter((child) => child.href !== item.href)
+                    .map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block rounded-lg pl-8 pr-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                </div>
               ))}
             </div>
           </nav>

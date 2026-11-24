@@ -329,6 +329,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="mt-8 text-gray-600 dark:text-gray-400">
+            Organiza eventos para associados? Conheça a{" "}
+            <Link href="/para-cdls-e-sebraes/" className="font-semibold text-blue-600 dark:text-blue-400 underline underline-offset-4">
+              palestra de IA para CDLs
+            </Link>{" "}
+            e a imersão de dois dias para empresários.
+          </p>
         </div>
       </section>
 
