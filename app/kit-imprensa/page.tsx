@@ -171,6 +171,11 @@ export default function KitImprensaPage() {
                     alt: "Alexandre Guimarães - Foto oficial 2026"
                   },
                   {
+                    id: 8,
+                    src: "/images/kit-imprensa/alexandre-guimaraes-palestrante-2026-sem-fundo.png",
+                    alt: "Alexandre Guimarães - Foto oficial 2026 sem fundo (PNG transparente)"
+                  },
+                  {
                     id: 1,
                     src: "/images/kit-imprensa/alexandre-guimaraes-palestrante-1.png",
                     alt: "Alexandre Guimarães - Foto 1"
