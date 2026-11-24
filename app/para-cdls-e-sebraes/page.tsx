@@ -210,7 +210,8 @@ export default function ParaCdlsESebraesPage() {
       {/* 4.2 Problema */}
       <section className="py-20 border-b border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="lg:col-span-7">
             <SectionEyebrow label="O cenário" className="mb-5" />
             <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-gray-900 dark:text-white mb-6">
               Seus associados já ouviram falar de IA. O que falta é aplicar
@@ -230,6 +231,19 @@ export default function ParaCdlsESebraesPage() {
               que a IA existe, é transformar a ferramenta em venda, em tempo economizado e em decisão melhor. É aí que a
               entidade pode fazer diferença para o associado, e é aí que eu trabalho.
             </p>
+          </div>
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src="/images/guimas-palestra-ia-empresarios.webp"
+                alt="Guimas palestrando sobre inteligência artificial para empresários"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                loading="lazy"
+              />
+            </div>
+          </div>
           </div>
         </div>
       </section>
