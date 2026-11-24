@@ -41,8 +41,7 @@ export default function Footer() {
               <span className="text-lg font-semibold text-white">Alexandre Guimarães</span>
             </div>
             <p className="text-gray-400 mb-6">
-              Especialista em Inteligência Artificial, Transformação Digital e Inovação, ajudando empresas a se
-              adaptarem e prosperarem na era digital.
+              Palestrante e consultor de IA aplicada a negócios. CEO da Simplí.
             </p>
             <div className="flex space-x-4">
               <Link
@@ -135,36 +134,29 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-6">Temas</h3>
             <ul className="space-y-3">
               <li>
-                <Link
-                  href="/temas/inteligencia-artificial"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
+                <Link href="/temas/inteligencia-artificial" className="text-gray-400 hover:text-white transition-colors">
                   Inteligência Artificial
-                </Link>
-              </li>
-              <li>
-                <Link href="/temas/transformacao-digital" className="text-gray-400 hover:text-white transition-colors">
-                  Transformação Digital
-                </Link>
-              </li>
-              <li>
-                <Link href="/temas/inovacao" className="text-gray-400 hover:text-white transition-colors">
-                  Inovação
-                </Link>
-              </li>
-              <li>
-                <Link href="/temas/lideranca" className="text-gray-400 hover:text-white transition-colors">
-                  Liderança na Era Digital
-                </Link>
-              </li>
-              <li>
-                <Link href="/temas/futuro-do-trabalho" className="text-gray-400 hover:text-white transition-colors">
-                  Futuro do Trabalho
                 </Link>
               </li>
               <li>
                 <Link href="/temas/agentes-ia" className="text-gray-400 hover:text-white transition-colors">
                   Agentes de IA
+                </Link>
+              </li>
+              <li>
+                <span className="text-gray-400">Automação</span>
+              </li>
+              <li>
+                <span className="text-gray-400">Varejo e Omnichannel</span>
+              </li>
+              <li>
+                <Link href="/temas/lideranca" className="text-gray-400 hover:text-white transition-colors">
+                  Liderança na Era da IA
+                </Link>
+              </li>
+              <li>
+                <Link href="/temas/futuro-do-trabalho" className="text-gray-400 hover:text-white transition-colors">
+                  Futuro do Trabalho
                 </Link>
               </li>
             </ul>
@@ -184,7 +176,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-blue-400 mr-3 mt-0.5" />
-                <span className="text-gray-400">Recife - PE, Brasil</span>
+                <span className="text-gray-400">Recife, PE, Brasil</span>
               </li>
             </ul>
           </div>
@@ -193,7 +185,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; 2025 Alexandre Guimarães. Todos os direitos reservados.
+              &copy; 2026 Alexandre Guimarães. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6">
               <Link
