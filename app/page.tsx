@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     url: "https://www.aleguimas.com.br",
     images: [
       {
-        url: "/images/alexandre-guimaraes-palestrante-2026.webp",
+        url: "/images/alexandre-guimaraes-palestrante-2026-og.jpg",
         width: 1200,
         height: 630,
         alt: "Alexandre Guimarães - Palestrante e Consultor em IA",
@@ -61,7 +61,7 @@ export default function Home() {
             "@type": "Organization",
             "name": "Alexandre Guimarães - Palestrante e Consultor",
             "url": "https://www.aleguimas.com.br",
-            "logo": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026.webp",
+            "logo": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026-og.jpg",
             "description": "Especialista em Inteligência Artificial, Transformação Digital e Inovação",
             "address": {
               "@type": "PostalAddress",
@@ -122,7 +122,7 @@ export default function Home() {
         {/* Retrato sangrando na metade direita (lg+), emergindo do fundo */}
         <div className="hidden lg:block absolute inset-y-0 right-0 w-[50%] z-0">
           <Image
-            src="/images/alexandre-guimaraes-palestrante-2026.webp"
+            src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
             alt="Alexandre Guimarães, palestrante e consultor em IA"
             fill
             className="object-cover object-[center_top]"
@@ -167,7 +167,7 @@ export default function Home() {
             <div className="lg:hidden">
               <div className="relative aspect-[4/5] w-full max-w-xs mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-950/50">
                 <Image
-                  src="/images/alexandre-guimaraes-palestrante-2026.webp"
+                  src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
                   alt="Alexandre Guimarães, palestrante e consultor em IA"
                   fill
                   className="object-cover object-[center_top]"

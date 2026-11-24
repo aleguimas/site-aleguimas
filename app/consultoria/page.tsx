@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     url: "https://www.aleguimas.com.br/consultoria",
     images: [
       {
-        url: "/images/alexandre-guimaraes-palestrante-2026.webp",
+        url: "/images/alexandre-guimaraes-palestrante-2026-og.jpg",
         width: 1200,
         height: 630,
         alt: "Consultoria - Alexandre Guimarães",

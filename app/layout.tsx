@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     siteName: 'Alexandre Guimarães',
     images: [
       {
-        url: '/images/alexandre-guimaraes-palestrante-2026.webp',
+        url: '/images/alexandre-guimaraes-palestrante-2026-og.jpg',
         width: 1200,
         height: 630,
         alt: 'Alexandre Guimarães - Palestrante e Consultor em IA',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Alexandre Guimarães - Palestrante e Consultor em IA e Transformação Digital',
     description: 'Especialista em Inteligência Artificial, Transformação Digital e Inovação, ajudando empresas a se adaptarem e prosperarem na era digital.',
-    images: ['/images/alexandre-guimaraes-palestrante-2026.webp'],
+    images: ['/images/alexandre-guimaraes-palestrante-2026-og.jpg'],
     creator: '@aleguimas',
   },
   robots: {
@@ -94,7 +94,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning className={inter.variable}>
       <head>
         {/* Preload de recursos críticos */}
-        <link rel="preload" href="/images/alexandre-guimaraes-palestrante-2026.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/alexandre-guimaraes-palestrante-2026-recorte.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/favicon-aleguimas.png" as="image" type="image/png" />
         
         {/* Preconnect para domínios externos */}
@@ -124,7 +124,7 @@ export default function RootLayout({
               "jobTitle": "Palestrante e Consultor em Inteligência Artificial",
               "description": "Especialista em Inteligência Artificial, Transformação Digital e Inovação",
               "url": "https://www.aleguimas.com.br",
-              "image": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026.webp",
+              "image": "https://www.aleguimas.com.br/images/alexandre-guimaraes-palestrante-2026-og.jpg",
               "sameAs": [
                 "https://www.linkedin.com/in/alexandre-guimarães",
                 "https://www.youtube.com/@aleguimas",

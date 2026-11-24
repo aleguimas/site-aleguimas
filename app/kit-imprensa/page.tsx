@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: "https://www.aleguimas.com.br/kit-imprensa",
     images: [
       {
-        url: "/images/alexandre-guimaraes-palestrante-2026.webp",
+        url: "/images/alexandre-guimaraes-palestrante-2026-og.jpg",
         width: 1200,
         height: 630,
         alt: "Kit de Imprensa - Alexandre Guimarães",
@@ -71,7 +71,7 @@ export default function KitImprensaPage() {
                   <div className="sticky top-24">
                     <div className="rounded-lg overflow-hidden mb-6">
                       <Image
-                        src="/images/alexandre-guimaraes-palestrante-2026.webp"
+                        src="/images/alexandre-guimaraes-palestrante-2026-recorte.webp"
                         alt="Alexandre Guimarães"
                         width={400}
                         height={500}
